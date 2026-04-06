@@ -1,58 +1,88 @@
-# PhD Symposium 2026
+# 28th EMBL PhD Symposium 2026
 
-## Shifting gears to Scale up discovery
+**Shifting Gears to Scale up Discovery**
+November 5–7, 2026 · EMBL Heidelberg, Germany
 
-## Installation guidelines
+Live site: [HugoHakem.github.io/PhD_Symposium_2026](https://HugoHakem.github.io/PhD_Symposium_2026)
 
-- Install `pnpm`:
+---
 
-  ```bash
-  curl -fsSL https://get.pnpm.io/install.sh | sh -
-  ```
+## Overview
 
-## Astro Starter Kit: Basics
+Conference website for the 28th EMBL PhD Symposium — a 3-day scientific meeting
+organised by PhD students at the European Molecular Biology Laboratory.
 
-This template has been generated using:
+Built with [Astro 6](https://astro.build) and [Tailwind CSS v4](https://tailwindcss.com).
+Content is managed via Markdown and YAML files — no code changes needed to update
+speakers, the schedule, or sponsors.
 
-```sh
-pnpm create astro@latest -- --template basics
+---
+
+## Quick Start
+
+```bash
+# Prerequisites: Node >= 22, pnpm
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+# Install dependencies
+pnpm install
+
+# Start local dev server
+pnpm dev
+# → http://localhost:4321/PhD_Symposium_2026/
 ```
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## Commands
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+| Command | Action |
+|---------|--------|
+| `pnpm dev` | Start dev server at `localhost:4321` |
+| `pnpm build` | Build production site to `dist/` |
+| `pnpm preview` | Preview the production build locally |
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## Updating Content
 
-All commands are run from the root of the project, from a terminal:
+All site content lives in `src/content/`. No component knowledge required.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+| What to update | Where |
+|----------------|-------|
+| Speakers | `src/content/speakers/<name>.md` |
+| Schedule | `src/content/schedule/day-{1,2,3}.yaml` |
+| Sponsors | `src/content/sponsors/<name>.yaml` |
+| Key dates | `src/pages/index.astro` (search `Mark Your Calendar`) |
+| Countdown date | `src/components/HeroSection.astro` (search `targetDate`) |
+| Venue / Travel / FAQ | `src/pages/about.astro` |
 
-## 👀 Want to learn more?
+See [docs/content-guide.md](docs/content-guide.md) for field-by-field instructions.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [docs/project-structure.md](docs/project-structure.md) | Every file and directory explained |
+| [docs/content-guide.md](docs/content-guide.md) | How to add/edit speakers, schedule, sponsors |
+| [docs/design-system.md](docs/design-system.md) | Colours, fonts, CSS utilities reference |
+| [docs/deployment.md](docs/deployment.md) | GitHub Pages deployment and custom domain setup |
+
+---
+
+## Deployment
+
+Pushes to `main` trigger an automatic deployment to GitHub Pages via GitHub Actions.
+See [docs/deployment.md](docs/deployment.md) for details and custom domain setup.
+
+---
+
+## Tech Stack
+
+- **Framework:** [Astro 6](https://astro.build) — static site generation
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com) via `@tailwindcss/vite`
+- **Fonts:** Syne · Source Serif 4 · JetBrains Mono (Google Fonts)
+- **Content:** Astro Content Layer API — Markdown + YAML with Zod validation
+- **Deployment:** GitHub Actions → GitHub Pages
