@@ -1,0 +1,63 @@
+name: Bug report
+description: Something is broken or displaying incorrectly on the site.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+        Please fill in as much detail as possible so we can reproduce and fix it quickly.
+
+  - type: input
+    id: url
+    attributes:
+      label: Affected page / URL
+      description: Which page or route is affected?
+      placeholder: "e.g. /phd-symposium-2026/program or the mobile nav on all pages"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What is wrong?
+      description: A clear description of the bug.
+      placeholder: "The mobile navigation menu opens but links are not tappable."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the site on a mobile device (or DevTools mobile emulation)
+        2. Tap the hamburger icon
+        3. Try to tap a nav link
+        4. Nothing happens
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      placeholder: "Tapping a nav link should navigate to that page."
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & device
+      placeholder: "e.g. Safari 17 on iPhone 14 / Chrome 124 on Android"
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or screen recording
+      description: Drag and drop images or videos here.
+    validations:
+      required: false

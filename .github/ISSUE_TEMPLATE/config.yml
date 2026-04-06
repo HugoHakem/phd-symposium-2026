@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Content guide
+    url: https://github.com/HugoHakem/phd-symposium-2026/blob/main/docs/content-guide.md
+    about: Field-by-field instructions for adding speakers, sessions, and sponsors without opening an issue.

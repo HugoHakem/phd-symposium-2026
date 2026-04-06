@@ -1,0 +1,49 @@
+name: Content update
+description: Add or change speakers, schedule sessions, sponsors, key dates, or other copy.
+labels: [content]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for content-only requests that do not require code changes.
+        If you have the file ready, open a PR directly — no issue needed.
+
+  - type: dropdown
+    id: content_type
+    attributes:
+      label: What type of content is this?
+      options:
+        - Speaker (add or update)
+        - Schedule session (add, edit, or remove)
+        - Sponsor (add or update)
+        - Key date
+        - Page copy (about, venue, FAQ, etc.)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: |
+        Provide the new or corrected information.
+        For speakers: name, affiliation, session type (keynote / talk / workshop), day, bio, photo URL.
+        For schedule: day, time, title, speaker, session type.
+        For sponsors: name, tier (platinum / gold / silver / bronze), logo, URL.
+      placeholder: |
+        Speaker: Dr Jane Smith
+        Affiliation: Max Planck Institute of Biochemistry
+        Session type: keynote
+        Day: 2
+        Bio: ...
+    validations:
+      required: true
+
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline (if any)
+      placeholder: "e.g. needed before May 1 for programme printing"
+    validations:
+      required: false
