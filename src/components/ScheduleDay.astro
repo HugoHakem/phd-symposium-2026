@@ -1,0 +1,189 @@
+---
+interface Session {
+  time: string;
+  title: string;
+  type: string;
+  speaker?: string;
+  speakerSlug?: string;
+  abstract?: string;
+  location?: string;
+}
+
+interface Props {
+  day: number;
+  date: string;
+  title: string;
+  theme: string;
+  color: string;
+  sessions: Session[];
+  defaultOpen?: boolean;
+}
+
+const { day, date, title, theme, color, sessions } = Astro.props;
+
+const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-GB', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const badgeClasses: Record<string, string> = {
+  keynote:  'badge-keynote',
+  talk:     'badge-talk',
+  workshop: 'badge-workshop',
+  break:    'badge-break',
+  lunch:    'badge-lunch',
+  social:   'badge-social',
+  ceremony: 'badge-ceremony',
+  panel:    'badge-panel',
+  poster:   'badge-poster',
+};
+
+const isMainEvent = (type: string) => ['keynote', 'talk', 'panel', 'ceremony'].includes(type);
+---
+
+<div class="schedule-day">
+  <!-- Day Header -->
+  <div
+    class="day-header"
+    style={`border-left: 4px solid ${color};`}
+  >
+    <div class="flex items-start justify-between gap-4 flex-wrap">
+      <div>
+        <div class="flex items-center gap-3 mb-1">
+          <span
+            class="font-mono text-[0.65rem] tracking-[0.15em] uppercase font-600"
+            style={`color: ${color};`}
+          >Day {day}</span>
+          <span class="text-border font-mono text-xs">·</span>
+          <span class="font-mono text-[0.65rem] tracking-[0.15em] uppercase text-muted">{formattedDate}</span>
+        </div>
+        <h2 class="font-display font-800 text-ink text-2xl lg:text-3xl mb-1">{title}</h2>
+        <p class="font-body text-muted text-base">{theme}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sessions -->
+  <div class="sessions-list">
+    {sessions.map((session) => (
+      <div
+        class:list={[
+          'session-row',
+          isMainEvent(session.type) ? 'session-main' : 'session-utility',
+        ]}
+      >
+        <!-- Time column -->
+        <div class="session-time">
+          <span class="font-mono text-sm font-600 text-ink/70">{session.time}</span>
+        </div>
+
+        <!-- Content column -->
+        <div class="session-content">
+          <div class="flex flex-wrap items-start gap-2 mb-2">
+            <span class:list={['session-badge', badgeClasses[session.type] || 'badge-break']}>
+              {session.type}
+            </span>
+          </div>
+
+          <h3
+            class:list={[
+              'font-display font-700 leading-tight mb-1',
+              isMainEvent(session.type) ? 'text-lg lg:text-xl text-ink' : 'text-base text-muted',
+            ]}
+          >
+            {session.title}
+          </h3>
+
+          {session.speaker && (
+            <p class="font-body text-sm text-green-700 font-500 mb-2">
+              {session.speakerSlug ? (
+                <a href={`/speakers#${session.speakerSlug}`} class="hover:text-green-900 underline-animate">
+                  {session.speaker}
+                </a>
+              ) : session.speaker}
+            </p>
+          )}
+
+          {session.abstract && (
+            <p class="font-body text-sm text-muted leading-relaxed">
+              {session.abstract}
+            </p>
+          )}
+
+          {session.location && (
+            <p class="font-mono text-[0.6rem] tracking-[0.12em] text-muted/70 uppercase mt-2">
+              📍 {session.location}
+            </p>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .schedule-day {
+    border: 1px solid #E8E4DC;
+    background: white;
+    overflow: hidden;
+  }
+
+  .day-header {
+    padding: 2rem 2rem 1.5rem;
+    background: #FAFAF8;
+    border-bottom: 1px solid #E8E4DC;
+    margin-left: -1px;
+  }
+
+  .sessions-list {
+    divide-y: #E8E4DC;
+  }
+
+  .session-row {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid #F0EDE6;
+    transition: background 0.15s ease;
+  }
+  .session-row:last-child {
+    border-bottom: none;
+  }
+  .session-row:hover {
+    background: #FAFAF8;
+  }
+
+  .session-main {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .session-utility {
+    opacity: 0.8;
+  }
+  .session-utility:hover {
+    opacity: 1;
+  }
+
+  .session-time {
+    padding-top: 0.25rem;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .session-row {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      padding: 1rem 1.25rem;
+    }
+    .session-time {
+      text-align: left;
+    }
+    .day-header {
+      padding: 1.5rem 1.25rem 1.25rem;
+    }
+  }
+</style>

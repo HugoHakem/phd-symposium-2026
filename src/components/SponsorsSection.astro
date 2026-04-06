@@ -1,0 +1,154 @@
+---
+interface Sponsor {
+  id: string;
+  data: {
+    name: string;
+    tier: 'platinum' | 'gold' | 'silver' | 'bronze' | 'media';
+    website: string;
+    description: string;
+    logo?: string;
+  };
+}
+
+interface Props {
+  sponsors: Sponsor[];
+}
+
+const { sponsors } = Astro.props;
+
+const tiers = ['platinum', 'gold', 'silver', 'bronze'] as const;
+
+const tierConfig = {
+  platinum: { label: 'Platinum', class: 'tier-platinum', cardClass: 'sponsor-platinum' },
+  gold:     { label: 'Gold',     class: 'tier-gold',     cardClass: 'sponsor-gold'     },
+  silver:   { label: 'Silver',   class: 'tier-silver',   cardClass: 'sponsor-silver'   },
+  bronze:   { label: 'Bronze',   class: 'tier-bronze',   cardClass: 'sponsor-bronze'   },
+  media:    { label: 'Media',    class: 'tier-bronze',   cardClass: 'sponsor-bronze'   },
+};
+
+const grouped = tiers.reduce((acc, tier) => {
+  acc[tier] = sponsors.filter(s => s.data.tier === tier);
+  return acc;
+}, {} as Record<string, Sponsor[]>);
+---
+
+<section class="py-24 lg:py-32 bg-cream">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mb-16">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-px w-10 bg-red-600"></div>
+        <span class="label-tag text-red-600">Acknowledgements</span>
+      </div>
+      <h2 class="font-display font-800 text-ink text-4xl lg:text-5xl mb-4">
+        Our Sponsors
+      </h2>
+      <p class="font-body text-muted text-lg max-w-2xl">
+        The 28th EMBL PhD Symposium is made possible by the generous support of our institutional and industry partners.
+      </p>
+    </div>
+
+    <!-- Sponsor tiers -->
+    {tiers.map((tier) => grouped[tier]?.length > 0 && (
+      <div class="sponsor-tier-group">
+        <div class="tier-header">
+          <h3 class:list={['font-mono text-[0.65rem] tracking-[0.2em] uppercase font-600', tierConfig[tier].class]}>
+            {tierConfig[tier].label} Sponsors
+          </h3>
+          <div class="tier-line"></div>
+        </div>
+
+        <div class:list={['sponsors-grid', `grid-${tier}`]}>
+          {grouped[tier].map((sponsor) => (
+            <a
+              href={sponsor.data.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              class:list={['sponsor-card', tierConfig[tier].cardClass]}
+              title={sponsor.data.name}
+            >
+              <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
+              <p class="sponsor-desc font-body text-sm text-muted">{sponsor.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <!-- Become a sponsor CTA -->
+    <div class="mt-16 pt-16 border-t border-warm">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <h3 class="font-display font-700 text-xl text-ink mb-1">Interested in sponsoring?</h3>
+          <p class="font-body text-muted">Contact us to discuss partnership opportunities for the symposium.</p>
+        </div>
+        <a
+          href="mailto:phd-symposium@embl.de"
+          class="font-display font-700 text-sm px-8 py-4 bg-green-800 text-white hover:bg-green-900 transition-colors whitespace-nowrap"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sponsor-tier-group {
+    margin-bottom: 3rem;
+  }
+
+  .tier-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .tier-line {
+    flex: 1;
+    height: 1px;
+    background: #D6D2CA;
+  }
+
+  .sponsors-grid {
+    display: grid;
+    gap: 1px;
+    background: #D6D2CA;
+    border: 1px solid #D6D2CA;
+  }
+  .grid-platinum { grid-template-columns: 1fr; }
+  .grid-gold     { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .grid-silver   { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .grid-bronze   { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+
+  .sponsor-card {
+    background: white;
+    padding: 1.5rem 2rem;
+    transition: background 0.2s, transform 0.2s;
+    display: block;
+  }
+  .sponsor-card:hover {
+    background: #F4F0E6;
+    transform: translateY(-2px);
+  }
+
+  .sponsor-platinum .sponsor-name { font-size: 1.4rem; color: #141414; }
+  .sponsor-gold .sponsor-name     { font-size: 1.15rem; color: #141414; }
+  .sponsor-silver .sponsor-name   { font-size: 1rem; color: #5A5857; }
+  .sponsor-bronze .sponsor-name   { font-size: 0.9rem; color: #5A5857; }
+
+  .sponsor-desc {
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  .sponsor-silver .sponsor-desc,
+  .sponsor-bronze .sponsor-desc {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .grid-gold, .grid-silver, .grid-bronze {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

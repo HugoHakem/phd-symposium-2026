@@ -1,0 +1,137 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  role: string;
+  institution: string;
+  country: string;
+  topic: string;
+  sessionType: 'keynote' | 'talk' | 'workshop-lead' | 'panel';
+  day: number;
+  image?: string;
+  compact?: boolean;
+}
+
+const { slug, name, role, institution, topic, sessionType, day, image, compact = false } = Astro.props;
+
+const dayLabels: Record<number, string> = {
+  1: 'Day 1 — Nov 5',
+  2: 'Day 2 — Nov 6',
+  3: 'Day 3 — Nov 7',
+};
+
+const typeColors: Record<string, string> = {
+  keynote:       'bg-red-600 text-white',
+  talk:          'bg-green-800 text-white',
+  'workshop-lead': 'bg-blue-700 text-white',
+  panel:         'bg-amber-600 text-white',
+};
+
+const initials = name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
+---
+
+<article class:list={['speaker-card group', compact ? 'compact' : '']}>
+  <a href={`/speakers#${slug}`} class="block h-full">
+    <!-- Avatar area -->
+    <div class="avatar-wrap">
+      {image ? (
+        <img src={image} alt={name} class="avatar-img" loading="lazy" />
+      ) : (
+        <div class="avatar-placeholder">
+          <span>{initials}</span>
+        </div>
+      )}
+      <!-- Session type badge overlay -->
+      <div class="badge-overlay">
+        <span class:list={['session-badge', typeColors[sessionType]]}>
+          {sessionType === 'workshop-lead' ? 'Workshop' : sessionType.charAt(0).toUpperCase() + sessionType.slice(1)}
+        </span>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="card-body">
+      <div class="mb-1">
+        <span class="font-mono text-[0.6rem] tracking-[0.15em] text-muted uppercase">
+          {dayLabels[day]}
+        </span>
+      </div>
+
+      <h3 class="font-display font-700 text-ink text-lg lg:text-xl leading-tight mb-1 group-hover:text-green-800 transition-colors">
+        {name}
+      </h3>
+
+      <p class="font-body text-sm text-muted mb-3 leading-snug">
+        {role} <br />
+        <span class="text-green-700 font-500">{institution}</span>
+      </p>
+
+      {!compact && (
+        <p class="font-body text-sm text-ink/70 leading-snug line-clamp-2">
+          {topic}
+        </p>
+      )}
+    </div>
+  </a>
+</article>
+
+<style>
+  .speaker-card {
+    background: white;
+    border: 1px solid #E8E4DC;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .speaker-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(26, 92, 54, 0.12);
+    border-color: #52B788;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: #F4F0E6;
+  }
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .speaker-card:hover .avatar-img {
+    transform: scale(1.04);
+  }
+  .avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1A5C36 0%, #2D7A4F 100%);
+  }
+  .avatar-placeholder span {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: rgba(255,255,255,0.25);
+    letter-spacing: -0.02em;
+  }
+
+  .badge-overlay {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .card-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .compact .card-body {
+    padding: 1rem 1.25rem 1.25rem;
+  }
+  .compact .avatar-wrap {
+    aspect-ratio: 3/2;
+  }
+</style>
