@@ -3,7 +3,7 @@
 **Shifting Gears to Scale up Discovery**
 November 5–7, 2026 · EMBL Heidelberg, Germany
 
-Live site: [HugoHakem.github.io/PhD_Symposium_2026](https://HugoHakem.github.io/PhD_Symposium_2026)
+Live site: [HugoHakem.github.io/phd-symposium-2026/](https://HugoHakem.github.io/phd-symposium-2026/)
 
 ---
 
@@ -29,7 +29,7 @@ pnpm install
 
 # Start local dev server
 pnpm dev
-# → http://localhost:4321/PhD_Symposium_2026/
+# → http://localhost:4321/phd-symposium-2026/
 ```
 
 ---

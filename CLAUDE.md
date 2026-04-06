@@ -11,7 +11,7 @@ This file gives Claude Code context about the project. Extended memory lives in
 November 5–7, 2026 · EMBL Heidelberg, Germany
 
 Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
-`https://HugoHakem.github.io/PhD_Symposium_2026/`.
+`https://HugoHakem.github.io/phd-symposium-2026/`.
 
 ---
 
@@ -32,8 +32,8 @@ Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
 - Entry identifier is `entry.id`, NOT `entry.slug` (slug was removed in Astro 5)
 
 ### Base path
-- `base: '/PhD_Symposium_2026/'` in `astro.config.mjs` — note the **trailing slash**
-- `import.meta.env.BASE_URL` resolves to `/PhD_Symposium_2026/` at build time
+- `base: '/phd-symposium-2026/'` in `astro.config.mjs` — note the **trailing slash**
+- `import.meta.env.BASE_URL` resolves to `/phd-symposium-2026/` at build time
 - All internal links and public asset `src` attributes use `${import.meta.env.BASE_URL}path`
   (e.g. `href={`${import.meta.env.BASE_URL}program`}`, `src={`${import.meta.env.BASE_URL}gear1.svg`}`)
 - **Never** use bare absolute paths like `/program` or `/gear1.svg` — they break on GitHub Pages

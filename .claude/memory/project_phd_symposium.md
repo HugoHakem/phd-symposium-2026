@@ -43,7 +43,7 @@ This memory file is the backing detail store for Claude sessions.
 - Config file: `src/content.config.ts` (NOT `src/content/config.ts` — that is the deprecated Astro 4 path)
 - Collections use `glob()` loaders; entry identifier is `entry.id` (not `entry.slug`)
 - `zod` v4 installed directly; import `z` from `'zod'` not `'astro:content'`
-- Base path: `base: '/PhD_Symposium_2026/'` with trailing slash — `BASE_URL` is `/PhD_Symposium_2026/`
+- Base path: `base: '/phd-symposium-2026/'` with trailing slash — `BASE_URL` is `/phd-symposium-2026/`
 - All internal hrefs and asset srcs use `${import.meta.env.BASE_URL}path` — never bare `/path`
 - `trailingSlash: "ignore"` in astro.config.mjs so GitHub Pages handles both `/program` and `/program/`
 - TypeScript strict mode on; some implicit `any` warnings in .astro files are non-blocking

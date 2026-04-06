@@ -3,7 +3,7 @@
 The site is deployed automatically to **GitHub Pages** via GitHub Actions
 whenever a commit is pushed to the `main` branch.
 
-Live URL: `https://HugoHakem.github.io/PhD_Symposium_2026`
+Live URL: `https://HugoHakem.github.io/phd-symposium-2026/`
 
 ---
 
@@ -37,7 +37,7 @@ pnpm install
 
 # Start dev server with hot reload
 pnpm dev
-# → http://localhost:4321/PhD_Symposium_2026/
+# → http://localhost:4321/phd-symposium-2026/
 
 # Production build (outputs to dist/)
 pnpm build
@@ -55,7 +55,7 @@ pnpm preview
 ```js
 export default defineConfig({
   site: 'https://HugoHakem.github.io',   // canonical origin
-  base: '/PhD_Symposium_2026',           // sub-path for GitHub Pages
+  base: '/phd-symposium-2026/',           // sub-path for GitHub Pages
   …
 });
 ```
