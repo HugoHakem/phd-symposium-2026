@@ -20,6 +20,7 @@ interface Props {
 }
 
 const { day, date, title, theme, color, sessions } = Astro.props;
+const base = import.meta.env.BASE_URL;
 
 const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-GB', {
   weekday: 'long',
@@ -99,7 +100,7 @@ const isMainEvent = (type: string) => ['keynote', 'talk', 'panel', 'ceremony'].i
           {session.speaker && (
             <p class="font-body text-sm text-green-700 font-500 mb-2">
               {session.speakerSlug ? (
-                <a href={`/speakers#${session.speakerSlug}`} class="hover:text-green-900 underline-animate">
+                <a href={`${base}speakers#${session.speakerSlug}`} class="hover:text-green-900 underline-animate">
                   {session.speaker}
                 </a>
               ) : session.speaker}

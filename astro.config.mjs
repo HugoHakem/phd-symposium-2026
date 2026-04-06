@@ -7,6 +7,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: 'https://HugoHakem.github.io',
-  base: '/PhD_Symposium_2026',
+  base: '/PhD_Symposium_2026/',
+  trailingSlash: "ignore",
 });
 

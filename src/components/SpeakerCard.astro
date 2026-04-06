@@ -13,6 +13,7 @@ interface Props {
 }
 
 const { slug, name, role, institution, topic, sessionType, day, image, compact = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
 
 const dayLabels: Record<number, string> = {
   1: 'Day 1 — Nov 5',
@@ -31,7 +32,7 @@ const initials = name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase
 ---
 
 <article class:list={['speaker-card group', compact ? 'compact' : '']}>
-  <a href={`/speakers#${slug}`} class="block h-full">
+  <a href={`${base}speakers#${slug}`} class="block h-full">
     <!-- Avatar area -->
     <div class="avatar-wrap">
       {image ? (

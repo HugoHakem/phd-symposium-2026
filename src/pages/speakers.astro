@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SpeakerCard from '../components/SpeakerCard.astro';
 import { getCollection, render } from 'astro:content';
+const base = import.meta.env.BASE_URL;
 
 const speakers = await getCollection('speakers');
 type Speaker = (typeof speakers)[number];
@@ -42,7 +43,7 @@ const dayThemes: Record<number, { title: string; theme: string; color: string }>
   <!-- Page Hero -->
   <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
     <img
-      src="/gear2.svg"
+      src={`${base}gear2.svg`}
       alt=""
       aria-hidden="true"
       class="absolute -bottom-16 -right-20 w-[400px] gear-spin-reverse pointer-events-none select-none"

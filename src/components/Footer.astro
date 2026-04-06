@@ -1,23 +1,24 @@
 ---
+const base = import.meta.env.BASE_URL;
 const currentYear = new Date().getFullYear();
 
 const footerLinks = [
   {
     heading: 'Symposium',
     links: [
-      { href: '/',         label: 'Home'    },
-      { href: '/program',  label: 'Program' },
-      { href: '/speakers', label: 'Speakers'},
-      { href: '/about',    label: 'About'   },
+      { href: base,                      label: 'Home'    },
+      { href: `${base}program`,          label: 'Program' },
+      { href: `${base}speakers`,         label: 'Speakers'},
+      { href: `${base}about`,            label: 'About'   },
     ],
   },
   {
     heading: 'Information',
     links: [
-      { href: '/about#venue',        label: 'Venue'        },
-      { href: '/about#travel',       label: 'Travel'       },
-      { href: '/about#accommodation', label: 'Accommodation'},
-      { href: '/about#faq',          label: 'FAQ'          },
+      { href: `${base}about#venue`,         label: 'Venue'        },
+      { href: `${base}about#travel`,        label: 'Travel'       },
+      { href: `${base}about#accommodation`, label: 'Accommodation'},
+      { href: `${base}about#faq`,           label: 'FAQ'          },
     ],
   },
   {
@@ -35,7 +36,7 @@ const footerLinks = [
   <!-- Top area with gears and key info -->
   <div class="relative overflow-hidden">
     <img
-      src="/gear2.svg"
+      src={`${base}gear2.svg`}
       alt=""
       aria-hidden="true"
       class="absolute -top-8 -right-16 w-72 pointer-events-none select-none"
@@ -48,7 +49,7 @@ const footerLinks = [
         <!-- Brand column -->
         <div class="lg:col-span-1">
           <div class="flex items-center gap-3 mb-4">
-            <img src="/gear1.svg" alt="Gear" class="w-8 h-8" style="filter: invert(1) opacity(0.7);" />
+            <img src={`${base}gear1.svg`} alt="Gear" class="w-8 h-8" style="filter: invert(1) opacity(0.7);" />
             <div>
               <p class="font-display font-800 text-white text-sm">EMBL PhD</p>
               <p class="font-mono text-white/40 text-[0.55rem] tracking-[0.15em] uppercase">Symposium 2026</p>
@@ -97,11 +98,11 @@ const footerLinks = [
         &copy; {currentYear} EMBL PhD Students Association · All rights reserved
       </p>
       <div class="flex items-center gap-4">
-        <a href="/about#code-of-conduct" class="font-mono text-[0.6rem] tracking-[0.1em] text-white/30 hover:text-white/60 uppercase transition-colors">
+        <a href={`${base}about#code-of-conduct`} class="font-mono text-[0.6rem] tracking-[0.1em] text-white/30 hover:text-white/60 uppercase transition-colors">
           Code of Conduct
         </a>
         <span class="text-white/20">·</span>
-        <a href="/about#privacy" class="font-mono text-[0.6rem] tracking-[0.1em] text-white/30 hover:text-white/60 uppercase transition-colors">
+        <a href={`${base}about#privacy`} class="font-mono text-[0.6rem] tracking-[0.1em] text-white/30 hover:text-white/60 uppercase transition-colors">
           Privacy Policy
         </a>
       </div>

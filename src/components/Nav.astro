@@ -1,12 +1,21 @@
 ---
+const base = import.meta.env.BASE_URL;
+
+// paths relative to base (no leading slash)
 const navLinks = [
-  { href: '/',         label: 'Home'     },
-  { href: '/program',  label: 'Program'  },
-  { href: '/speakers', label: 'Speakers' },
-  { href: '/about',    label: 'About'    },
+  { path: '',          label: 'Home'     },
+  { path: 'program',   label: 'Program'  },
+  { path: 'speakers',  label: 'Speakers' },
+  { path: 'about',     label: 'About'    },
 ];
 
 const currentPath = Astro.url.pathname;
+
+function isActive(path: string): boolean {
+  const href = base + path;
+  if (path === '') return currentPath === href || currentPath === href.slice(0, -1);
+  return currentPath.startsWith(href);
+}
 ---
 
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -15,10 +24,10 @@ const currentPath = Astro.url.pathname;
 
   <div class="relative max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-3 group">
+    <a href={base} class="flex items-center gap-3 group">
       <div class="relative w-9 h-9 flex-shrink-0">
         <img
-          src="/gear1.svg"
+          src={`${base}gear1.svg`}
           alt="Gear logo"
           class="w-full h-full object-contain transition-transform duration-700 group-hover:rotate-45"
           style="filter: invert(1) brightness(2) opacity(0.9);"
@@ -32,12 +41,12 @@ const currentPath = Astro.url.pathname;
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-1">
-      {navLinks.map(({ href, label }) => (
+      {navLinks.map(({ path, label }) => (
         <a
-          href={href}
+          href={base + path}
           class:list={[
             'font-display font-600 text-sm px-4 py-2 rounded transition-all duration-200',
-            currentPath === href
+            isActive(path)
               ? 'text-white bg-white/15'
               : 'text-white/80 hover:text-white hover:bg-white/10',
           ]}
@@ -46,7 +55,7 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
       <a
-        href="/program#registration"
+        href={`${base}program#registration`}
         class="ml-4 font-display font-700 text-sm px-5 py-2.5 bg-red-600 text-white rounded hover:bg-red-700 transition-colors duration-200"
       >
         Register
@@ -74,12 +83,12 @@ const currentPath = Astro.url.pathname;
     class="hidden md:hidden bg-green-900 border-t border-white/10"
   >
     <nav class="flex flex-col px-6 py-4 gap-1">
-      {navLinks.map(({ href, label }) => (
+      {navLinks.map(({ path, label }) => (
         <a
-          href={href}
+          href={base + path}
           class:list={[
             'font-display font-600 text-base px-4 py-3 rounded transition-colors',
-            currentPath === href
+            isActive(path)
               ? 'text-white bg-white/15'
               : 'text-white/80 hover:text-white hover:bg-white/10',
           ]}
@@ -88,7 +97,7 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
       <a
-        href="/program#registration"
+        href={`${base}program#registration`}
         class="mt-2 font-display font-700 text-base px-4 py-3 bg-red-600 text-white rounded text-center hover:bg-red-700 transition-colors"
       >
         Register
