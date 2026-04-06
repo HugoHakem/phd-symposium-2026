@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+/* ── Custom Theme ─────────────────────────────────────────── */
+@theme {
+  --color-green-950: #0a2419;
+  --color-green-900: #0D3321;
+  --color-green-800: #1A5C36;
+  --color-green-700: #2D7A4F;
+  --color-green-600: #3D9965;
+  --color-green-500: #52B788;
+  --color-green-100: #D8F3DC;
+  --color-green-50:  #F0FBF4;
+
+  --color-red-900: #6B0000;
+  --color-red-800: #8B0000;
+  --color-red-700: #A50E0E;
+  --color-red-600: #C1121F;
+  --color-red-500: #E63946;
+  --color-red-100: #FFE5E7;
+  --color-red-50:  #FFF5F5;
+
+  --color-cream:   #F4F0E6;
+  --color-warm:    #E8E4DC;
+  --color-parchment: #FAF8F3;
+  --color-ink:     #141414;
+  --color-muted:   #5A5857;
+  --color-border:  #D6D2CA;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Source Serif 4', serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+
+/* ── Base Styles ──────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background-color: #FAF8F3;
+    color: #141414;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', sans-serif;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: #1A5C36;
+    color: #FAF8F3;
+  }
+}
+
+/* ── Custom Utilities ─────────────────────────────────────── */
+@layer utilities {
+  .font-display { font-family: 'Syne', sans-serif; }
+  .font-body    { font-family: 'Source Serif 4', serif; }
+  .font-mono    { font-family: 'JetBrains Mono', monospace; }
+
+  /* Section label style */
+  .label-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Diagonal clip paths for section breaks */
+  .clip-diagonal-down {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%);
+    padding-bottom: 6vw;
+  }
+  .clip-diagonal-up {
+    clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
+    padding-top: 6vw;
+  }
+  .clip-both-diagonal {
+    clip-path: polygon(0 4vw, 100% 0, 100% calc(100% - 4vw), 0 100%);
+    padding-top: 6vw;
+    padding-bottom: 6vw;
+  }
+
+  /* Outline text */
+  .text-outline-white {
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.35);
+    color: transparent;
+  }
+  .text-outline-green {
+    -webkit-text-stroke: 1.5px #1A5C36;
+    color: transparent;
+  }
+
+  /* Animated underline */
+  .underline-animate {
+    position: relative;
+  }
+  .underline-animate::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+  }
+  .underline-animate:hover::after {
+    width: 100%;
+  }
+
+  /* Gear rotation animation */
+  .gear-spin-slow {
+    animation: spin-slow 60s linear infinite;
+  }
+  .gear-spin-reverse {
+    animation: spin-slow 45s linear infinite reverse;
+  }
+
+  /* Stagger fade-in */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fade-up 0.7s ease forwards;
+  }
+}
+
+/* ── Keyframes ────────────────────────────────────────────── */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Component Styles ─────────────────────────────────────── */
+@layer components {
+  /* Session type badges */
+  .badge-keynote   { background: #C1121F; color: white; }
+  .badge-talk      { background: #1A5C36; color: white; }
+  .badge-workshop  { background: #2D6A8A; color: white; }
+  .badge-break     { background: #E8E4DC; color: #5A5857; }
+  .badge-lunch     { background: #E8E4DC; color: #5A5857; }
+  .badge-social    { background: #F4A261; color: white; }
+  .badge-ceremony  { background: #9B59B6; color: white; }
+  .badge-panel     { background: #E67E22; color: white; }
+  .badge-poster    { background: #27AE60; color: white; }
+
+  .session-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  /* Sponsor tier labels */
+  .tier-platinum { color: #6B7280; letter-spacing: 0.2em; }
+  .tier-gold     { color: #B7791F; letter-spacing: 0.2em; }
+  .tier-silver   { color: #718096; letter-spacing: 0.2em; }
+  .tier-bronze   { color: #9C6644; letter-spacing: 0.2em; }
+}
