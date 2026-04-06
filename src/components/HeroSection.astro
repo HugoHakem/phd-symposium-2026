@@ -1,29 +1,31 @@
 ---
-// Hero section for the symposium homepage
+const base = import.meta.env.BASE_URL;
 ---
 
-<section class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-green-900">
+<!--
+  Layout: flex-col with three rows
+    1. flex-1 centering wrapper  — holds the content, grows to fill space
+    2. scroll indicator          — always sits at the bottom, never overlaps
+-->
+<section class="relative min-h-screen flex flex-col overflow-hidden bg-green-900">
   <!-- Background gear decorations -->
   <div class="absolute inset-0 pointer-events-none select-none overflow-hidden">
-    <!-- Large gear, top right -->
     <img
-      src="/gear-all.svg"
+      src={`${base}gear-all.svg`}
       alt=""
       aria-hidden="true"
       class="absolute -top-20 -right-32 w-[560px] lg:w-[780px] gear-spin-slow"
       style="filter: invert(1) opacity(0.06);"
     />
-    <!-- Medium gear, bottom left -->
     <img
-      src="/gear2.svg"
+      src={`${base}gear2.svg`}
       alt=""
       aria-hidden="true"
       class="absolute -bottom-16 -left-24 w-[360px] gear-spin-reverse"
       style="filter: invert(1) opacity(0.05);"
     />
-    <!-- Small gear accent -->
     <img
-      src="/gear3.svg"
+      src={`${base}gear3.svg`}
       alt=""
       aria-hidden="true"
       class="absolute top-1/2 left-1/3 w-[180px] -translate-y-1/2 gear-spin-slow"
@@ -34,7 +36,6 @@
       class="absolute inset-0"
       style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.04%22/%3E%3C/svg%3E'); background-size: 200px; opacity: 0.6;"
     ></div>
-    <!-- Gradient overlay for readability -->
     <div class="absolute inset-0 bg-gradient-to-br from-green-950/60 via-transparent to-green-800/30"></div>
   </div>
 
@@ -46,121 +47,126 @@
     >28</span>
   </div>
 
-  <!-- Main content -->
-  <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-20">
-    <div class="max-w-4xl">
-      <!-- Label -->
-      <div class="flex items-center gap-3 mb-6">
-        <div class="h-px w-10 bg-red-500"></div>
-        <span class="label-tag text-red-400">28th EMBL PhD Symposium · Heidelberg, Germany</span>
-      </div>
-
-      <!-- Main title -->
-      <h1 class="font-display font-800 text-white leading-[0.95] mb-4">
-        <span
-          class="block text-[clamp(3.5rem,9vw,8rem)]"
-          style="animation: fade-up 0.8s ease 0.1s both;"
-        >Shifting</span>
-        <span
-          class="block text-[clamp(3.5rem,9vw,8rem)] text-green-500"
-          style="animation: fade-up 0.8s ease 0.2s both;"
-        >Gears</span>
-      </h1>
-
-      <!-- Subtitle -->
-      <p
-        class="font-display font-400 text-white/60 text-[clamp(1.1rem,2.5vw,1.75rem)] mb-10 tracking-wide"
-        style="animation: fade-up 0.8s ease 0.3s both;"
-      >
-        to Scale up Discovery
-      </p>
-
-      <!-- Meta info -->
-      <div
-        class="flex flex-wrap items-center gap-4 mb-10 text-white/70 font-mono text-sm"
-        style="animation: fade-up 0.8s ease 0.4s both;"
-      >
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          <span>November 5–7, 2026</span>
+  <!-- ── Row 1: Main content (flex-1 keeps it centred vertically) ── -->
+  <div class="relative flex-1 flex items-center">
+    <div class="w-full max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-10">
+      <div class="max-w-4xl">
+        <!-- Label -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-red-500"></div>
+          <span class="label-tag text-red-400">28th EMBL PhD Symposium · Heidelberg, Germany</span>
         </div>
-        <span class="text-white/30">·</span>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span>EMBL Heidelberg, Germany</span>
-        </div>
-        <span class="text-white/30">·</span>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <span>9 Keynote Speakers · 3 Days</span>
-        </div>
-      </div>
 
-      <!-- Countdown Timer -->
-      <div
-        id="countdown-container"
-        class="mb-12"
-        style="animation: fade-up 0.8s ease 0.5s both;"
-      >
-        <p class="label-tag text-white/40 mb-3">Time until symposium</p>
-        <div id="countdown" class="flex flex-wrap gap-4">
-          <div class="countdown-unit">
-            <span id="cd-days" class="countdown-value">--</span>
-            <span class="countdown-label">Days</span>
-          </div>
-          <div class="countdown-sep">:</div>
-          <div class="countdown-unit">
-            <span id="cd-hours" class="countdown-value">--</span>
-            <span class="countdown-label">Hours</span>
-          </div>
-          <div class="countdown-sep">:</div>
-          <div class="countdown-unit">
-            <span id="cd-minutes" class="countdown-value">--</span>
-            <span class="countdown-label">Min</span>
-          </div>
-          <div class="countdown-sep">:</div>
-          <div class="countdown-unit">
-            <span id="cd-seconds" class="countdown-value">--</span>
-            <span class="countdown-label">Sec</span>
-          </div>
-        </div>
-      </div>
+        <!-- Main title -->
+        <h1 class="font-display font-800 text-white leading-[0.95] mb-4">
+          <span
+            class="block text-[clamp(3.5rem,9vw,8rem)]"
+            style="animation: fade-up 0.8s ease 0.1s both;"
+          >Shifting</span>
+          <span
+            class="block text-[clamp(3.5rem,9vw,8rem)] text-green-500"
+            style="animation: fade-up 0.8s ease 0.2s both;"
+          >Gears</span>
+        </h1>
 
-      <!-- CTA Buttons -->
-      <div
-        class="flex flex-wrap gap-4"
-        style="animation: fade-up 0.8s ease 0.6s both;"
-      >
-        <a
-          href="/program"
-          class="inline-flex items-center gap-2 font-display font-700 text-base px-8 py-4 bg-red-600 text-white hover:bg-red-700 transition-all duration-200 group"
+        <!-- Subtitle -->
+        <p
+          class="font-display font-400 text-white/60 text-[clamp(1.1rem,2.5vw,1.75rem)] mb-10 tracking-wide"
+          style="animation: fade-up 0.8s ease 0.3s both;"
         >
-          View Program
-          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-        <a
-          href="/speakers"
-          class="inline-flex items-center gap-2 font-display font-700 text-base px-8 py-4 border border-white/30 text-white hover:border-white/60 hover:bg-white/10 transition-all duration-200"
+          to Scale up Discovery
+        </p>
+
+        <!-- Meta info -->
+        <div
+          class="flex flex-wrap items-center gap-4 mb-10 text-white/70 font-mono text-sm"
+          style="animation: fade-up 0.8s ease 0.4s both;"
         >
-          Meet Speakers
-        </a>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>November 5–7, 2026</span>
+          </div>
+          <span class="text-white/30">·</span>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>EMBL Heidelberg, Germany</span>
+          </div>
+          <span class="text-white/30">·</span>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>9 Keynote Speakers · 3 Days</span>
+          </div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div
+          id="countdown-container"
+          class="mb-12"
+          style="animation: fade-up 0.8s ease 0.5s both;"
+        >
+          <p class="label-tag text-white/40 mb-3">Time until symposium</p>
+          <div id="countdown" class="flex flex-wrap gap-4">
+            <div class="countdown-unit">
+              <span id="cd-days" class="countdown-value">--</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit">
+              <span id="cd-hours" class="countdown-value">--</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit">
+              <span id="cd-minutes" class="countdown-value">--</span>
+              <span class="countdown-label">Min</span>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-unit">
+              <span id="cd-seconds" class="countdown-value">--</span>
+              <span class="countdown-label">Sec</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div
+          class="flex flex-wrap gap-4"
+          style="animation: fade-up 0.8s ease 0.6s both;"
+        >
+          <a
+            href={`${base}program`}
+            class="inline-flex items-center gap-2 font-display font-700 text-base px-8 py-4 bg-red-600 text-white hover:bg-red-700 transition-all duration-200 group"
+          >
+            View Program
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a
+            href={`${base}speakers`}
+            class="inline-flex items-center gap-2 font-display font-700 text-base px-8 py-4 border border-white/30 text-white hover:border-white/60 hover:bg-white/10 transition-all duration-200"
+          >
+            Meet Speakers
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40" style="animation: fade-up 1s ease 1s both;">
+  <!-- ── Row 2: Scroll indicator — flows naturally, never overlaps ── -->
+  <div
+    class="relative flex flex-col items-center gap-2 pb-8 text-white/40"
+    style="animation: fade-up 1s ease 1s both;"
+  >
     <span class="font-mono text-[0.6rem] tracking-[0.2em] uppercase">Scroll</span>
-    <div class="w-px h-12 bg-gradient-to-b from-white/40 to-transparent animate-pulse"></div>
+    <div class="w-px h-10 bg-gradient-to-b from-white/40 to-transparent animate-pulse"></div>
   </div>
 </section>
 
