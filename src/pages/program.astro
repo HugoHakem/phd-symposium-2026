@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScheduleDay from '../components/ScheduleDay.astro';
+import { getCollection } from 'astro:content';
+
+const schedule = await getCollection('schedule');
+type ScheduleEntry = (typeof schedule)[number];
+const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) => a.data.day - b.data.day);
+---
+
+<BaseLayout
+  title="Program — 28th EMBL PhD Symposium 2026"
+  description="Full program for the 28th EMBL PhD Symposium: keynotes, talks, workshops, and social events over three days."
+>
+  <!-- Page Hero -->
+  <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
+    <img
+      src="/gear-all.svg"
+      alt=""
+      aria-hidden="true"
+      class="absolute -top-12 -right-24 w-[480px] gear-spin-slow pointer-events-none select-none"
+      style="filter: invert(1) opacity(0.06);"
+    />
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-px w-10 bg-green-500"></div>
+        <span class="label-tag text-green-400">3-Day Symposium</span>
+      </div>
+      <h1 class="font-display font-800 text-white text-5xl lg:text-7xl mb-4">Program</h1>
+      <p class="font-body text-white/60 text-lg max-w-2xl">
+        Three focused days exploring biological discovery at scale — from structural biology and single-cell genomics
+        to systems medicine and spatial multi-omics.
+      </p>
+
+      <!-- Day quick links -->
+      <div class="flex flex-wrap gap-3 mt-8">
+        {sortedSchedule.map((day: ScheduleEntry) => (
+          <a
+            href={`#day-${day.data.day}`}
+            class="font-mono text-sm px-5 py-2.5 border border-white/20 text-white/70 hover:text-white hover:border-green-400 transition-all"
+            style={`hover:border-color: ${day.data.color};`}
+          >
+            Day {day.data.day}: {day.data.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="bg-parchment border-b border-warm">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <span class="font-mono text-[0.6rem] tracking-[0.15em] text-muted uppercase">Session types:</span>
+        {[
+          ['keynote',  'Keynote Lecture'],
+          ['talk',     'Invited Talk'   ],
+          ['workshop', 'Workshop'       ],
+          ['panel',    'Panel'          ],
+          ['poster',   'Poster Session' ],
+          ['social',   'Social Event'   ],
+        ].map(([type, label]) => (
+          <div class="flex items-center gap-1.5">
+            <span class:list={['session-badge', `badge-${type}`]}>{type}</span>
+            <span class="font-body text-xs text-muted">{label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Schedule content -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+    <div class="space-y-12">
+      {sortedSchedule.map((day: ScheduleEntry, i: number) => (
+        <div id={`day-${day.data.day}`}>
+          <ScheduleDay
+            day={day.data.day}
+            date={day.data.date}
+            title={day.data.title}
+            theme={day.data.theme}
+            color={day.data.color}
+            sessions={day.data.sessions}
+            defaultOpen={i === 0}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Registration callout -->
+    <div id="registration" class="mt-20 bg-green-900 relative overflow-hidden">
+      <img
+        src="/gear3.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute -bottom-10 -right-10 w-56 gear-spin-slow pointer-events-none"
+        style="filter: invert(1) opacity(0.07);"
+      />
+      <div class="relative p-10 lg:p-16">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="h-px w-8 bg-red-500"></div>
+            <span class="label-tag text-red-400">Registration</span>
+          </div>
+          <h2 class="font-display font-800 text-white text-3xl lg:text-4xl mb-4">
+            Join us in Heidelberg
+          </h2>
+          <p class="font-body text-white/70 mb-8 text-lg leading-relaxed">
+            Registration for the 28th EMBL PhD Symposium opens July 1, 2026.
+            Places are limited — priority access for EMBL predoctoral fellows and alumni.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="mailto:phd-symposium@embl.de?subject=Registration%20Inquiry"
+              class="font-display font-700 text-base px-8 py-4 bg-red-600 text-white hover:bg-red-700 transition-colors"
+            >
+              Register Interest
+            </a>
+            <a
+              href="/about"
+              class="font-display font-700 text-base px-8 py-4 border border-white/30 text-white hover:bg-white/10 transition-colors"
+            >
+              Practical Info
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

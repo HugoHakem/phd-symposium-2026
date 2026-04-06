@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found — 28th EMBL PhD Symposium 2026">
+  <div class="relative min-h-screen flex items-center justify-center bg-green-900 overflow-hidden">
+    <img
+      src="/gear-all.svg"
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 w-full h-full object-cover gear-spin-slow pointer-events-none select-none"
+      style="filter: invert(1) opacity(0.04);"
+    />
+    <div class="relative text-center px-6">
+      <p class="font-mono text-[0.65rem] tracking-[0.2em] text-green-400 uppercase mb-4">Error 404</p>
+      <h1 class="font-display font-800 text-white text-[clamp(6rem,20vw,14rem)] leading-none mb-4"
+          style="-webkit-text-stroke: 1px rgba(255,255,255,0.15); color: transparent;">
+        404
+      </h1>
+      <p class="font-display font-700 text-white text-2xl mb-3">Gear not found</p>
+      <p class="font-body text-white/60 text-lg mb-10 max-w-sm mx-auto">
+        This page seems to have shifted into an unknown gear. Let's get you back on track.
+      </p>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 font-display font-700 text-base px-8 py-4 bg-red-600 text-white hover:bg-red-700 transition-colors"
+      >
+        Return Home
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</BaseLayout>

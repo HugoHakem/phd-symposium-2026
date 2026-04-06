@@ -1,0 +1,375 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — 28th EMBL PhD Symposium 2026"
+  description="About the 28th EMBL PhD Symposium: venue, travel information, accommodation, and practical details for attending."
+>
+  <!-- Page Hero -->
+  <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
+    <img
+      src="/gear1.svg"
+      alt=""
+      aria-hidden="true"
+      class="absolute -top-16 -left-20 w-[500px] gear-spin-slow pointer-events-none select-none"
+      style="filter: invert(1) opacity(0.05);"
+    />
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-px w-10 bg-green-500"></div>
+        <span class="label-tag text-green-400">Symposium Information</span>
+      </div>
+      <h1 class="font-display font-800 text-white text-5xl lg:text-7xl mb-4">About</h1>
+      <p class="font-body text-white/60 text-lg max-w-2xl">
+        Everything you need to know to attend the 28th EMBL PhD Symposium — from the history of the event
+        to practical travel and accommodation information.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+
+    <!-- About the symposium -->
+    <section class="mb-20 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-red-600"></div>
+          <span class="label-tag text-red-600">The Symposium</span>
+        </div>
+        <h2 class="font-display font-800 text-ink text-3xl lg:text-4xl mb-6">
+          28 Years of EMBL PhD Symposia
+        </h2>
+        <div class="font-body text-muted text-lg leading-relaxed space-y-4">
+          <p>
+            The EMBL PhD Symposium is an annual conference entirely organised by PhD students
+            at the European Molecular Biology Laboratory. Since its inception in 1999, it has
+            become one of the premier scientific meetings for early-career researchers in the life sciences.
+          </p>
+          <p>
+            Each year, the organising committee — composed of current EMBL PhD students — selects a theme,
+            invites world-leading speakers, curates the scientific program, and manages all logistics.
+            The result is a scientifically rigorous yet deeply personal gathering that reflects the
+            values and curiosity of the next generation of scientists.
+          </p>
+          <p>
+            The 28th edition, themed <strong>"Shifting Gears to Scale up Discovery,"</strong> focuses on
+            the transformative moment biology is experiencing: technologies and computational approaches
+            that enable researchers to move from studying one molecule, one cell, or one patient at a time
+            to studying millions simultaneously — fundamentally changing what questions we can ask and answer.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick facts sidebar -->
+      <div class="space-y-0">
+        <div class="bg-green-900 text-white p-8">
+          <h3 class="font-display font-700 text-xl mb-6 text-green-400">Quick Facts</h3>
+          {[
+            { label: 'Edition',    value: '28th (2026)'             },
+            { label: 'Theme',      value: 'Shifting Gears to Scale up Discovery' },
+            { label: 'Dates',      value: 'November 5–7, 2026'     },
+            { label: 'Venue',      value: 'EMBL Heidelberg, ATC Auditorium' },
+            { label: 'Capacity',   value: '~200 participants'       },
+            { label: 'Organised',  value: 'EMBL PhD Students Association' },
+          ].map(({ label, value }) => (
+            <div class="fact-row">
+              <span class="font-mono text-[0.6rem] tracking-[0.12em] uppercase text-green-400/60">{label}</span>
+              <span class="font-body text-sm text-white/80">{value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Venue section -->
+    <section id="venue" class="mb-20 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="h-px w-10 bg-red-600"></div>
+        <span class="label-tag text-red-600">Venue</span>
+      </div>
+      <h2 class="font-display font-800 text-ink text-3xl lg:text-4xl mb-10">EMBL Heidelberg</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div>
+          <div class="venue-block">
+            <h3 class="font-display font-700 text-lg text-ink mb-2">ATC Auditorium</h3>
+            <p class="font-body text-muted leading-relaxed">
+              The Advanced Training Centre (ATC) Auditorium is EMBL's state-of-the-art conference facility,
+              seating 500 and equipped with high-definition projection systems, conference audio, and
+              simultaneous translation booths. The adjacent foyer and corridors serve as poster exhibition space.
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="venue-block">
+            <h3 class="font-display font-700 text-lg text-ink mb-2">Computer Labs</h3>
+            <p class="font-body text-muted leading-relaxed">
+              Workshop sessions will take place in EMBL's bioinformatics computer labs, each equipped with
+              60 workstations running Linux with pre-installed bioinformatics software suites. Participants
+              should bring their own laptops for follow-along exercises.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map placeholder -->
+      <div class="bg-green-100/50 border border-green-200 p-8 text-center relative overflow-hidden">
+        <img
+          src="/gear3.svg"
+          alt=""
+          aria-hidden="true"
+          class="absolute -top-8 -right-8 w-40 gear-spin-slow opacity-5"
+        />
+        <p class="font-mono text-sm text-green-700 mb-2">📍 Meyerhofstraße 1, 69117 Heidelberg, Germany</p>
+        <p class="font-body text-muted text-sm">
+          Interactive map and directions will be embedded here.
+          <a href="https://www.embl.org/about/info/computing/scientific-computing/services/how-to-reach-embl/" target="_blank" rel="noopener noreferrer" class="text-green-700 underline ml-1">
+            EMBL directions page →
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Travel section -->
+    <section id="travel" class="mb-20 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="h-px w-10 bg-red-600"></div>
+        <span class="label-tag text-red-600">Getting Here</span>
+      </div>
+      <h2 class="font-display font-800 text-ink text-3xl lg:text-4xl mb-10">Travel Information</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          {
+            icon: '✈️',
+            title: 'By Air',
+            content: 'Frankfurt Airport (FRA) is the closest major hub, approximately 1 hour from Heidelberg by train. Stuttgart Airport (STR) is also convenient, about 1.5 hours away.',
+          },
+          {
+            icon: '🚆',
+            title: 'By Train',
+            content: 'Heidelberg has excellent rail connections. Direct ICE trains from Frankfurt take 40 minutes. From Heidelberg Hauptbahnhof, take bus 39 to the Technologiepark stop (15 min), then a short walk up the hill to EMBL.',
+          },
+          {
+            icon: '🚗',
+            title: 'By Car',
+            content: 'EMBL is located off Meyerhofstraße, accessible from the B37 via Berliner Straße. Limited parking is available on the EMBL campus. A shuttle service from city centre hotels will be provided.',
+          },
+        ].map(({ icon, title, content }) => (
+          <div class="travel-card">
+            <div class="text-3xl mb-4">{icon}</div>
+            <h3 class="font-display font-700 text-ink text-xl mb-3">{title}</h3>
+            <p class="font-body text-muted leading-relaxed">{content}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Accommodation section -->
+    <section id="accommodation" class="mb-20 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="h-px w-10 bg-red-600"></div>
+        <span class="label-tag text-red-600">Where to Stay</span>
+      </div>
+      <h2 class="font-display font-800 text-ink text-3xl lg:text-4xl mb-10">Accommodation</h2>
+
+      <div class="space-y-4">
+        {[
+          {
+            name: 'EMBL Guesthouse',
+            type: 'On-campus (Limited availability)',
+            price: '€55–€80/night',
+            description: 'Located directly on the EMBL campus, the guesthouse offers comfortable single and double rooms for symposium participants. Book early as places are very limited. Priority given to travel grant recipients.',
+            highlight: true,
+          },
+          {
+            name: 'Hotel Zum Ritter St. Georg',
+            type: 'Heidelberg Old Town (Historic)',
+            price: '€120–€180/night',
+            description: 'A beautiful 16th-century hotel in the heart of the Altstadt, a 15-minute bus ride from EMBL. We have negotiated a symposium rate — quote "EMBL PhD Symposium 2026" when booking.',
+          },
+          {
+            name: 'NH Heidelberg',
+            type: 'City Centre',
+            price: '€85–€130/night',
+            description: 'Modern 4-star hotel conveniently located near Heidelberg Hauptbahnhof with direct bus access to EMBL. Symposium discount available with code EMBLS2026.',
+          },
+          {
+            name: 'Youth Hostel Heidelberg',
+            type: 'Budget Option',
+            price: '€25–€45/night',
+            description: 'The Heidelberg DJH Youth Hostel offers affordable dormitory and private rooms for budget-conscious participants. Good public transport connections to EMBL.',
+          },
+        ].map(({ name, type, price, description, highlight }) => (
+          <div class:list={['accommodation-card', highlight ? 'accommodation-card-highlight' : '']}>
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-2">
+              <div>
+                <h3 class="font-display font-700 text-ink text-lg">{name}</h3>
+                <p class="font-mono text-xs text-muted tracking-wide">{type}</p>
+              </div>
+              <span class="font-mono text-sm font-600 text-green-700 whitespace-nowrap">{price}</span>
+            </div>
+            <p class="font-body text-muted leading-relaxed">{description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mb-20 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="h-px w-10 bg-red-600"></div>
+        <span class="label-tag text-red-600">FAQ</span>
+      </div>
+      <h2 class="font-display font-800 text-ink text-3xl lg:text-4xl mb-10">Frequently Asked Questions</h2>
+
+      <div class="space-y-0 border border-warm">
+        {[
+          {
+            q: 'Who can attend the symposium?',
+            a: 'The symposium is open to all scientists, but is primarily targeted at PhD students, postdoctoral researchers, and early-career scientists. Some places are reserved for EMBL predoctoral fellows.',
+          },
+          {
+            q: 'Is there a registration fee?',
+            a: 'Yes. Registration fees will be announced in June 2026. EMBL predoctoral fellows attend free of charge. Travel grants are available for participants from low- and middle-income countries.',
+          },
+          {
+            q: 'Can I submit an abstract for a poster or flash talk?',
+            a: 'Yes! Abstract submission opens July 1, 2026. We encourage all participants to submit abstracts. Selected abstracts will be invited for 5-minute flash talks at the start of each day.',
+          },
+          {
+            q: 'Will the symposium be hybrid or recorded?',
+            a: 'The 28th edition will be primarily in-person to foster community and networking. Selected sessions may be live-streamed. All keynote talks will be recorded and made available to registered participants after the symposium.',
+          },
+          {
+            q: 'What is the Code of Conduct?',
+            a: 'The symposium follows the EMBL Code of Conduct, which promotes a respectful, inclusive, and harassment-free environment for all participants regardless of background, identity, or career stage. All participants are required to read and agree to the CoC upon registration.',
+          },
+        ].map(({ q, a }) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{q}</span>
+              <svg class="faq-arrow w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="faq-answer">
+              <p class="font-body text-muted leading-relaxed">{a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Code of Conduct -->
+    <section id="code-of-conduct" class="mb-20 scroll-mt-24">
+      <div class="bg-green-50 border border-green-200 p-8 lg:p-12">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-8 bg-green-700"></div>
+          <span class="label-tag text-green-700">Our Commitment</span>
+        </div>
+        <h2 class="font-display font-800 text-ink text-2xl lg:text-3xl mb-4" id="code-of-conduct-title">
+          Code of Conduct
+        </h2>
+        <p class="font-body text-muted leading-relaxed max-w-3xl">
+          We are committed to creating a welcoming, inclusive, and scientifically stimulating environment
+          for all participants. Harassment, discrimination, or exclusionary behaviour of any kind will not
+          be tolerated. Any concerns should be reported to the symposium committee via
+          <a href="mailto:phd-symposium-coc@embl.de" class="text-green-700 underline">phd-symposium-coc@embl.de</a>.
+          All reports are treated with full confidentiality.
+        </p>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .fact-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .fact-row:last-child { border-bottom: none; }
+
+  .venue-block {
+    padding: 1.5rem;
+    border: 1px solid #E8E4DC;
+    background: white;
+    height: 100%;
+  }
+
+  .travel-card {
+    padding: 1.75rem;
+    border: 1px solid #E8E4DC;
+    background: white;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .travel-card:hover {
+    border-color: #52B788;
+    box-shadow: 0 4px 16px rgba(26,92,54,0.08);
+  }
+
+  .accommodation-card {
+    padding: 1.5rem;
+    border: 1px solid #E8E4DC;
+    background: white;
+    margin-bottom: -1px;
+  }
+  .accommodation-card-highlight {
+    border-color: #52B788;
+    background: #F0FBF4;
+    position: relative;
+  }
+  .accommodation-card-highlight::before {
+    content: 'Recommended';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1A5C36;
+    background: #D8F3DC;
+    padding: 0.2rem 0.5rem;
+  }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid #E8E4DC;
+    background: white;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #141414;
+    list-style: none;
+    transition: background 0.15s;
+  }
+  .faq-question:hover { background: #FAFAF8; }
+  .faq-question::-webkit-details-marker { display: none; }
+
+  details[open] .faq-arrow {
+    transform: rotate(180deg);
+  }
+  .faq-arrow {
+    transition: transform 0.2s;
+  }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid #F0EDE6;
+  }
+</style>

@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SpeakerCard from '../components/SpeakerCard.astro';
+import { getCollection, render } from 'astro:content';
+
+const speakers = await getCollection('speakers');
+type Speaker = (typeof speakers)[number];
+
+const sortedSpeakers = [...speakers].sort((a: Speaker, b: Speaker) => {
+  if (a.data.day !== b.data.day) return a.data.day - b.data.day;
+  // Keynotes first within each day
+  if (a.data.sessionType === 'keynote' && b.data.sessionType !== 'keynote') return -1;
+  if (b.data.sessionType === 'keynote' && a.data.sessionType !== 'keynote') return 1;
+  return 0;
+});
+
+// Pre-render all bios
+const rendered = await Promise.all(
+  sortedSpeakers.map(async (s: Speaker) => {
+    const { Content } = await render(s);
+    return { id: s.id, Content };
+  })
+);
+const bioMap = Object.fromEntries(rendered.map(r => [r.id, r.Content]));
+
+const dayGroups = [1, 2, 3].map(day => ({
+  day,
+  speakers: sortedSpeakers.filter((s: Speaker) => s.data.day === day),
+}));
+
+const dayThemes: Record<number, { title: string; theme: string; color: string }> = {
+  1: { title: 'Day 1 — Nov 5', theme: 'Molecules to Systems', color: '#1A5C36' },
+  2: { title: 'Day 2 — Nov 6', theme: 'Circuits & Systems',   color: '#C1121F' },
+  3: { title: 'Day 3 — Nov 7', theme: 'Technology Frontiers', color: '#2D6A4F' },
+};
+---
+
+<BaseLayout
+  title="Speakers — 28th EMBL PhD Symposium 2026"
+  description="Meet the invited speakers of the 28th EMBL PhD Symposium, covering structural biology, single-cell genomics, systems biology, AI, and spatial multi-omics."
+>
+  <!-- Page Hero -->
+  <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
+    <img
+      src="/gear2.svg"
+      alt=""
+      aria-hidden="true"
+      class="absolute -bottom-16 -right-20 w-[400px] gear-spin-reverse pointer-events-none select-none"
+      style="filter: invert(1) opacity(0.06);"
+    />
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-px w-10 bg-green-500"></div>
+        <span class="label-tag text-green-400">Invited Scientists</span>
+      </div>
+      <h1 class="font-display font-800 text-white text-5xl lg:text-7xl mb-4">Speakers</h1>
+      <p class="font-body text-white/60 text-lg max-w-2xl">
+        Nine leading scientists from institutions across Europe and North America — each advancing the frontiers
+        of biological discovery through scale, technology, and computation.
+      </p>
+
+      <!-- Stats row -->
+      <div class="flex flex-wrap gap-8 mt-10 pt-8 border-t border-white/10">
+        {[
+          { value: '9', label: 'Invited Speakers' },
+          { value: '3', label: 'Keynote Lectures'  },
+          { value: '6', label: 'Invited Talks'     },
+          { value: '7', label: 'Countries'         },
+        ].map(({ value, label }) => (
+          <div>
+            <p class="font-display font-800 text-green-400 text-3xl">{value}</p>
+            <p class="font-mono text-[0.6rem] tracking-[0.15em] uppercase text-white/40">{label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Speakers by day -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+    {dayGroups.map(({ day, speakers: daySpeakers }) => (
+      <div class="mb-20 last:mb-0">
+        <!-- Day header -->
+        <div class="flex items-center gap-6 mb-10">
+          <div>
+            <div class="flex items-center gap-3 mb-1">
+              <span
+                class="font-display font-800 text-5xl lg:text-6xl"
+                style={`color: ${dayThemes[day].color}; opacity: 0.2;`}
+              >{String(day).padStart(2, '0')}</span>
+            </div>
+          </div>
+          <div class="border-l-4 pl-6" style={`border-color: ${dayThemes[day].color};`}>
+            <p class="font-mono text-[0.65rem] tracking-[0.15em] uppercase text-muted mb-0.5">
+              {dayThemes[day].title}
+            </p>
+            <h2 class="font-display font-800 text-ink text-2xl lg:text-3xl">
+              {dayThemes[day].theme}
+            </h2>
+          </div>
+        </div>
+
+        <!-- Speaker cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {daySpeakers.map((speaker: Speaker) => (
+            <SpeakerCard
+              slug={speaker.id}
+              name={speaker.data.name}
+              role={speaker.data.role}
+              institution={speaker.data.institution}
+              country={speaker.data.country}
+              topic={speaker.data.topic}
+              day={speaker.data.day}
+              sessionType={speaker.data.sessionType}
+              image={speaker.data.image}
+            />
+          ))}
+        </div>
+
+        <!-- Bio panels for each speaker -->
+        {daySpeakers.map((speaker: Speaker) => {
+          const Bio = bioMap[speaker.id];
+          return (
+            <div id={speaker.id} class="bio-panel">
+              <div class="bio-panel-inner">
+                <!-- Speaker header inside bio -->
+                <div class="bio-header">
+                  <div>
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class:list={['session-badge', speaker.data.sessionType === 'keynote' ? 'badge-keynote' : 'badge-talk']}>
+                        {speaker.data.sessionType}
+                      </span>
+                      <span class="font-mono text-[0.6rem] text-muted uppercase tracking-[0.1em]">Day {speaker.data.day}</span>
+                    </div>
+                    <h3 class="font-display font-800 text-ink text-2xl lg:text-3xl mb-1">{speaker.data.name}</h3>
+                    <p class="font-body text-muted mb-0.5">{speaker.data.role}</p>
+                    <p class="font-display font-600 text-green-700">{speaker.data.institution} · {speaker.data.country}</p>
+                  </div>
+                </div>
+                <!-- Talk info -->
+                <div class="bio-talk">
+                  <p class="label-tag text-red-600 mb-2">Talk</p>
+                  <p class="font-display font-700 text-ink text-lg leading-tight">{speaker.data.topic}</p>
+                </div>
+                <!-- Bio text -->
+                <div class="bio-content prose-bio">
+                  <Bio />
+                </div>
+                <!-- External links -->
+                <div class="bio-links">
+                  {speaker.data.website && (
+                    <a
+                      href={speaker.data.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="bio-link"
+                    >
+                      🔗 Personal / Lab Website
+                    </a>
+                  )}
+                  {speaker.data.twitter && (
+                    <a
+                      href={`https://twitter.com/${speaker.data.twitter}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="bio-link"
+                    >
+                      𝕏 @{speaker.data.twitter}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .bio-panel {
+    border: 1px solid #E8E4DC;
+    background: white;
+    margin-bottom: 2rem;
+    scroll-margin-top: 5rem;
+  }
+  .bio-panel-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .bio-header {
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid #F0EDE6;
+  }
+  .bio-talk {
+    padding: 1.5rem 2rem;
+    background: #FFF5F5;
+    border-bottom: 1px solid #FFE5E7;
+    border-left: 3px solid #C1121F;
+  }
+  .bio-content {
+    padding: 2rem;
+    border-bottom: 1px solid #F0EDE6;
+  }
+  .bio-links {
+    padding: 1.25rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .bio-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #1A5C36;
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #D8F3DC;
+    background: #F0FBF4;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .bio-link:hover {
+    background: #D8F3DC;
+    border-color: #52B788;
+  }
+
+  /* Prose styles for bio content */
+  .prose-bio :global(p) {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    color: #5A5857;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .prose-bio :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .prose-bio :global(strong) {
+    color: #141414;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .bio-header,
+    .bio-talk,
+    .bio-content,
+    .bio-links {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+</style>
