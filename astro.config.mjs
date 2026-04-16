@@ -6,8 +6,10 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: 'https://HugoHakem.github.io',
+  site: 'https://phdsymposium.pages.embl.de',
   base: '/phd-symposium-2026/',
+  outDir: 'public',
+  publicDir: 'static',
   trailingSlash: "ignore",
 });
 
