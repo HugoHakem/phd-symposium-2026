@@ -3,7 +3,7 @@
 **Shifting Gears to Scale up Discovery**
 November 5–7, 2026 · EMBL Heidelberg, Germany
 
-Live site: [HugoHakem.github.io/phd-symposium-2026/](https://HugoHakem.github.io/phd-symposium-2026/)
+Live site: [phdsymposium.embl-community.io/phd-symposium-2026/](https://phdsymposium.embl-community.io/phd-symposium-2026/)
 
 ---
 

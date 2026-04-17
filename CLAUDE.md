@@ -35,7 +35,7 @@ Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
 - `base: '/phd-symposium-2026/'` in `astro.config.mjs` — note the **trailing slash**
 - `import.meta.env.BASE_URL` resolves to `/phd-symposium-2026/` at build time
 - All internal links and public asset `src` attributes use `${import.meta.env.BASE_URL}path`
-  (e.g. `href={`${import.meta.env.BASE_URL}program`}`, `src={`${import.meta.env.BASE_URL}gear1.svg`}`)
+  (e.g. `href={'${import.meta.env.BASE_URL}program'}`, `src={'${import.meta.env.BASE_URL}gear1.svg'}`)
 - **Never** use bare absolute paths like `/program` or `/gear1.svg` — they break on GitHub Pages
 
 ### Public assets
