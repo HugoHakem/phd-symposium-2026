@@ -3,8 +3,9 @@ interface Sponsor {
   id: string;
   data: {
     name: string;
-    tier: 'platinum' | 'gold' | 'silver' | 'bronze' | 'media';
-    website: string;
+    tier: 'sponsor' | 'grant' | 'cpp';
+    subTier?: 'founder_partner' | 'corporate_partner' | 'associate_partner';
+    website?: string;
     description: string;
     logo?: string;
   };
@@ -16,20 +17,19 @@ interface Props {
 
 const { sponsors } = Astro.props;
 
-const tiers = ['platinum', 'gold', 'silver', 'bronze'] as const;
+const mainSponsors = sponsors.filter(s => s.data.tier === 'sponsor');
+const grants       = sponsors.filter(s => s.data.tier === 'grant');
+const cppSponsors  = sponsors.filter(s => s.data.tier === 'cpp');
 
-const tierConfig = {
-  platinum: { label: 'Platinum', class: 'tier-platinum', cardClass: 'sponsor-platinum' },
-  gold:     { label: 'Gold',     class: 'tier-gold',     cardClass: 'sponsor-gold'     },
-  silver:   { label: 'Silver',   class: 'tier-silver',   cardClass: 'sponsor-silver'   },
-  bronze:   { label: 'Bronze',   class: 'tier-bronze',   cardClass: 'sponsor-bronze'   },
-  media:    { label: 'Media',    class: 'tier-bronze',   cardClass: 'sponsor-bronze'   },
-};
+const cppSubTiers = [
+  { key: 'founder_partner',   label: 'Founder Partners'    },
+  { key: 'corporate_partner', label: 'Corporate Partners'  },
+  { key: 'associate_partner', label: 'Associate Partners'  },
+] as const;
 
-const grouped = tiers.reduce((acc, tier) => {
-  acc[tier] = sponsors.filter(s => s.data.tier === tier);
-  return acc;
-}, {} as Record<string, Sponsor[]>);
+const cppGrouped = Object.fromEntries(
+  cppSubTiers.map(({ key }) => [key, cppSponsors.filter(s => s.data.subTier === key)])
+);
 ---
 
 <section class="py-24 lg:py-32 bg-cream">
@@ -48,23 +48,20 @@ const grouped = tiers.reduce((acc, tier) => {
       </p>
     </div>
 
-    <!-- Sponsor tiers -->
-    {tiers.map((tier) => grouped[tier]?.length > 0 && (
+    <!-- Sponsors -->
+    {mainSponsors.length > 0 && (
       <div class="sponsor-tier-group">
         <div class="tier-header">
-          <h3 class:list={['font-mono text-[0.65rem] tracking-[0.2em] uppercase font-600', tierConfig[tier].class]}>
-            {tierConfig[tier].label} Sponsors
-          </h3>
+          <h3 class="font-mono text-[0.65rem] tracking-[0.2em] uppercase font-600 text-green-800">Sponsors</h3>
           <div class="tier-line"></div>
         </div>
-
-        <div class:list={['sponsors-grid', `grid-${tier}`]}>
-          {grouped[tier].map((sponsor) => (
+        <div class="sponsors-grid grid-sponsor">
+          {mainSponsors.map((sponsor) => (
             <a
               href={sponsor.data.website}
               target="_blank"
               rel="noopener noreferrer"
-              class:list={['sponsor-card', tierConfig[tier].cardClass]}
+              class="sponsor-card sponsor-main"
               title={sponsor.data.name}
             >
               <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
@@ -73,7 +70,60 @@ const grouped = tiers.reduce((acc, tier) => {
           ))}
         </div>
       </div>
-    ))}
+    )}
+
+    <!-- Grants -->
+    {grants.length > 0 && (
+      <div class="sponsor-tier-group">
+        <div class="tier-header">
+          <h3 class="font-mono text-[0.65rem] tracking-[0.2em] uppercase font-600 text-green-800">Grants</h3>
+          <div class="tier-line"></div>
+        </div>
+        <div class="sponsors-grid grid-grant">
+          {grants.map((sponsor) => (
+            <a
+              href={sponsor.data.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="sponsor-card sponsor-grant"
+              title={sponsor.data.name}
+            >
+              <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
+              <p class="sponsor-desc font-body text-sm text-muted">{sponsor.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- CPP Sponsors -->
+    {cppSponsors.length > 0 && (
+      <div class="sponsor-tier-group">
+        <div class="tier-header">
+          <h3 class="font-mono text-[0.65rem] tracking-[0.2em] uppercase font-600 text-green-800">CPP Sponsors</h3>
+          <div class="tier-line"></div>
+        </div>
+        {cppSubTiers.map(({ key, label }) => cppGrouped[key]?.length > 0 && (
+          <div class="cpp-subtier-group">
+            <p class="font-mono text-[0.6rem] tracking-[0.15em] uppercase text-muted mb-3">{label}</p>
+            <div class="sponsors-grid grid-cpp">
+              {cppGrouped[key].map((sponsor) => (
+                <a
+                  href={sponsor.data.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="sponsor-card sponsor-cpp"
+                  title={sponsor.data.name}
+                >
+                  <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
+                  <p class="sponsor-desc font-body text-sm text-muted">{sponsor.data.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
 
     <!-- Become a sponsor CTA -->
     <div class="mt-16 pt-16 border-t border-warm">
@@ -83,7 +133,7 @@ const grouped = tiers.reduce((acc, tier) => {
           <p class="font-body text-muted">Contact us to discuss partnership opportunities for the symposium.</p>
         </div>
         <a
-          href="mailto:phd-symposium@embl.de"
+          href="mailto:phdsymposium2026.partners@embl.de"
           class="font-display font-700 text-sm px-8 py-4 bg-green-800 text-white hover:bg-green-900 transition-colors whitespace-nowrap"
         >
           Contact Us
@@ -96,6 +146,10 @@ const grouped = tiers.reduce((acc, tier) => {
 <style>
   .sponsor-tier-group {
     margin-bottom: 3rem;
+  }
+
+  .cpp-subtier-group {
+    margin-bottom: 2rem;
   }
 
   .tier-header {
@@ -116,10 +170,9 @@ const grouped = tiers.reduce((acc, tier) => {
     background: #D6D2CA;
     border: 1px solid #D6D2CA;
   }
-  .grid-platinum { grid-template-columns: 1fr; }
-  .grid-gold     { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-  .grid-silver   { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-  .grid-bronze   { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  .grid-sponsor { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .grid-grant   { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .grid-cpp     { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 
   .sponsor-card {
     background: white;
@@ -132,22 +185,20 @@ const grouped = tiers.reduce((acc, tier) => {
     transform: translateY(-2px);
   }
 
-  .sponsor-platinum .sponsor-name { font-size: 1.4rem; color: #141414; }
-  .sponsor-gold .sponsor-name     { font-size: 1.15rem; color: #141414; }
-  .sponsor-silver .sponsor-name   { font-size: 1rem; color: #5A5857; }
-  .sponsor-bronze .sponsor-name   { font-size: 0.9rem; color: #5A5857; }
+  .sponsor-main  .sponsor-name { font-size: 1.15rem; color: #141414; }
+  .sponsor-grant .sponsor-name { font-size: 1rem;    color: #141414; }
+  .sponsor-cpp   .sponsor-name { font-size: 0.9rem;  color: #5A5857; }
 
   .sponsor-desc {
     margin-top: 0.5rem;
     line-height: 1.5;
   }
-  .sponsor-silver .sponsor-desc,
-  .sponsor-bronze .sponsor-desc {
+  .sponsor-cpp .sponsor-desc {
     display: none;
   }
 
   @media (max-width: 640px) {
-    .grid-gold, .grid-silver, .grid-bronze {
+    .grid-sponsor, .grid-grant, .grid-cpp {
       grid-template-columns: 1fr;
     }
   }
