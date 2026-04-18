@@ -22,8 +22,8 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
 ---
 
 <BaseLayout
-  title="28th EMBL PhD Symposium 2026 — Shifting Gears to Scale up Discovery"
-  description="The 28th EMBL PhD Symposium: Shifting Gears to Scale up Discovery. November 5–7, 2026 at EMBL Heidelberg."
+  title="28th EMBL PhD Symposium 2026 — Shifting Gears: Automation, AI, and High-Throughput Methodologies"
+  description="The 28th EMBL PhD Symposium: Shifting Gears: Automation, AI, and High-Throughput Methodologies. December 1–3, 2026 at EMBL Heidelberg."
 >
   <HeroSection />
 
@@ -58,7 +58,7 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
             {[
               { value: '9', label: 'Invited Speakers' },
               { value: '3', label: 'Focused Days'     },
-              { value: '200+', label: 'Participants'  },
+              { value: '100+', label: 'Participants'  },
             ].map(({ value, label }) => (
               <div>
                 <p class="font-display font-800 text-green-800 text-4xl mb-1">{value}</p>
@@ -181,12 +181,12 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
           <h2 class="font-display font-800 text-ink text-4xl mb-10">Mark Your<br />Calendar</h2>
           <div class="space-y-0">
             {[
-              { date: 'July 1, 2026',    label: 'Abstract Submission Opens',  past: false },
-              { date: 'August 31, 2026', label: 'Abstract Submission Closes', past: false },
-              { date: 'September 15, 2026', label: 'Registration Deadline',  past: false },
-              { date: 'October 1, 2026', label: 'Program Announced',         past: false },
-              { date: 'November 5, 2026', label: 'Symposium Begins',         past: false, highlight: true },
-              { date: 'November 7, 2026', label: 'Symposium Ends',           past: false },
+              { date: 'TBA',             label: 'Abstract Submission Opens',  past: false },
+              { date: 'TBA',             label: 'Abstract Submission Closes', past: false },
+              { date: 'TBA',             label: 'Registration Deadline',      past: false },
+              { date: 'TBA',             label: 'Program Announced',          past: false },
+              { date: 'December 1, 2026', label: 'Symposium Begins',         past: false, highlight: true },
+              { date: 'December 3, 2026', label: 'Symposium Ends',           past: false },
             ].map(({ date, label, highlight }, i) => (
               <div class:list={['date-row', highlight ? 'date-row-highlight' : '']}>
                 <div class="date-marker">
