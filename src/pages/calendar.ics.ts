@@ -50,6 +50,26 @@ export const GET: APIRoute = async () => {
     }
   }
 
+  const vtimezone = [
+    'BEGIN:VTIMEZONE',
+    'TZID:Europe/Berlin',
+    'BEGIN:STANDARD',
+    'DTSTART:19701025T030000',
+    'RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10',
+    'TZNAME:CET',
+    'TZOFFSETFROM:+0200',
+    'TZOFFSETTO:+0100',
+    'END:STANDARD',
+    'BEGIN:DAYLIGHT',
+    'DTSTART:19700329T020000',
+    'RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3',
+    'TZNAME:CEST',
+    'TZOFFSETFROM:+0100',
+    'TZOFFSETTO:+0200',
+    'END:DAYLIGHT',
+    'END:VTIMEZONE',
+  ].join('\r\n');
+
   const ics = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -61,6 +81,7 @@ export const GET: APIRoute = async () => {
     'METHOD:PUBLISH',
     'REFRESH-INTERVAL;VALUE=DURATION:PT12H',
     'X-PUBLISHED-TTL:PT12H',
+    vtimezone,
     ...events,
     'END:VCALENDAR',
   ].join('\r\n');
