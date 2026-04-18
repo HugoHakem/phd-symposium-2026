@@ -39,34 +39,34 @@
   }
 
   body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    background-color: #FAF8F3;
-    color: #141414;
+    font-family: var(--font-body);
+    background-color: var(--color-parchment);
+    color: var(--color-ink);
     line-height: 1.7;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syne', sans-serif;
+    font-family: var(--font-display);
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
   ::selection {
-    background-color: #1A5C36;
-    color: #FAF8F3;
+    background-color: var(--color-green-800);
+    color: var(--color-parchment);
   }
 }
 
 /* ── Custom Utilities ─────────────────────────────────────── */
 @layer utilities {
-  .font-display { font-family: 'Syne', sans-serif; }
-  .font-body    { font-family: 'Source Serif 4', serif; }
-  .font-mono    { font-family: 'JetBrains Mono', monospace; }
+  .font-display { font-family: var(--font-display); }
+  .font-body    { font-family: var(--font-body); }
+  .font-mono    { font-family: var(--font-mono); }
 
   /* Section label style */
   .label-tag {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -94,7 +94,7 @@
     color: transparent;
   }
   .text-outline-green {
-    -webkit-text-stroke: 1.5px #1A5C36;
+    -webkit-text-stroke: 1.5px var(--color-green-800);
     color: transparent;
   }
 
@@ -148,18 +148,18 @@
 /* ── Component Styles ─────────────────────────────────────── */
 @layer components {
   /* Session type badges */
-  .badge-keynote   { background: #C1121F; color: white; }
-  .badge-talk      { background: #1A5C36; color: white; }
+  .badge-keynote   { background: var(--color-red-600);  color: white; }
+  .badge-talk      { background: var(--color-green-800); color: white; }
   .badge-workshop  { background: #2D6A8A; color: white; }
-  .badge-break     { background: #E8E4DC; color: #5A5857; }
-  .badge-lunch     { background: #E8E4DC; color: #5A5857; }
+  .badge-break     { background: var(--color-warm); color: var(--color-muted); }
+  .badge-lunch     { background: var(--color-warm); color: var(--color-muted); }
   .badge-social    { background: #F4A261; color: white; }
   .badge-ceremony  { background: #9B59B6; color: white; }
   .badge-panel     { background: #E67E22; color: white; }
   .badge-poster    { background: #27AE60; color: white; }
 
   .session-badge {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -169,8 +169,7 @@
   }
 
   /* Sponsor tier labels */
-  .tier-platinum { color: #6B7280; letter-spacing: 0.2em; }
-  .tier-gold     { color: #B7791F; letter-spacing: 0.2em; }
-  .tier-silver   { color: #718096; letter-spacing: 0.2em; }
-  .tier-bronze   { color: #9C6644; letter-spacing: 0.2em; }
+  .tier-sponsor  { color: var(--color-green-800); letter-spacing: 0.2em; }
+  .tier-grant    { color: var(--color-green-700); letter-spacing: 0.2em; }
+  .tier-cpp      { color: var(--color-muted);     letter-spacing: 0.2em; }
 }
