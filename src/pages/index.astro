@@ -42,21 +42,21 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
           </h2>
           <div class="font-body text-muted text-lg leading-relaxed space-y-4">
             <p>
-              The 28th EMBL PhD Symposium invites scientists at the frontier of scale — from single-molecule
-              imaging to genome-wide perturbation screens, from individual cells to tissue-level spatial atlases,
-              from single datasets to population-scale biobanks.
+              The 28th EMBL PhD Symposium explores how automation, high-throughput methodologies, and artificial
+              intelligence are accelerating scientific discovery — enhancing speed, reliability, and reproducibility
+              across biological disciplines.
             </p>
             <p>
-              Over three focused days, we bring together leading researchers to explore how technology, computation,
-              and bold scientific vision are shifting biology into a new era of discovery — one where scale itself
-              is the instrument.
+              Over three focused days, we bring together researchers and engineers at the frontier of scalable
+              science: from robotic wet-lab workflows and large-scale screening to AI-driven data analysis and
+              translational biomedical applications.
             </p>
           </div>
 
           <!-- Key stats -->
           <div class="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-warm">
             {[
-              { value: '9', label: 'Invited Speakers' },
+              { value: '12', label: 'Invited Speakers' },
               { value: '3', label: 'Focused Days'     },
               { value: '100+', label: 'Participants'  },
             ].map(({ value, label }) => (
@@ -140,29 +140,34 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
         ))}
       </div>
 
-      <!-- Other speakers compact row -->
+      <!-- Other speakers — scrollable band -->
       <div>
         <p class="font-mono text-[0.6rem] tracking-[0.2em] text-white/40 uppercase mb-4">Invited Talks</p>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {otherSpeakers.map((speaker: Speaker) => (
-            <a
-              href={`${base}speakers#${speaker.id}`}
-              class="group text-center p-4 border border-white/10 hover:border-green-500/40 hover:bg-white/5 transition-all"
-            >
-              <!-- Initials avatar -->
-              <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-green-800/60 flex items-center justify-center">
-                <span class="font-display font-800 text-white/50 text-sm">
-                  {speaker.data.name.split(' ').map((p: string) => p[0]).join('').slice(0, 2)}
-                </span>
-              </div>
-              <p class="font-display font-600 text-white text-sm leading-tight group-hover:text-green-400 transition-colors">
-                {speaker.data.name.split(' ').slice(-1)[0]}
-              </p>
-              <p class="font-mono text-[0.55rem] tracking-[0.1em] text-white/40 uppercase mt-1">
-                Day {speaker.data.day}
-              </p>
-            </a>
-          ))}
+        <div class="relative">
+          <div class="absolute right-0 top-0 bottom-0 w-20 pointer-events-none z-10"
+               style="background: linear-gradient(to left, var(--color-green-900), transparent);"></div>
+          <div class="flex overflow-x-auto invited-scroll-track">
+            <div class="flex gap-3 pb-1 mx-auto shrink-0">
+              {otherSpeakers.map((speaker: Speaker) => (
+                <a
+                  href={`${base}speakers#${speaker.id}`}
+                  class="group text-center p-4 border border-white/10 hover:border-green-500/40 hover:bg-white/5 transition-all flex-shrink-0 w-28"
+                >
+                  <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-green-800/60 flex items-center justify-center">
+                    <span class="font-display font-800 text-white/50 text-xs">
+                      {speaker.data.name.split(' ').map((p: string) => p[0]).join('').slice(0, 2)}
+                    </span>
+                  </div>
+                  <p class="font-display font-600 text-white text-xs leading-tight group-hover:text-green-400 transition-colors">
+                    {speaker.data.name.split(' ').slice(-1)[0]}
+                  </p>
+                  <p class="font-mono text-[0.5rem] tracking-[0.1em] text-white/40 uppercase mt-1">
+                    Day {speaker.data.day}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -272,6 +277,21 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
   .day-preview-card:hover {
     border-color: var(--color-green-500);
     box-shadow: 0 4px 16px var(--color-cyan-glow-sm);
+  }
+
+  .invited-scroll-track {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+  }
+  .invited-scroll-track::-webkit-scrollbar {
+    height: 2px;
+  }
+  .invited-scroll-track::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .invited-scroll-track::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 1px;
   }
 
   .date-row {

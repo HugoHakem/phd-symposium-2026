@@ -1,7 +1,7 @@
 day: 1
 date: "2026-12-01"
-title: "Molecules to Systems"
-theme: "Structural Biology & Single-Cell Genomics at Scale"
+title: "Scaling the Experiment"
+theme: "Automation, Robotics & High-Throughput Methodologies"
 color: "var(--color-day-1)"
 sessions:
   - time: "08:30"
@@ -39,6 +39,13 @@ sessions:
     abstract: "Abstract coming soon."
     location: "EMBL ATC Auditorium"
   - time: "12:45"
+    title: "Invited Talk"
+    type: "talk"
+    speaker: "Speaker TBA"
+    speakerSlug: "rafael-torres"
+    abstract: "Abstract coming soon."
+    location: "EMBL ATC Auditorium"
+  - time: "13:30"
     title: "Lunch Break"
     type: "lunch"
     location: "EMBL Canteen"

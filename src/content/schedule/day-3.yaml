@@ -1,7 +1,7 @@
 day: 3
 date: "2026-12-03"
-title: "Technology Frontiers"
-theme: "Spatial Biology, Proteomics & The Future of Discovery"
+title: "From Lab to World"
+theme: "Biomedical Engineering & Translational Applications"
 color: "var(--color-day-3)"
 sessions:
   - time: "09:00"
@@ -30,6 +30,13 @@ sessions:
     abstract: "Abstract coming soon."
     location: "EMBL ATC Auditorium"
   - time: "12:00"
+    title: "Invited Talk"
+    type: "talk"
+    speaker: "Speaker TBA"
+    speakerSlug: "nina-petrov"
+    abstract: "Abstract coming soon."
+    location: "EMBL ATC Auditorium"
+  - time: "12:45"
     title: "Lunch Break"
     type: "lunch"
     location: "EMBL Canteen"

@@ -1,7 +1,7 @@
 day: 2
 date: "2026-12-02"
-title: "Circuits & Systems"
-theme: "Computational Biology, AI & Systems Medicine"
+title: "Scaling the Analysis"
+theme: "AI, Machine Learning & Real-Time Data Science"
 color: "var(--color-day-2)"
 sessions:
   - time: "09:00"
@@ -30,6 +30,13 @@ sessions:
     abstract: "Abstract coming soon."
     location: "EMBL ATC Auditorium"
   - time: "12:00"
+    title: "Invited Talk"
+    type: "talk"
+    speaker: "Speaker TBA"
+    speakerSlug: "yuki-tanaka"
+    abstract: "Abstract coming soon."
+    location: "EMBL ATC Auditorium"
+  - time: "12:45"
     title: "Lunch & EMBL Campus Tour (Optional)"
     type: "lunch"
     location: "EMBL Canteen / Campus"

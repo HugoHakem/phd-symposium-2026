@@ -36,15 +36,15 @@ const dayColors: Record<number, string> = {
   3: 'var(--color-day-3)',
 };
 const dayThemes: Record<number, { title: string; theme: string }> = {
-  1: { title: 'Day 1 — Dec 1', theme: 'Molecules to Systems' },
-  2: { title: 'Day 2 — Dec 2', theme: 'Circuits & Systems'   },
-  3: { title: 'Day 3 — Dec 3', theme: 'Technology Frontiers' },
+  1: { title: 'Day 1 — Dec 1', theme: 'Scaling the Experiment'  },
+  2: { title: 'Day 2 — Dec 2', theme: 'Scaling the Analysis'    },
+  3: { title: 'Day 3 — Dec 3', theme: 'From Lab to World'       },
 };
 ---
 
 <BaseLayout
   title="Speakers — 28th EMBL PhD Symposium 2026"
-  description="Meet the invited speakers of the 28th EMBL PhD Symposium, covering structural biology, single-cell genomics, systems biology, AI, and spatial multi-omics."
+  description="Meet the invited speakers of the 28th EMBL PhD Symposium: Shifting Gears — Automation, AI, and High-Throughput Methodologies."
 >
   <!-- Page Hero -->
   <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
@@ -62,17 +62,17 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
       </div>
       <h1 class="font-display font-800 text-white text-5xl lg:text-7xl mb-4">Speakers</h1>
       <p class="font-body text-white/60 text-lg max-w-2xl">
-        Nine leading scientists from institutions across the world — each advancing the frontiers
-        of biological discovery through scale, technology, and computation.
+        Twelve leading scientists from institutions across the world — each advancing discovery
+        through automation, high-throughput methodologies, and AI-driven analysis.
       </p>
 
       <!-- Stats row -->
       <div class="flex flex-wrap gap-8 mt-10 pt-8 border-t border-white/10">
         {[
-          { value: '9', label: 'Invited Speakers' },
+          { value: '12', label: 'Invited Speakers' },
           { value: '3', label: 'Keynote Lectures'  },
-          { value: '6', label: 'Invited Talks'     },
-          { value: '7', label: 'Countries'         },
+          { value: '9', label: 'Invited Talks'     },
+          { value: 'TBA', label: 'Countries'       },
         ].map(({ value, label }) => (
           <div>
             <p class="font-display font-800 text-green-400 text-3xl">{value}</p>
@@ -108,7 +108,7 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
         </div>
 
         <!-- Speaker cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {daySpeakers.map((speaker: Speaker) => (
             <SpeakerCard
               slug={speaker.id}
