@@ -7,7 +7,7 @@ const base = import.meta.env.BASE_URL;
     1. flex-1 centering wrapper  — holds the content, grows to fill space
     2. scroll indicator          — always sits at the bottom, never overlaps
 -->
-<section class="relative min-h-screen flex flex-col overflow-hidden bg-green-900">
+<section class="relative min-h-screen flex flex-col overflow-hidden bg-mesh-dark">
   <!-- Background gear decorations -->
   <div class="absolute inset-0 pointer-events-none select-none overflow-hidden">
     <img
@@ -42,8 +42,8 @@ const base = import.meta.env.BASE_URL;
   <!-- Edition number — large background text -->
   <div class="absolute top-0 right-0 pointer-events-none select-none" aria-hidden="true">
     <span
-      class="font-display font-800 text-[clamp(12rem,28vw,24rem)] leading-none"
-      style="-webkit-text-stroke: 1px rgba(255,255,255,0.08); color: transparent;"
+      class="font-display font-800 text-[clamp(12rem,28vw,24rem)] leading-none text-outline-cyan"
+      style="opacity: 0.18;"
     >28</span>
   </div>
 
@@ -54,7 +54,7 @@ const base = import.meta.env.BASE_URL;
         <!-- Label -->
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px w-10 bg-red-500"></div>
-          <span class="label-tag text-red-400">28th EMBL PhD Symposium · Heidelberg, Germany</span>
+          <span class="label-tag text-red-400 text-glow-magenta">28th EMBL PhD Symposium · Heidelberg, Germany</span>
         </div>
 
         <!-- Main title -->
@@ -64,7 +64,7 @@ const base = import.meta.env.BASE_URL;
             style="animation: fade-up 0.8s ease 0.1s both;"
           >Shifting</span>
           <span
-            class="block text-[clamp(3.5rem,9vw,8rem)] text-green-500"
+            class="block text-[clamp(3.5rem,9vw,8rem)] text-gradient-brand"
             style="animation: fade-up 0.8s ease 0.2s both;"
           >Gears</span>
         </h1>
@@ -113,22 +113,22 @@ const base = import.meta.env.BASE_URL;
         >
           <p class="label-tag text-white/40 mb-3">Time until symposium</p>
           <div id="countdown" class="flex flex-wrap gap-4">
-            <div class="countdown-unit">
+            <div class="countdown-unit glass-panel">
               <span id="cd-days" class="countdown-value">--</span>
               <span class="countdown-label">Days</span>
             </div>
             <div class="countdown-sep">:</div>
-            <div class="countdown-unit">
+            <div class="countdown-unit glass-panel">
               <span id="cd-hours" class="countdown-value">--</span>
               <span class="countdown-label">Hours</span>
             </div>
             <div class="countdown-sep">:</div>
-            <div class="countdown-unit">
+            <div class="countdown-unit glass-panel">
               <span id="cd-minutes" class="countdown-value">--</span>
               <span class="countdown-label">Min</span>
             </div>
             <div class="countdown-sep">:</div>
-            <div class="countdown-unit">
+            <div class="countdown-unit glass-panel">
               <span id="cd-seconds" class="countdown-value">--</span>
               <span class="countdown-label">Sec</span>
             </div>
@@ -140,19 +140,13 @@ const base = import.meta.env.BASE_URL;
           class="flex flex-wrap gap-4"
           style="animation: fade-up 0.8s ease 0.6s both;"
         >
-          <a
-            href={`${base}program`}
-            class="inline-flex items-center gap-2 font-display font-700 text-base px-8 py-4 bg-red-600 text-white hover:bg-red-700 transition-all duration-200 group"
-          >
+          <a href={`${base}program`} class="btn-accent text-base px-8 py-4 group">
             View Program
             <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
-          <a
-            href={`${base}speakers`}
-            class="inline-flex items-center gap-2 font-display font-700 text-base px-8 py-4 border border-white/30 text-white hover:border-white/60 hover:bg-white/10 transition-all duration-200"
-          >
+          <a href={`${base}speakers`} class="btn-primary text-base px-8 py-4">
             Meet Speakers
           </a>
         </div>
@@ -180,11 +174,14 @@ const base = import.meta.env.BASE_URL;
   .countdown-value {
     font-family: var(--font-mono);
     font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 400;
+    font-weight: 700;
     color: white;
     line-height: 1;
     min-width: 2ch;
     text-align: center;
+    text-shadow:
+      0 0 20px rgba(93, 181, 181, 0.7),
+      0 0 60px rgba(93, 181, 181, 0.35);
   }
   .countdown-label {
     font-family: var(--font-mono);
