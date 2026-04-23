@@ -118,7 +118,10 @@ function isActive(path: string): boolean {
   function updateNav() {
     const scrolled = window.scrollY > 60;
     if (navBg) {
-      navBg.style.backgroundColor = scrolled ? 'rgba(13, 51, 33, 0.95)' : 'rgba(13, 51, 33, 0)';
+      const style = getComputedStyle(document.documentElement);
+      navBg.style.backgroundColor = scrolled
+        ? style.getPropertyValue('--color-nav-bg-scrolled').trim()
+        : style.getPropertyValue('--color-nav-bg-top').trim();
       navBg.style.backdropFilter = scrolled ? 'blur(12px)' : 'blur(0)';
     }
     if (nav) {

@@ -2,7 +2,7 @@ day: 2
 date: "2026-12-02"
 title: "Circuits & Systems"
 theme: "Computational Biology, AI & Systems Medicine"
-color: "#C1121F"
+color: "var(--color-day-2)"
 sessions:
   - time: "09:00"
     title: "Keynote Lecture"

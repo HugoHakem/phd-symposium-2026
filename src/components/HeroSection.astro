@@ -178,16 +178,16 @@ const base = import.meta.env.BASE_URL;
     min-width: 5rem;
   }
   .countdown-value {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 600;
+    font-weight: 400;
     color: white;
     line-height: 1;
     min-width: 2ch;
     text-align: center;
   }
   .countdown-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -195,7 +195,7 @@ const base = import.meta.env.BASE_URL;
     margin-top: 0.4rem;
   }
   .countdown-sep {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 600;
     color: rgba(255,255,255,0.3);

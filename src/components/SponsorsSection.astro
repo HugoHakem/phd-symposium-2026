@@ -161,33 +161,33 @@ const cppGrouped = Object.fromEntries(
   .tier-line {
     flex: 1;
     height: 1px;
-    background: #D6D2CA;
+    background: var(--color-border);
   }
 
   .sponsors-grid {
     display: grid;
     gap: 1px;
-    background: #D6D2CA;
-    border: 1px solid #D6D2CA;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
   }
   .grid-sponsor { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
   .grid-grant   { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
   .grid-cpp     { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 
   .sponsor-card {
-    background: white;
+    background: var(--color-cream);
     padding: 1.5rem 2rem;
     transition: background 0.2s, transform 0.2s;
     display: block;
   }
   .sponsor-card:hover {
-    background: #F4F0E6;
+    background: var(--color-warm);
     transform: translateY(-2px);
   }
 
-  .sponsor-main  .sponsor-name { font-size: 1.15rem; color: #141414; }
-  .sponsor-grant .sponsor-name { font-size: 1rem;    color: #141414; }
-  .sponsor-cpp   .sponsor-name { font-size: 0.9rem;  color: #5A5857; }
+  .sponsor-main  .sponsor-name { font-size: 1.15rem; color: var(--color-ink); }
+  .sponsor-grant .sponsor-name { font-size: 1rem;    color: var(--color-ink); }
+  .sponsor-cpp   .sponsor-name { font-size: 0.9rem;  color: var(--color-muted); }
 
   .sponsor-desc {
     margin-top: 0.5rem;

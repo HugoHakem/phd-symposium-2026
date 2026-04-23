@@ -126,20 +126,20 @@ const isMainEvent = (type: string) => ['keynote', 'talk', 'panel', 'ceremony'].i
 
 <style>
   .schedule-day {
-    border: 1px solid #E8E4DC;
-    background: white;
+    border: 1px solid var(--color-border);
+    background: var(--color-cream);
     overflow: hidden;
   }
 
   .day-header {
     padding: 2rem 2rem 1.5rem;
-    background: #FAFAF8;
-    border-bottom: 1px solid #E8E4DC;
+    background: var(--color-warm);
+    border-bottom: 1px solid var(--color-border);
     margin-left: -1px;
   }
 
   .sessions-list {
-    divide-y: #E8E4DC;
+    divide-y: var(--color-border);
   }
 
   .session-row {
@@ -147,14 +147,14 @@ const isMainEvent = (type: string) => ['keynote', 'talk', 'panel', 'ceremony'].i
     grid-template-columns: 5rem 1fr;
     gap: 1.5rem;
     padding: 1.25rem 2rem;
-    border-bottom: 1px solid #F0EDE6;
+    border-bottom: 1px solid var(--color-border);
     transition: background 0.15s ease;
   }
   .session-row:last-child {
     border-bottom: none;
   }
   .session-row:hover {
-    background: #FAFAF8;
+    background: var(--color-warm);
   }
 
   .session-main {

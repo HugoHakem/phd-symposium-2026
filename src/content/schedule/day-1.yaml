@@ -2,7 +2,7 @@ day: 1
 date: "2026-12-01"
 title: "Molecules to Systems"
 theme: "Structural Biology & Single-Cell Genomics at Scale"
-color: "#1A5C36"
+color: "var(--color-day-1)"
 sessions:
   - time: "08:30"
     title: "Registration & Welcome Coffee"
