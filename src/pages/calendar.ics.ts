@@ -75,7 +75,7 @@ export const GET: APIRoute = async () => {
     'VERSION:2.0',
     'PRODID:-//28th EMBL PhD Symposium 2026//EN',
     'X-WR-CALNAME:28th EMBL PhD Symposium 2026',
-    'X-WR-CALDESC:Shifting Gears: Automation\\, AI\\, and High-Throughput Methodologies — Dec 1–3\\, 2026',
+    'X-WR-CALDESC:Shifting Gears: Automation\\, AI\\, and High-Throughput Methodologies — Dec 2–4\\, 2026',
     'X-WR-TIMEZONE:Europe/Berlin',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',

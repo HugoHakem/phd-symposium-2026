@@ -8,7 +8,7 @@ This file gives Claude Code context about the project. Extended memory lives in
 ## Project
 
 28th EMBL PhD Symposium website — **"Shifting Gears to Scale up Discovery"**
-November 5–7, 2026 · EMBL Heidelberg, Germany
+December 2–4, 2026 · EMBL Heidelberg, Germany
 
 Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
 `https://HugoHakem.github.io/phd-symposium-2026/`.
