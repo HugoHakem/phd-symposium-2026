@@ -7,7 +7,6 @@ pages:
     - pnpm run build
   variables:
     ASTRO_SITE: 'https://phdsymposium.embl-community.io'
-    ASTRO_BASE: '/'
     ASTRO_OUT_DIR: 'public'
   artifacts:
     paths:
