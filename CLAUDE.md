@@ -39,7 +39,8 @@ Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
 - **Never** use bare absolute paths like `/program` or `/gear1.svg` — they break on GitHub Pages
 
 ### Public assets
-- Gear SVGs live in both `src/assets/` (originals) and `public/` (copies for URL access)
+- `publicDir` is set to `static/` in `astro.config.mjs` (not the Astro default `public/`)
+- Gear SVGs live in `static/` for URL access and `src/assets/` as originals — **edit `static/` when changing served files**
 - Reference them as `${import.meta.env.BASE_URL}gear1.svg` etc.
 
 ### Tailwind colours
