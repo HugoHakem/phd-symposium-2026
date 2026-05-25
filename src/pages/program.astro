@@ -15,7 +15,7 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
 
 <BaseLayout
   title="Program — 28th EMBL PhD Symposium 2026"
-  description="Full program for the 28th EMBL PhD Symposium: keynotes, talks, workshops, and social events over three days."
+  description="Full program for the 28th EMBL PhD Symposium: invited talks, workshops, and social events over three days."
 >
   <!-- Page Hero -->
   <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
@@ -58,7 +58,6 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
         <span class="font-mono text-[0.6rem] tracking-[0.15em] text-muted uppercase">Session types:</span>
         {[
-          ['keynote',  'Keynote Lecture'],
           ['talk',     'Invited Talk'   ],
           ['workshop', 'Workshop'       ],
           ['panel',    'Panel'          ],

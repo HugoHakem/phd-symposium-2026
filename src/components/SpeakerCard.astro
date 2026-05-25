@@ -6,7 +6,7 @@ interface Props {
   institution: string;
   country: string;
   topic: string;
-  sessionType: 'keynote' | 'talk' | 'workshop-lead' | 'panel';
+  sessionType: 'talk' | 'workshop-lead' | 'panel';
   day: number;
   image?: string;
   compact?: boolean;
@@ -19,13 +19,6 @@ const dayLabels: Record<number, string> = {
   1: 'Day 1 — Dec 1',
   2: 'Day 2 — Dec 2',
   3: 'Day 3 — Dec 3',
-};
-
-const typeColors: Record<string, string> = {
-  keynote:       'bg-red-600 text-white',
-  talk:          'bg-green-800 text-white',
-  'workshop-lead': 'bg-blue-700 text-white',
-  panel:         'bg-amber-600 text-white',
 };
 
 const initials = name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
@@ -42,12 +35,6 @@ const initials = name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase
           <span>{initials}</span>
         </div>
       )}
-      <!-- Session type badge overlay -->
-      <div class="badge-overlay">
-        <span class:list={['session-badge', typeColors[sessionType]]}>
-          {sessionType === 'workshop-lead' ? 'Workshop' : sessionType.charAt(0).toUpperCase() + sessionType.slice(1)}
-        </span>
-      </div>
     </div>
 
     <!-- Info -->
@@ -117,12 +104,6 @@ const initials = name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase
     font-size: clamp(2.5rem, 5vw, 4rem);
     color: var(--color-cyan-glow-lg);
     letter-spacing: -0.03em;
-  }
-
-  .badge-overlay {
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
   }
 
   .card-body {

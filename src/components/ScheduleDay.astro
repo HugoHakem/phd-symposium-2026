@@ -30,7 +30,6 @@ const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-GB', {
 });
 
 const badgeClasses: Record<string, string> = {
-  keynote:  'badge-keynote',
   talk:     'badge-talk',
   workshop: 'badge-workshop',
   break:    'badge-break',
@@ -41,7 +40,7 @@ const badgeClasses: Record<string, string> = {
   poster:   'badge-poster',
 };
 
-const isMainEvent = (type: string) => ['keynote', 'talk', 'panel', 'ceremony'].includes(type);
+const isMainEvent = (type: string) => ['talk', 'panel', 'ceremony'].includes(type);
 ---
 
 <div class="schedule-day">

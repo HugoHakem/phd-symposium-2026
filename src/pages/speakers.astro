@@ -8,11 +8,7 @@ const speakers = await getCollection('speakers');
 type Speaker = (typeof speakers)[number];
 
 const sortedSpeakers = [...speakers].sort((a: Speaker, b: Speaker) => {
-  if (a.data.day !== b.data.day) return a.data.day - b.data.day;
-  // Keynotes first within each day
-  if (a.data.sessionType === 'keynote' && b.data.sessionType !== 'keynote') return -1;
-  if (b.data.sessionType === 'keynote' && a.data.sessionType !== 'keynote') return 1;
-  return 0;
+  return a.data.day - b.data.day;
 });
 
 // Pre-render all bios
@@ -70,8 +66,7 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
       <div class="flex flex-wrap gap-8 mt-10 pt-8 border-t border-white/10">
         {[
           { value: '12', label: 'Invited Speakers' },
-          { value: '3', label: 'Keynote Lectures'  },
-          { value: '9', label: 'Invited Talks'     },
+          { value: '12', label: 'Invited Talks'    },
           { value: 'TBA', label: 'Countries'       },
         ].map(({ value, label }) => (
           <div>
@@ -134,7 +129,7 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
                 <div class="bio-header">
                   <div>
                     <div class="flex items-center gap-2 mb-2">
-                      <span class:list={['session-badge', speaker.data.sessionType === 'keynote' ? 'badge-keynote' : 'badge-talk']}>
+                      <span class:list={['session-badge', 'badge-talk']}>
                         {speaker.data.sessionType}
                       </span>
                       <span class="font-mono text-[0.6rem] text-muted uppercase tracking-[0.1em]">Day {speaker.data.day}</span>

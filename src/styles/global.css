@@ -309,7 +309,7 @@
 /* ── Component Styles ─────────────────────────────────────── */
 @layer components {
   /* Session type badges */
-  .badge-keynote  { background: var(--color-red-600);   color: #fff; }
+  .badge-highlight { background: var(--color-red-600);  color: #fff; }
   .badge-talk     { background: var(--color-green-700); color: var(--color-green-50); }
   .badge-workshop { background: #1a5878; color: #a0ddf0; }
   .badge-break    { background: var(--color-warm);      color: var(--color-muted); }

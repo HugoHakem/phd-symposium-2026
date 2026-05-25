@@ -11,7 +11,7 @@ const speakers = defineCollection({
     country: z.string(),
     topic: z.string(),
     day: z.number().min(1).max(3),
-    sessionType: z.enum(['keynote', 'talk', 'workshop-lead', 'panel']),
+    sessionType: z.enum(['talk', 'workshop-lead', 'panel']),
     image: z.string().optional(),
     website: z.string().optional(),
     twitter: z.string().optional(),
@@ -30,7 +30,7 @@ const schedule = defineCollection({
       z.object({
         time: z.string(),
         title: z.string(),
-        type: z.enum(['keynote', 'talk', 'workshop', 'break', 'lunch', 'social', 'ceremony', 'panel', 'poster']),
+        type: z.enum(['talk', 'workshop', 'break', 'lunch', 'social', 'ceremony', 'panel', 'poster']),
         speaker: z.string().optional(),
         speakerSlug: z.string().optional(),
         abstract: z.string().optional(),
