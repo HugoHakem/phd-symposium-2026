@@ -160,14 +160,15 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
           <h2 class="font-display font-800 text-ink text-4xl mb-10">Mark Your<br />Calendar</h2>
           <div class="space-y-0">
             {[
-              { date: 'TBA',             label: 'Abstract Submission Opens',  past: false },
-              { date: 'TBA',             label: 'Abstract Submission Closes', past: false },
-              { date: 'TBA',             label: 'Registration Deadline',      past: false },
-              { date: 'TBA',             label: 'Program Announced',          past: false },
-              { date: 'December 2, 2026', label: 'Symposium Begins',         past: false, highlight: true },
-              { date: 'December 4, 2026', label: 'Symposium Ends',           past: false },
+{ date: 'August 10, 2026',    label: 'Early-Bird Registration Deadline'  },
+              { date: 'August 26, 2026',    label: 'Abstract Submission Deadline'       },
+              { date: 'September 16, 2026', label: 'Abstract Selection Notification'    },
+              { date: 'October 21, 2026',   label: 'On-Site Registration Deadline'      },
+              { date: 'November 25, 2026',  label: 'Virtual Registration Deadline'      },
+              { date: 'December 2, 2026',   label: 'Symposium Begins', highlight: true  },
+              { date: 'December 4, 2026',   label: 'Symposium Ends'                     },
             ].map(({ date, label, highlight }, i) => (
-              <div class:list={['date-row', highlight ? 'date-row-highlight' : '']}>
+              <div class:list={['date-row', highlight ? 'date-row-highlight' : '']} data-date={date}>
                 <div class="date-marker">
                   <span class="font-mono font-600 text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
                 </div>
@@ -177,7 +178,7 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
                   </p>
                   <p class="font-mono text-xs text-muted">{date}</p>
                 </div>
-                {highlight && <span class="session-badge badge-keynote text-[0.6rem]">Featured</span>}
+                {highlight && <span class="session-badge badge-highlight text-[0.6rem]">Featured</span>}
               </div>
             ))}
           </div>
@@ -287,4 +288,18 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
     text-align: center;
     flex-shrink: 0;
   }
+  .date-row.is-past {
+    opacity: 0.4;
+  }
+  .date-row.is-past .font-display {
+    text-decoration: line-through;
+  }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-date]').forEach(row => {
+    if (new Date(row.dataset.date!) < new Date()) {
+      row.classList.add('is-past');
+    }
+  });
+</script>
