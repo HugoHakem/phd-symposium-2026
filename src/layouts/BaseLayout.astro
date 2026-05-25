@@ -12,7 +12,7 @@ interface Props {
 const {
   title = '28th EMBL PhD Symposium 2026',
   description = 'Shifting Gears: Automation, AI, and High-Throughput Methodologies — December 2–4, 2026 · EMBL Heidelberg',
-  image = '/og-image.jpg',
+  image = `${import.meta.env.BASE_URL}og-image.png`,
 } = Astro.props;
 ---
 
@@ -27,7 +27,7 @@ const {
     <meta property="og:image" content={image} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}gear1.svg`} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <title>{title}</title>
 
     <!-- Google Fonts -->
