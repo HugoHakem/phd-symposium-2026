@@ -179,7 +179,7 @@ const base = import.meta.env.BASE_URL;
         <div class="accommodation-card accommodation-card-highlight">
           <h3 class="font-display font-700 text-ink text-lg mb-2">Official EMBL Partner Accommodation</h3>
           <p class="font-body text-muted leading-relaxed mb-4">
-            EMBL has two official partner accommodation options for visitors: <strong>Hotel ISG</strong> and the <strong>EMBL Guesthouse</strong>.
+            EMBL's official partner accommodation option for visitors is <strong>Hotel ISG</strong>.
             Full details and booking information are available on the EMBL accommodation page.
           </p>
           <a
@@ -210,6 +210,64 @@ const base = import.meta.env.BASE_URL;
       </div>
     </section>
 
+    <!-- Registration & Fees -->
+    <section id="registration" class="mb-20 scroll-mt-24">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="h-px w-10 bg-red-600"></div>
+        <span class="label-tag text-red-600">Registration</span>
+      </div>
+      <h2 class="font-display font-800 text-ink text-3xl lg:text-4xl mb-10">Registration & Fees</h2>
+
+      <div class="overflow-x-auto mb-6">
+        <table class="reg-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Early Bird<span>until Aug 10</span></th>
+              <th>Regular</th>
+              <th>Virtual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bachelor / Master student</td>
+              <td>225 €</td>
+              <td>260 €</td>
+              <td>70 €</td>
+            </tr>
+            <tr>
+              <td>PhD student</td>
+              <td>310 €</td>
+              <td>410 €</td>
+              <td>70 €</td>
+            </tr>
+            <tr>
+              <td>EMBL-affiliated</td>
+              <td>—</td>
+              <td>240 €</td>
+              <td>70 €</td>
+            </tr>
+            <tr>
+              <td>Academia</td>
+              <td>420 €</td>
+              <td>510 €</td>
+              <td>70 €</td>
+            </tr>
+            <tr>
+              <td>Industry</td>
+              <td>—</td>
+              <td>720 €</td>
+              <td>120 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="space-y-1">
+        <p class="font-body text-sm text-muted">EMBL predoctoral fellows attend free of charge.</p>
+      </div>
+    </section>
+
     <!-- FAQ -->
     <section id="faq" class="mb-20 scroll-mt-24">
       <div class="flex items-center gap-3 mb-8">
@@ -226,7 +284,7 @@ const base = import.meta.env.BASE_URL;
           },
           {
             q: 'Is there a registration fee?',
-            a: 'Yes. Registration fees will be announced in TBA. EMBL predoctoral fellows attend free of charge. Travel grants are available for participants from low- and middle-income countries.',
+            a: 'Yes. See the Registration & Fees section above for the full price breakdown. EMBL predoctoral fellows attend free of charge.',
           },
           {
             q: 'Can I submit an abstract for a poster or flash talk?',
@@ -234,7 +292,7 @@ const base = import.meta.env.BASE_URL;
           },
           {
             q: 'Will the symposium be hybrid or recorded?',
-            a: 'The 28th edition will be primarily in-person to foster community and networking. Selected sessions may be live-streamed. All keynote talks will be recorded and made available to registered participants after the symposium.',
+            a: 'The 28th edition will be primarily in-person to foster community and networking. Selected sessions may be live-streamed. All invited talks will be recorded and made available to registered participants after the symposium.',
           },
           {
             q: 'What is the Code of Conduct?',
@@ -330,6 +388,51 @@ const base = import.meta.env.BASE_URL;
     color: var(--color-green-500);
     background: var(--color-green-800);
     padding: 0.2rem 0.5rem;
+  }
+
+  /* Registration table */
+  .reg-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .reg-table th,
+  .reg-table td {
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--color-border);
+  }
+  .reg-table thead th {
+    background: var(--color-green-900);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: right;
+  }
+  .reg-table thead th:first-child { text-align: left; }
+  .reg-table thead th span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-green-400);
+    margin-top: 0.15rem;
+  }
+  .reg-table tbody tr { background: var(--color-cream); }
+  .reg-table tbody tr:nth-child(even) { background: var(--color-parchment); }
+  .reg-table tbody td {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    text-align: right;
+  }
+  .reg-table tbody td:first-child {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-ink);
+    text-align: left;
   }
 
   /* FAQ */
