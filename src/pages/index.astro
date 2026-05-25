@@ -127,7 +127,7 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
         <div class="overflow-x-auto invited-scroll-track pt-4 -mt-4 pb-2 -mb-2">
           <div class="flex gap-5 pb-4">
             {allSpeakers.map((speaker: Speaker) => (
-              <div class="flex-shrink-0 w-72">
+              <div class="shrink-0 w-72">
                 <SpeakerCard
                   slug={speaker.id}
                   name={speaker.data.name}

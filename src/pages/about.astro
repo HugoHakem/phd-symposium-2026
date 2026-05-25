@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL;
       src={`${base}gear1.svg`}
       alt=""
       aria-hidden="true"
-      class="absolute -top-16 -left-20 w-[500px] gear-spin-slow pointer-events-none select-none"
+      class="absolute -top-16 -left-20 w-125 gear-spin-slow pointer-events-none select-none"
       style="filter: invert(1) opacity(0.05);"
     />
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
@@ -302,7 +302,7 @@ const base = import.meta.env.BASE_URL;
           <details class="faq-item">
             <summary class="faq-question">
               <span>{q}</span>
-              <svg class="faq-arrow w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="faq-arrow w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>

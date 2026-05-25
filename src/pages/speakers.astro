@@ -48,7 +48,7 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
       src={`${base}gear2.svg`}
       alt=""
       aria-hidden="true"
-      class="absolute -bottom-16 -right-20 w-[400px] gear-spin-reverse pointer-events-none select-none"
+      class="absolute -bottom-16 -right-20 w-100 gear-spin-reverse pointer-events-none select-none"
       style="filter: invert(1) opacity(0.06);"
     />
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
@@ -132,7 +132,7 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
                       <span class:list={['session-badge', 'badge-talk']}>
                         {speaker.data.sessionType}
                       </span>
-                      <span class="font-mono text-[0.6rem] text-muted uppercase tracking-[0.1em]">Day {speaker.data.day}</span>
+                      <span class="font-mono text-[0.6rem] text-muted uppercase tracking-widest">Day {speaker.data.day}</span>
                     </div>
                     <h3 class="font-display font-800 text-ink text-2xl lg:text-3xl mb-1">{speaker.data.name}</h3>
                     <p class="font-body text-muted mb-0.5">{speaker.data.role}</p>
