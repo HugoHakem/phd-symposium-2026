@@ -29,7 +29,7 @@ const initials = name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase
     <!-- Avatar area -->
     <div class="avatar-wrap">
       {image ? (
-        <img src={image} alt={name} class="avatar-img" loading="lazy" />
+        <img src={`${base}${image}`} alt={name} class="avatar-img" loading="lazy" />
       ) : (
         <div class="avatar-placeholder">
           <span>{initials}</span>
