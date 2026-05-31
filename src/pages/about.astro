@@ -1,6 +1,93 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
+
+const faqs = [
+  {
+    q: 'What is the EMBL PhD Symposium?',
+    a: 'The EMBL PhD Symposium is organised by EMBL PhD students to provide an opportunity for networking between early-career researchers and high-profile scientists. This year\'s theme is <strong>Shifting Gears: Automation, AI, and High-Throughput Methodologies</strong>.',
+  },
+  {
+    q: 'What is the Symposium about?',
+    a: 'The 28th EMBL PhD Symposium focuses on how high-throughput technologies, automation, quantitative analysis, and interdisciplinary approaches are accelerating biological science. Through talks, poster sessions, workshops, and networking activities, it brings together researchers across disciplines to explore how collaborative and technology-driven science can address major challenges in human health, sustainability, and the future of our world.',
+  },
+  {
+    q: 'Who can attend the symposium?',
+    a: 'The symposium is primarily directed towards PhD students and undergraduates, but everybody is welcome to participate.',
+  },
+  {
+    q: 'How do I register?',
+    a: 'Register via <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=413271505a736a3279427a4e4461695652635a567a342b702f7875473964452b69455a35655748536762733d" target="_blank" rel="noopener noreferrer" class="text-green-700 underline-animate hover:text-green-500 transition-colors">on-site registration</a> or <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=74436b70784a574a2b6f5a30765a5839614761634773497a66794b2b554f794d6c32497856384b4e6a45513d" target="_blank" rel="noopener noreferrer" class="text-green-700 underline-animate hover:text-green-500 transition-colors">virtual registration</a>. For questions, email <a href="mailto:phdsymposium2026.participants@embl.de" class="text-green-700 underline-animate hover:text-green-500 transition-colors">phdsymposium2026.participants@embl.de</a>.',
+  },
+  {
+    q: 'How much does it cost?',
+    a: 'See the Registration &amp; Fees table above for the full price breakdown. On-site fees include catering (coffee breaks, lunch, and dinner) and networking events. Remote fees include virtual access to all speaker sessions and student talks. Accommodation is not included.',
+  },
+  {
+    q: 'Can I submit an abstract without paying immediately?',
+    a: 'Yes — during registration, select the "I will pay later" option. Payment must be received before <strong>August 10th, 2026</strong> for the early bird discount, and before <strong>October 21st, 2026</strong> for the regular rate.',
+  },
+  {
+    q: 'How and when can I get the early bird fee?',
+    a: 'The early bird fee applies to on-site participants who <strong>register and pay</strong> before <strong>August 10th, 2026</strong>. If payment is not received by then, the regular fee applies.',
+  },
+  {
+    q: 'What are the registration deadlines?',
+    a: '<ul class="mt-1 space-y-1 list-disc list-inside"><li>Early bird: <strong>August 10th, 2026</strong></li><li>Regular: <strong>October 21st, 2026</strong></li><li>Virtual: <strong>November 25th, 2026</strong></li></ul>Registration is completed only once payment is received.',
+  },
+  {
+    q: 'Can I submit an abstract for a talk or poster if my topic is not fully on-theme?',
+    a: 'Yes. Abstracts are welcome from all participants regardless of topic; however, studies closely aligned with the symposium theme will be preferred during selection.',
+  },
+  {
+    q: 'Is there a deadline for abstract submission?',
+    a: 'Abstracts for talks and/or posters can be submitted until <strong>August 26th, 2026</strong>.',
+  },
+  {
+    q: 'How do I submit an abstract?',
+    a: 'Abstracts can only be submitted after registering as an on-site participant. The submission link is provided in the registration confirmation email.',
+  },
+  {
+    q: 'Do I need to submit an abstract to attend?',
+    a: 'No — abstract submission is not required. However, we strongly encourage every participant to submit one.',
+  },
+  {
+    q: 'Is it possible to participate remotely?',
+    a: 'Yes, virtual participation will be available. We encourage in-person attendance to fully experience the networking opportunities the symposium provides.',
+  },
+  {
+    q: 'What is included in remote participation?',
+    a: 'Remote participants have access to all live-streamed talks and can submit questions during the event. Recorded talks are also available during the symposium and for four weeks afterwards, subject to individual speaker consent.',
+  },
+  {
+    q: 'Can I give a talk or present a poster when participating remotely?',
+    a: 'No — only on-site participants can submit abstracts, present posters, or give a talk.',
+  },
+  {
+    q: 'Is there a symposium shuttle bus?',
+    a: 'Yes, there will be a shuttle bus service. The schedule and pick-up/drop-off point in Heidelberg city centre will be announced here closer to the event.',
+  },
+  {
+    q: 'Are there travel grants available?',
+    a: 'Yes. Travel grants include a registration fee waiver and travel cost coverage of up to <strong>€1,000 for international participants</strong> and up to <strong>€400 for EU participants</strong>. Apply when submitting your abstract — financial support applications do not affect your registration outcome. See the <a href="https://www.embl.org/about/info/course-and-conference-office/information-for-participants/financial-assistance/" target="_blank" rel="noopener noreferrer" class="text-green-700 underline-animate hover:text-green-500 transition-colors">EMBL financial assistance page</a> for details.',
+  },
+  {
+    q: 'Can I get a visa support letter?',
+    a: 'We can issue a registration confirmation to support your visa procedure (this is not an official invitation letter). The confirmation is provided upon request after payment. We recommend booking your visa appointment as soon as possible. If your visa application is unsuccessful, your registration fee will be reimbursed upon proof.',
+  },
+  {
+    q: 'What is the cancellation policy?',
+    a: 'Please refer to the <a href="https://www.embl.org/about/info/course-and-conference-office/information-for-participants/terms-and-conditions/" target="_blank" rel="noopener noreferrer" class="text-green-700 underline-animate hover:text-green-500 transition-colors">EMBL General Terms and Conditions</a>. For urgent cases, contact <a href="mailto:phdsymposium2026.participants@embl.de" class="text-green-700 underline-animate hover:text-green-500 transition-colors">phdsymposium2026.participants@embl.de</a>.',
+  },
+  {
+    q: 'What if I have specific accessibility needs?',
+    a: 'We are committed to inclusivity. If you have specific accessibility needs, please contact us at <a href="mailto:phdsymposium2026.participants@embl.de" class="text-green-700 underline-animate hover:text-green-500 transition-colors">phdsymposium2026.participants@embl.de</a> and we will do our best to accommodate you.',
+  },
+  {
+    q: 'How can I contact the organisers?',
+    a: 'For any general inquiries, reach out to <a href="mailto:phdsymposium2026.participants@embl.de" class="text-green-700 underline-animate hover:text-green-500 transition-colors">phdsymposium2026.participants@embl.de</a>.',
+  },
+];
 ---
 
 <BaseLayout
@@ -116,7 +203,7 @@ const base = import.meta.env.BASE_URL;
           href="https://www.embl.org/about/info/course-and-conference-office/information-for-participants/"
           target="_blank"
           rel="noopener noreferrer"
-          class="font-display font-700 text-sm text-green-700 underline underline-offset-2 hover:text-green-900 transition-colors"
+          class="font-display font-700 text-sm text-green-700 underline-animate hover:text-green-500 transition-colors"
         >
           EMBL participant information →
         </a>
@@ -141,7 +228,7 @@ const base = import.meta.env.BASE_URL;
           {
             icon: '🚆',
             title: 'By Train',
-            content: 'Heidelberg Hauptbahnhof has extensive European connections. EMBL collaborates with Deutsche Bahn for discounted tickets — contact events@embl.de for details.',
+            content: 'Heidelberg Hauptbahnhof has extensive European connections. EMBL collaborates with Deutsche Bahn for discounted tickets — contact <a href="mailto:events@embl.de" class="text-green-700 underline-animate hover:text-green-500 transition-colors">events@embl.de</a> for details.',
           },
           {
             icon: '🚌',
@@ -152,7 +239,7 @@ const base = import.meta.env.BASE_URL;
           <div class="travel-card">
             <div class="text-3xl mb-4">{icon}</div>
             <h3 class="font-display font-700 text-ink text-xl mb-3">{title}</h3>
-            <p class="font-body text-muted leading-relaxed">{content}</p>
+            <p class="font-body text-muted leading-relaxed" set:html={content} />
           </div>
         ))}
       </div>
@@ -160,7 +247,7 @@ const base = import.meta.env.BASE_URL;
         href="https://www.embl.org/about/info/course-and-conference-office/information-for-participants/travel-information/"
         target="_blank"
         rel="noopener noreferrer"
-        class="font-display font-700 text-sm text-green-700 underline underline-offset-2 hover:text-green-900 transition-colors"
+        class="font-display font-700 text-sm text-green-700 underline-animate hover:text-green-500 transition-colors"
       >
         Full travel information on the EMBL website →
       </a>
@@ -186,7 +273,7 @@ const base = import.meta.env.BASE_URL;
             href="https://www.embl.org/sites/heidelberg/accommodation/"
             target="_blank"
             rel="noopener noreferrer"
-            class="font-display font-700 text-sm text-green-700 underline underline-offset-2 hover:text-green-900 transition-colors"
+            class="font-display font-700 text-sm text-green-700 underline-animate hover:text-green-500 transition-colors"
           >
             EMBL Accommodation Page →
           </a>
@@ -194,18 +281,31 @@ const base = import.meta.env.BASE_URL;
 
         <!-- Alternative accommodation -->
         <div class="accommodation-card">
-          <h3 class="font-display font-700 text-ink text-lg mb-2">Alternative Accommodation</h3>
+          <h3 class="font-display font-700 text-ink text-lg mb-2">Recommended Hotels</h3>
           <p class="font-body text-muted leading-relaxed mb-4">
-            A range of hotels, hostels, and other options are available in Heidelberg. The EMBL Course and Conference Office maintains a list of alternatives with transport information.
+            A range of hotels and aparthotels are available in Heidelberg city centre:
           </p>
-          <a
-            href="https://www.embl.org/about/info/course-and-conference-office/information-for-participants/frequently-asked-questions/#:~:text=the%20conference%20bus%3F-,Accommodation,-Which%20is%20the"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-display font-700 text-sm text-green-700 underline underline-offset-2 hover:text-green-900 transition-colors"
-          >
-            Alternative Accommodation Options →
-          </a>
+          <ul class="space-y-2">
+            {[
+              { name: 'B&B Hotel Heidelberg',                    url: 'https://www.hotel-bb.com/de/hotel/heidelberg' },
+              { name: 'Ibis Heidelberg Hauptbahnhof',            url: 'https://all.accor.com/hotel/1447/index.en.shtml' },
+              { name: 'Staycity Aparthotel',                     url: 'https://www.staycity.com/de-de/heidelberg' },
+              { name: 'Meininger Hotel Heidelberg Hauptbahnhof', url: 'https://www.meininger-hotels.com/de/hotels/heidelberg/hotel-heidelberg-hauptbahnhof' },
+              { name: 'Leonardo Hotel Heidelberg City Center',   url: 'https://www.leonardo-hotels.com/heidelberg/leonardo-hotel-heidelberg-city-center' },
+              { name: 'Premier Inn Heidelberg City Zentrum',     url: 'https://www.premierinn.com/de/de/hotels/deutschland/baden-wuerttemberg/heidelberg/heidelberg-city-zentrum.html' },
+            ].map(({ name, url }) => (
+              <li>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-display font-700 text-sm text-green-700 underline-animate hover:text-green-500 transition-colors"
+                >
+                  {name} →
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -277,28 +377,7 @@ const base = import.meta.env.BASE_URL;
       <h2 class="font-display font-800 text-ink text-3xl lg:text-4xl mb-10">Frequently Asked Questions</h2>
 
       <div class="space-y-0 border border-warm">
-        {[
-          {
-            q: 'Who can attend the symposium?',
-            a: 'The symposium is open to all scientists, but is primarily targeted at PhD students, postdoctoral researchers, and early-career scientists.',
-          },
-          {
-            q: 'Is there a registration fee?',
-            a: 'Yes. See the Registration & Fees section above for the full price breakdown. EMBL predoctoral fellows attend free of charge.',
-          },
-          {
-            q: 'Can I submit an abstract for a poster or flash talk?',
-            a: 'Yes! Abstract submission opens TBA. We encourage all participants to submit abstracts. Selected abstracts will be invited for 5-minute flash talks.',
-          },
-          {
-            q: 'Will the symposium be hybrid or recorded?',
-            a: 'The 28th edition will be primarily in-person to foster community and networking. Selected sessions may be live-streamed. All invited talks will be recorded and made available to registered participants after the symposium.',
-          },
-          {
-            q: 'What is the Code of Conduct?',
-            a: 'The symposium follows the EMBL Code of Conduct, which promotes a respectful, inclusive, and harassment-free environment for all participants regardless of background, identity, or career stage. All participants are required to read and agree to the CoC upon registration.',
-          },
-        ].map(({ q, a }) => (
+        {faqs.map(({ q, a }) => (
           <details class="faq-item">
             <summary class="faq-question">
               <span>{q}</span>
@@ -307,7 +386,7 @@ const base = import.meta.env.BASE_URL;
               </svg>
             </summary>
             <div class="faq-answer">
-              <p class="font-body text-muted leading-relaxed">{a}</p>
+              <div class="font-body text-muted leading-relaxed" set:html={a} />
             </div>
           </details>
         ))}
