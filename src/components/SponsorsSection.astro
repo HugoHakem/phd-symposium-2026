@@ -16,6 +16,7 @@ interface Props {
 }
 
 const { sponsors } = Astro.props;
+const base = import.meta.env.BASE_URL;
 
 const mainSponsors = sponsors.filter(s => s.data.tier === 'sponsor');
 const grants       = sponsors.filter(s => s.data.tier === 'grant');
@@ -52,7 +53,7 @@ const cppGrouped = Object.fromEntries(
     {mainSponsors.length > 0 && (
       <div class="sponsor-tier-group">
         <div class="tier-header">
-          <h3 class="font-mono text-[0.65rem] tracking-[0.2em] uppercase font-600 text-green-800">Sponsors</h3>
+          <h3 class="font-mono text-xs tracking-[0.2em] uppercase font-700 text-green-400">Sponsors</h3>
           <div class="tier-line"></div>
         </div>
         <div class="sponsors-grid grid-sponsor">
@@ -76,7 +77,7 @@ const cppGrouped = Object.fromEntries(
     {grants.length > 0 && (
       <div class="sponsor-tier-group">
         <div class="tier-header">
-          <h3 class="font-mono text-[0.65rem] tracking-[0.2em] uppercase font-600 text-green-800">Grants</h3>
+          <h3 class="font-mono text-xs tracking-[0.2em] uppercase font-700 text-green-400">Grants</h3>
           <div class="tier-line"></div>
         </div>
         <div class="sponsors-grid grid-grant">
@@ -100,12 +101,12 @@ const cppGrouped = Object.fromEntries(
     {cppSponsors.length > 0 && (
       <div class="sponsor-tier-group">
         <div class="tier-header">
-          <h3 class="font-mono text-[0.65rem] tracking-[0.2em] uppercase font-600 text-green-800">CPP Sponsors</h3>
+          <h3 class="font-mono text-xs tracking-[0.2em] uppercase font-700 text-green-400">EMBL Corporate Partnership Programme</h3>
           <div class="tier-line"></div>
         </div>
         {cppSubTiers.map(({ key, label }) => cppGrouped[key]?.length > 0 && (
           <div class="cpp-subtier-group">
-            <p class="font-mono text-[0.6rem] tracking-[0.15em] uppercase text-muted mb-3">{label}</p>
+            <p class="font-mono text-xs tracking-[0.15em] uppercase font-600 text-green-400 mb-3">{label}</p>
             <div class="sponsors-grid grid-cpp">
               {cppGrouped[key].map((sponsor) => (
                 <a
@@ -115,8 +116,16 @@ const cppGrouped = Object.fromEntries(
                   class="sponsor-card sponsor-cpp"
                   title={sponsor.data.name}
                 >
-                  <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
-                  <p class="sponsor-desc font-body text-sm text-muted">{sponsor.data.description}</p>
+                  {sponsor.data.logo ? (
+                    <img
+                      src={`${base}${sponsor.data.logo}`}
+                      alt={sponsor.data.name}
+                      class="sponsor-logo"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
+                  )}
                 </a>
               ))}
             </div>
@@ -184,10 +193,29 @@ const cppGrouped = Object.fromEntries(
     background: var(--color-warm);
     transform: translateY(-2px);
   }
+  .sponsor-cpp {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 6rem;
+    padding: 1.25rem 1.5rem;
+  }
+  .sponsor-cpp:hover {
+    background: #f8f8f8;
+  }
 
   .sponsor-main  .sponsor-name { font-size: 1.15rem; color: var(--color-ink); }
   .sponsor-grant .sponsor-name { font-size: 1rem;    color: var(--color-ink); }
   .sponsor-cpp   .sponsor-name { font-size: 0.9rem;  color: var(--color-muted); }
+
+  .sponsor-logo {
+    max-height: 3.5rem;
+    width: auto;
+    max-width: 80%;
+    object-fit: contain;
+    display: block;
+  }
 
   .sponsor-desc {
     margin-top: 0.5rem;
