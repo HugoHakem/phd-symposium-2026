@@ -1,10 +1,10 @@
 ---
-name: "Invited Speaker — Day 3"
+name: "Invited Speaker — Day 1"
 role: "TBA"
 institution: "TBA"
 country: "TBA"
 topic: "TBA"
-day: 3
+day: 1
 sessionType: "talk"
 ---
 

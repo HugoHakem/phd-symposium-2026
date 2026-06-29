@@ -13,13 +13,12 @@ interface Props {
   day: number;
   date: string;
   title: string;
-  theme: string;
   color: string;
   sessions: Session[];
   defaultOpen?: boolean;
 }
 
-const { day, date, title, theme, color, sessions } = Astro.props;
+const { day, date, title, color, sessions } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
 const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-GB', {
@@ -59,8 +58,7 @@ const isMainEvent = (type: string) => ['talk', 'panel', 'ceremony'].includes(typ
           <span class="text-border font-mono text-xs">·</span>
           <span class="font-mono text-xs tracking-[0.15em] uppercase text-muted">{formattedDate}</span>
         </div>
-        <h2 class="font-display font-800 text-ink text-2xl lg:text-3xl mb-1">{title}</h2>
-        <p class="font-body text-muted text-base">{theme}</p>
+        <h2 class="font-display font-800 text-ink text-2xl lg:text-3xl">{title}</h2>
       </div>
     </div>
   </div>
@@ -97,18 +95,14 @@ const isMainEvent = (type: string) => ['talk', 'panel', 'ceremony'].includes(typ
           </h3>
 
           {session.speaker && (
-            <p class="font-body text-sm text-green-700 font-500 mb-2">
+            <p class="font-body text-base font-600 mb-2" style="color: var(--color-green-500);">
               {session.speakerSlug ? (
-                <a href={`${base}speakers#${session.speakerSlug}`} class="hover:text-green-900 underline-animate">
+                <a href={`${base}speakers#${session.speakerSlug}`} class="hover:underline">
                   {session.speaker}
                 </a>
-              ) : session.speaker}
-            </p>
-          )}
-
-          {session.abstract && (
-            <p class="font-body text-sm text-muted leading-relaxed">
-              {session.abstract}
+              ) : (
+                <span class="text-muted font-400">{session.speaker}</span>
+              )}
             </p>
           )}
 

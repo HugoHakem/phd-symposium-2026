@@ -56,7 +56,7 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
   <div class="bg-parchment border-b border-warm">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4">
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-        <span class="font-mono text-[0.6rem] tracking-[0.15em] text-muted uppercase">Session types:</span>
+        <span class="font-mono text-xs tracking-[0.15em] text-ink uppercase font-600">Session types:</span>
         {[
           ['talk',     'Invited Talk'   ],
           ['workshop', 'Workshop'       ],
@@ -131,7 +131,6 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
             day={day.data.day}
             date={day.data.date}
             title={day.data.title}
-            theme={day.data.theme}
             color={day.data.color}
             sessions={day.data.sessions}
             defaultOpen={i === 0}
@@ -159,22 +158,24 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
             Join us in Heidelberg
           </h2>
           <p class="font-body text-white/70 mb-8 text-lg leading-relaxed">
-            Registration for the 28th EMBL PhD Symposium opens TBA.
-            <!-- Places are limited — priority access for EMBL predoctoral fellows and alumni. -->
+            Registration is now open. Select the option that applies to you.
           </p>
-          <div class="flex flex-wrap gap-4">
-            <a
-              href="mailto:phdsymposium2026.participants@embl.de?subject=Registration%20Inquiry"
-              class="font-display font-700 text-base px-8 py-4 bg-red-600 text-white hover:bg-red-700 transition-colors"
-            >
-              Register Interest
-            </a>
-            <a
-              href={`${base}about`}
-              class="font-display font-700 text-base px-8 py-4 border border-white/30 text-white hover:bg-white/10 transition-colors"
-            >
-              Practical Info
-            </a>
+          <div class="space-y-5">
+            <div>
+              <p class="font-mono text-[0.65rem] tracking-[0.15em] uppercase text-white/40 mb-2">On-site</p>
+              <div class="flex flex-wrap gap-3">
+                <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=3532786b714233776141585163793455734f654f74696e367936556f57664e4d516e744135536d7372546b3d" target="_blank" rel="noopener noreferrer" class="font-display font-700 text-sm px-6 py-3 bg-red-600 text-white hover:bg-red-700 transition-colors">Standard</a>
+                <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=716d4d6a4e676f6932323267614d42736b796b6c6f536b454d503669763449717575504642757a6b48726f3d" target="_blank" rel="noopener noreferrer" class="font-display font-700 text-sm px-6 py-3 border border-white/30 text-white hover:bg-white/10 transition-colors">EMBL-affiliated</a>
+                <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=584f4d716a4d5653696434656561765949726b595441705566367148366e577869306157764a48542b71413d" target="_blank" rel="noopener noreferrer" class="font-display font-700 text-sm px-6 py-3 border border-white/30 text-white hover:bg-white/10 transition-colors">Speaker / Organiser</a>
+              </div>
+            </div>
+            <div>
+              <p class="font-mono text-[0.65rem] tracking-[0.15em] uppercase text-white/40 mb-2">Virtual</p>
+              <div class="flex flex-wrap gap-3">
+                <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=43657545326f35693631452b686830594d6b512b2f75534a46724653322b316e796a58665a3548656773343d" target="_blank" rel="noopener noreferrer" class="font-display font-700 text-sm px-6 py-3 bg-red-600 text-white hover:bg-red-700 transition-colors">Standard</a>
+                <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=6b43594953694d6b613539313869736b454449474f67444e714c306e5a59724668516e35504b66336d4f383d" target="_blank" rel="noopener noreferrer" class="font-display font-700 text-sm px-6 py-3 border border-white/30 text-white hover:bg-white/10 transition-colors">EMBL-affiliated</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

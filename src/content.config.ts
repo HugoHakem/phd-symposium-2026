@@ -24,7 +24,6 @@ const schedule = defineCollection({
     day: z.number(),
     date: z.string(),
     title: z.string(),
-    theme: z.string(),
     color: z.string(),
     sessions: z.array(
       z.object({

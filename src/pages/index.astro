@@ -53,7 +53,7 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
           <!-- Key stats -->
           <div class="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-warm">
             {[
-              { value: '12', label: 'Invited Speakers' },
+              { value: '11', label: 'Invited Speakers' },
               { value: '3', label: 'Focused Days'     },
               { value: '100+', label: 'Participants'  },
             ].map(({ value, label }) => (
@@ -84,7 +84,6 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
                     <p class="font-display font-700 text-ink text-lg group-hover:text-green-800 transition-colors">
                       {day.data.title}
                     </p>
-                    <p class="font-body text-sm text-muted">{day.data.theme}</p>
                   </div>
                 </div>
                 <svg class="w-5 h-5 text-muted group-hover:text-green-700 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">

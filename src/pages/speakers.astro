@@ -32,9 +32,9 @@ const dayColors: Record<number, string> = {
   3: 'var(--color-day-3)',
 };
 const dayThemes: Record<number, { title: string; theme: string }> = {
-  1: { title: 'Day 1 — Dec 2', theme: 'Scaling the Experiment'  },
-  2: { title: 'Day 2 — Dec 3', theme: 'Scaling the Analysis'    },
-  3: { title: 'Day 3 — Dec 4', theme: 'From Lab to World'       },
+  1: { title: 'Day 1 — Dec 2', theme: 'High Throughput Methods' },
+  2: { title: 'Day 2 — Dec 3', theme: 'AI and Industry'         },
+  3: { title: 'Day 3 — Dec 4', theme: 'Robotics'                },
 };
 ---
 
@@ -58,16 +58,16 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
       </div>
       <h1 class="font-display font-800 text-white text-5xl lg:text-7xl mb-4">Speakers</h1>
       <p class="font-body text-white/60 text-lg max-w-2xl">
-        Twelve leading scientists from institutions across the world — each advancing discovery
+        Eleven leading scientists from institutions across the world — each advancing discovery
         through automation, high-throughput methodologies, and AI-driven analysis.
       </p>
 
       <!-- Stats row -->
       <div class="flex flex-wrap gap-8 mt-10 pt-8 border-t border-white/10">
         {[
-          { value: '12', label: 'Invited Speakers' },
-          { value: '12', label: 'Invited Talks'    },
-          { value: 'TBA', label: 'Countries'       },
+          { value: '11', label: 'Invited Speakers' },
+          { value: '6',  label: 'Student Talks'    },
+          { value: '2',   label: 'Panels'           },
         ].map(({ value, label }) => (
           <div>
             <p class="font-display font-800 text-green-400 text-3xl">{value}</p>
