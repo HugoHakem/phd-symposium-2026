@@ -20,7 +20,7 @@ Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
 - **Astro 6** — static output, Content Layer API
 - **Tailwind CSS v4** — via `@tailwindcss/vite` plugin, `@theme` tokens in `src/styles/global.css`
 - **Zod v4** — content schema validation in `src/content.config.ts`
-- **Google Fonts** — Syne (headings) · Source Serif 4 (body) · JetBrains Mono (labels)
+- **Google Fonts** — Sora (headings) · Spectral (body) · Space Mono (labels)
 
 ---
 
@@ -45,17 +45,24 @@ Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
 
 ### Tailwind colours
 Custom tokens are defined in `src/styles/global.css` under `@theme` and generate
-standard Tailwind utilities:
+standard Tailwind utilities. The site is **dark-mode-first**: `cream`/`parchment`
+are near-black surfaces and `ink` is near-white text, despite the names.
 
 | Token | Hex | Utility example |
 |-------|-----|-----------------|
-| `green-800` | `#1A5C36` | `bg-green-800`, `text-green-800` |
-| `green-900` | `#0D3321` | `bg-green-900` |
-| `red-600`   | `#C1121F` | `bg-red-600` |
-| `cream`     | `#F4F0E6` | `bg-cream` |
-| `parchment` | `#FAF8F3` | `bg-parchment` |
-| `ink`       | `#141414` | `text-ink` |
-| `muted`     | `#5A5857` | `text-muted` |
+| `green-800` | `#0E3535` | `bg-green-800`, `text-green-800` (dark teal) |
+| `green-900` | `#071F1F` | `bg-green-900` |
+| `green-500` | `#5DB5B5` | `text-green-500` (primary cyan/teal accent) |
+| `red-600`   | `#CB24CB` | `bg-red-600` (magenta accent, used for CTAs/keynote) |
+| `cream`     | `#071414` | `bg-cream` |
+| `parchment` | `#040D0D` | `bg-parchment` |
+| `ink`       | `#DDF0F0` | `text-ink` |
+| `muted`     | `#5A9898` | `text-muted` |
+
+Session-type badges (`.badge-talk`, `.badge-workshop`, etc. in `global.css`) use
+a separate 7-hue set validated for colourblind-safe separation — see
+`docs/design-system.md` for the full table and the rule about not reordering
+them without re-validating.
 
 ---
 

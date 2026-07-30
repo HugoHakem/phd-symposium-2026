@@ -83,6 +83,6 @@ See [docs/deployment.md](docs/deployment.md) for details and custom domain setup
 
 - **Framework:** [Astro 6](https://astro.build) — static site generation
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com) via `@tailwindcss/vite`
-- **Fonts:** Syne · Source Serif 4 · JetBrains Mono (Google Fonts)
+- **Fonts:** Sora · Spectral · Space Mono (Google Fonts)
 - **Content:** Astro Content Layer API — Markdown + YAML with Zod validation
 - **Deployment:** GitHub Actions → GitHub Pages

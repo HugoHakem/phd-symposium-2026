@@ -10,9 +10,9 @@ the design.
 
 | Role | Font | Weight | Usage |
 |------|------|--------|-------|
-| Display / Headings | [Syne](https://fonts.google.com/specimen/Syne) | 400–800 | All `<h1>`–`<h6>`, nav, labels, buttons |
-| Body | [Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4) | 300, 400, 600 | Paragraphs, bios, card descriptions |
-| Monospace | [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) | 400–600 | Labels, tags, times, countdown |
+| Display / Headings | [Sora](https://fonts.google.com/specimen/Sora) | 400–800 | All `<h1>`–`<h6>`, nav, labels, buttons |
+| Body | [Spectral](https://fonts.google.com/specimen/Spectral) | 400, 600, 700 (+ italics) | Paragraphs, bios, card descriptions |
+| Monospace | [Space Mono](https://fonts.google.com/specimen/Space+Mono) | 400, 700 | Labels, tags, times, countdown |
 
 All three are loaded via Google Fonts in `src/layouts/BaseLayout.astro`.
 
@@ -22,43 +22,46 @@ CSS utility classes: `font-display`, `font-body`, `font-mono`.
 
 ## Colour Palette
 
-Defined in `src/styles/global.css` inside the `@theme` block.
+Defined in `src/styles/global.css` inside the `@theme` block. The site is
+**dark-mode-first**: `parchment`/`cream`/`warm` are near-black surfaces and
+`ink` is near-white text, despite the light-sounding names — this is a legacy
+naming holdover from an earlier light-theme version of the site.
 
-### Greens (primary brand)
-
-| Token | Hex | Tailwind class | Usage |
-|-------|-----|----------------|-------|
-| `green-950` | `#0a2419` | `bg-green-950` | Darkest — footer bar |
-| `green-900` | `#0D3321` | `bg-green-900` | Hero, nav scrolled, page banners |
-| `green-800` | `#1A5C36` | `bg-green-800` | Primary green — talk badges, sponsor card hover |
-| `green-700` | `#2D7A4F` | `text-green-700` | Links inside content |
-| `green-600` | `#3D9965` | — | Intermediate accent |
-| `green-500` | `#52B788` | `text-green-500` | Footer logo, border hovers |
-| `green-100` | `#D8F3DC` | `bg-green-100` | Light backgrounds |
-| `green-50`  | `#F0FBF4` | `bg-green-50`  | Very light tints |
-
-### Reds (accent / call-to-action)
+### Cyan/teal ramp (primary brand)
 
 | Token | Hex | Tailwind class | Usage |
 |-------|-----|----------------|-------|
-| `red-900` | `#6B0000` | — | — |
-| `red-800` | `#8B0000` | — | — |
-| `red-700` | `#A50E0E` | — | — |
-| `red-600` | `#C1121F` | `bg-red-600` | Primary CTA buttons, keynote badge |
-| `red-500` | `#E63946` | `text-red-500` | Decorative label elements |
-| `red-100` | `#FFE5E7` | `bg-red-100` | Light red tints |
-| `red-50`  | `#FFF5F5` | `bg-red-50`  | Highlight backgrounds |
+| `green-950` | `#020b0b` | `bg-green-950` | Darkest — footer bottom bar |
+| `green-900` | `#071f1f` | `bg-green-900` | Hero, nav scrolled, page banners |
+| `green-800` | `#0e3535` | `bg-green-800` | Primary dark teal |
+| `green-700` | `#1a5858` | `text-green-700`, `bg-green-700` | Links, talk badge fill |
+| `green-600` | `#2d8585` | — | Intermediate accent |
+| `green-500` | `#5db5b5` | `text-green-500` | Primary cyan accent — footer logo, border hovers |
+| `green-100` | `#d0f0f0` | `bg-green-100` | Light tints |
+| `green-50`  | `#e8fafa` | `bg-green-50`  | Very light tints, badge text |
+
+### Magenta ramp (accent / call-to-action)
+
+| Token | Hex | Tailwind class | Usage |
+|-------|-----|----------------|-------|
+| `red-900` | `#350035` | — | — |
+| `red-800` | `#5e005e` | — | — |
+| `red-700` | `#960a96` | — | — |
+| `red-600` | `#cb24cb` | `bg-red-600` | Primary CTA buttons, "Featured" badge |
+| `red-500` | `#da48da` | `text-red-500` | Decorative label elements |
+| `red-100` | `#f7caf7` | `bg-red-100` | Light magenta tints |
+| `red-50`  | `#fdeafd` | `bg-red-50`  | Highlight backgrounds |
 
 ### Neutrals
 
 | Token | Hex | Tailwind class | Usage |
 |-------|-----|----------------|-------|
-| `cream` | `#F4F0E6` | `bg-cream` | Alternate section backgrounds |
-| `warm` | `#E8E4DC` | `bg-warm` | Borders, dividers |
-| `parchment` | `#FAF8F3` | `bg-parchment` | Main page background |
-| `ink` | `#141414` | `text-ink` | Primary text |
-| `muted` | `#5A5857` | `text-muted` | Secondary text |
-| `border` | `#D6D2CA` | `border-border` | Hairline borders |
+| `cream` | `#071414` | `bg-cream` | Alternate section / card backgrounds |
+| `warm` | `#0d2020` | `bg-warm` | Borders, dividers, section fills |
+| `parchment` | `#040d0d` | `bg-parchment` | Main page background |
+| `ink` | `#ddf0f0` | `text-ink` | Primary text (near-white) |
+| `muted` | `#5a9898` | `text-muted` | Secondary text |
+| `border` | `#193535` | `border-border` | Hairline borders |
 
 ---
 
@@ -81,7 +84,7 @@ elements to create flowing transitions between sections.
 <section class="py-24 bg-cream clip-diagonal-down">…</section>
 ```
 
-### `.text-outline-white` / `.text-outline-green`
+### `.text-outline-white` / `.text-outline-cyan` / `.text-outline-magenta`
 Renders text as an outline (transparent fill, coloured stroke). Used for the large
 "28" background number in the Hero.
 
@@ -110,18 +113,35 @@ Use with inline `animation-delay` for staggered reveals.
 
 ## Session Badge Classes
 
-Applied to `<span class="session-badge ...">` elements in the schedule and speaker cards.
+Applied to `<span class="session-badge ...">` elements in the schedule, the
+programme-page legend, and speaker cards.
 
-| Class | Colour |
-|-------|--------|
-| `.badge-keynote` | Red |
-| `.badge-talk` | Dark green |
-| `.badge-workshop` | Blue |
-| `.badge-panel` | Orange |
-| `.badge-poster` | Teal |
-| `.badge-social` | Amber |
-| `.badge-ceremony` | Purple |
-| `.badge-break` / `.badge-lunch` | Grey (muted) |
+The 7 colour-coded badges below are a fixed, validated set — chosen and
+ordered with the `dataviz` skill's palette validator so that every pair is
+distinguishable under simulated colour blindness and clears WCAG text
+contrast against this site's dark surfaces. **Don't reorder or recolour a
+single badge in isolation** — the safety of the set depends on the exact
+hues and the order they were validated in (see the comment above
+`.badge-workshop` in `global.css`). Re-run the validator against the full set
+if you need to add, remove, or recolour one.
+
+| Class | Colour | Fixed order slot |
+|-------|--------|-------------------|
+| `.badge-workshop` | Blue | 1 |
+| `.badge-poster` | Green | 2 |
+| `.badge-keynote` | Magenta | 3 |
+| `.badge-social` | Yellow/amber | 4 |
+| `.badge-talk` | Aqua/teal | 5 |
+| `.badge-panel` | Orange | 6 |
+| `.badge-ceremony` | Violet | 7 |
+
+`.badge-break` and `.badge-lunch` are intentionally excluded from the
+colour-coded set — they're logistics, not sessions, and use the same neutral
+grey (`--color-warm` / `--color-muted`) so they read as "not a content
+session" rather than competing for a distinct hue.
+
+`.badge-keynote` is also used standalone (not paired with a `type` badge) as
+an overlay on speaker cards and bio panels when `keynote: true` is set.
 
 ---
 
