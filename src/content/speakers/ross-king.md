@@ -6,6 +6,7 @@ country: "UK"
 topic: "Automated scientific discovery, robot scientists, AI for science"
 day: 3
 sessionType: "talk"
+image: "speakers/ross-king.jpg"
 ---
 
 Ross D. King has joint positions at the University of Cambridge (Biotechnology), and is Professor of Machine Intelligence at Chalmers Institute of Technology, Sweden. His main research interest is AI for science. He originated the idea of a "Robot Scientist" (aka self-driving lab): integrating AI and laboratory robotics to physically implement closed-loop scientific discovery.
