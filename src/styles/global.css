@@ -310,14 +310,25 @@
 @layer components {
   /* Session type badges */
   .badge-highlight { background: var(--color-red-600);  color: #fff; }
-  .badge-talk     { background: var(--color-green-700); color: var(--color-green-50); }
-  .badge-workshop { background: #1a5878; color: #a0ddf0; }
+
+  /*
+   * Session-type badge palette — 7 hues validated as a set (CVD-safe
+   * adjacent pairs + WCAG text/fill contrast) against this site's dark
+   * surfaces via the dataviz skill's validator. Keep this fixed order
+   * when adding/reordering legend entries (program.astro): workshop,
+   * poster, keynote, social, talk, panel, ceremony. Reordering changes
+   * which pairs sit adjacent and can silently reintroduce a collision.
+   */
+  .badge-workshop { background: #0d1e32; color: #3987e5; }
+  .badge-poster   { background: #062306; color: #1c9e1c; }
+  .badge-keynote  { background: #260f17; color: #d55181; }
+  .badge-social   { background: #2c1d00; color: #c98500; }
+  .badge-talk     { background: #062319; color: #199e70; }
+  .badge-panel    { background: #271007; color: #d95926; }
+  .badge-ceremony { background: #201d33; color: #9085e9; }
+
   .badge-break    { background: var(--color-warm);      color: var(--color-muted); }
   .badge-lunch    { background: var(--color-warm);      color: var(--color-muted); }
-  .badge-social   { background: #6b3a00; color: #f4c07a; }
-  .badge-ceremony { background: #3a1460; color: #c8a0f8; }
-  .badge-panel    { background: #5a2d00; color: #f0a060; }
-  .badge-poster   { background: #0f3a20; color: #68d88a; }
 
   .session-badge {
     font-family: var(--font-mono);

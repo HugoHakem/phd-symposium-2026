@@ -19,28 +19,11 @@ const rendered = await Promise.all(
   })
 );
 const bioMap = Object.fromEntries(rendered.map(r => [r.id, r.Content]));
-
-const dayGroups = [1, 2, 3].map(day => ({
-  day,
-  speakers: sortedSpeakers.filter((s: Speaker) => s.data.day === day),
-}));
-
-// Day colors reference --color-day-{n} defined in global.css :root
-const dayColors: Record<number, string> = {
-  1: 'var(--color-day-1)',
-  2: 'var(--color-day-2)',
-  3: 'var(--color-day-3)',
-};
-const dayThemes: Record<number, { title: string; theme: string }> = {
-  1: { title: 'Day 1 — Dec 2', theme: 'High Throughput Methods' },
-  2: { title: 'Day 2 — Dec 3', theme: 'AI and Industry'         },
-  3: { title: 'Day 3 — Dec 4', theme: 'Robotics'                },
-};
 ---
 
 <BaseLayout
   title="Speakers — 28th EMBL PhD Symposium 2026"
-  description="Meet the invited speakers of the 28th EMBL PhD Symposium: Shifting Gears — Automation, AI, and High-Throughput Methodologies."
+  description="Meet the invited speakers of the 28th EMBL PhD Symposium: Shifting gears — automation, AI, and high-throughput methodologies."
 >
   <!-- Page Hero -->
   <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
@@ -58,15 +41,15 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
       </div>
       <h1 class="font-display font-800 text-white text-5xl lg:text-7xl mb-4">Speakers</h1>
       <p class="font-body text-white/60 text-lg max-w-2xl">
-        Eleven leading scientists from institutions across the world — each advancing discovery
+        Twelve leading scientists from institutions across the world — each advancing discovery
         through automation, high-throughput methodologies, and AI-driven analysis.
       </p>
 
       <!-- Stats row -->
       <div class="flex flex-wrap gap-8 mt-10 pt-8 border-t border-white/10">
         {[
-          { value: '11', label: 'Invited Speakers' },
-          { value: '6',  label: 'Student Talks'    },
+          { value: '12', label: 'Invited Speakers' },
+          { value: '7',  label: 'Student Talks'    },
           { value: '2',   label: 'Panels'           },
         ].map(({ value, label }) => (
           <div>
@@ -78,105 +61,84 @@ const dayThemes: Record<number, { title: string; theme: string }> = {
     </div>
   </div>
 
-  <!-- Speakers by day -->
+  <!-- All speakers, one grid -->
   <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-    {dayGroups.map(({ day, speakers: daySpeakers }) => (
-      <div class="mb-20 last:mb-0">
-        <!-- Day header -->
-        <div class="flex items-center gap-6 mb-10">
-          <div>
-            <div class="flex items-center gap-3 mb-1">
-              <span
-                class="font-display font-800 text-5xl lg:text-6xl"
-                style={`color: ${dayColors[day]}; opacity: 0.2;`}
-              >{String(day).padStart(2, '0')}</span>
-            </div>
-          </div>
-          <div class="border-l-4 pl-6" style={`border-color: ${dayColors[day]};`}>
-            <p class="font-mono text-[0.65rem] tracking-[0.15em] uppercase text-muted mb-0.5">
-              {dayThemes[day].title}
-            </p>
-            <h2 class="font-display font-800 text-ink text-2xl lg:text-3xl">
-              {dayThemes[day].theme}
-            </h2>
-          </div>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      {sortedSpeakers.map((speaker: Speaker) => (
+        <SpeakerCard
+          slug={speaker.id}
+          name={speaker.data.name}
+          role={speaker.data.role}
+          institution={speaker.data.institution}
+          country={speaker.data.country}
+          topic={speaker.data.topic}
+          day={speaker.data.day}
+          sessionType={speaker.data.sessionType}
+          image={speaker.data.image}
+          keynote={speaker.data.keynote}
+        />
+      ))}
+    </div>
 
-        <!-- Speaker cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {daySpeakers.map((speaker: Speaker) => (
-            <SpeakerCard
-              slug={speaker.id}
-              name={speaker.data.name}
-              role={speaker.data.role}
-              institution={speaker.data.institution}
-              country={speaker.data.country}
-              topic={speaker.data.topic}
-              day={speaker.data.day}
-              sessionType={speaker.data.sessionType}
-              image={speaker.data.image}
-            />
-          ))}
-        </div>
-
-        <!-- Bio panels for each speaker -->
-        {daySpeakers.map((speaker: Speaker) => {
-          const Bio = bioMap[speaker.id];
-          return (
-            <div id={speaker.id} class="bio-panel">
-              <div class="bio-panel-inner">
-                <!-- Speaker header inside bio -->
-                <div class="bio-header">
-                  <div>
-                    <div class="flex items-center gap-2 mb-2">
-                      <span class:list={['session-badge', 'badge-talk']}>
-                        {speaker.data.sessionType}
-                      </span>
-                      <span class="font-mono text-[0.6rem] text-muted uppercase tracking-widest">Day {speaker.data.day}</span>
-                    </div>
-                    <h3 class="font-display font-800 text-ink text-2xl lg:text-3xl mb-1">{speaker.data.name}</h3>
-                    <p class="font-body text-muted mb-0.5">{speaker.data.role}</p>
-                    <p class="font-display font-600 text-green-700">{speaker.data.institution} · {speaker.data.country}</p>
-                  </div>
-                </div>
-                <!-- Talk info -->
-                <div class="bio-talk">
-                  <p class="label-tag text-red-600 mb-2">Talk</p>
-                  <p class="font-display font-700 text-ink text-lg leading-tight">{speaker.data.topic}</p>
-                </div>
-                <!-- Bio text -->
-                <div class="bio-content prose-bio">
-                  <Bio />
-                </div>
-                <!-- External links -->
-                <div class="bio-links">
-                  {speaker.data.website && (
-                    <a
-                      href={speaker.data.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="bio-link"
-                    >
-                      🔗 Personal / Lab Website
-                    </a>
+    <!-- Bio panels, one per speaker -->
+    {sortedSpeakers.map((speaker: Speaker) => {
+      const Bio = bioMap[speaker.id];
+      return (
+        <div id={speaker.id} class="bio-panel">
+          <div class="bio-panel-inner">
+            <!-- Speaker header inside bio -->
+            <div class="bio-header">
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <span class:list={['session-badge', 'badge-talk']}>
+                    {speaker.data.sessionType}
+                  </span>
+                  {speaker.data.keynote && (
+                    <span class="session-badge badge-keynote">Keynote</span>
                   )}
-                  {speaker.data.twitter && (
-                    <a
-                      href={`https://twitter.com/${speaker.data.twitter}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="bio-link"
-                    >
-                      𝕏 @{speaker.data.twitter}
-                    </a>
-                  )}
+                  <span class="font-mono text-[0.6rem] text-muted uppercase tracking-widest">Day {speaker.data.day}</span>
                 </div>
+                <h3 class="font-display font-800 text-ink text-2xl lg:text-3xl mb-1">{speaker.data.name}</h3>
+                <p class="font-body text-muted mb-0.5">{speaker.data.role}</p>
+                <p class="font-display font-600 text-green-700">{speaker.data.institution} · {speaker.data.country}</p>
               </div>
             </div>
-          );
-        })}
-      </div>
-    ))}
+            <!-- Talk info -->
+            <div class="bio-talk">
+              <p class="label-tag text-red-600 mb-2">Talk</p>
+              <p class="font-display font-700 text-ink text-lg leading-tight">{speaker.data.topic}</p>
+            </div>
+            <!-- Bio text -->
+            <div class="bio-content prose-bio">
+              <Bio />
+            </div>
+            <!-- External links -->
+            <div class="bio-links">
+              {speaker.data.website && (
+                <a
+                  href={speaker.data.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bio-link"
+                >
+                  🔗 Personal / Lab Website
+                </a>
+              )}
+              {speaker.data.twitter && (
+                <a
+                  href={`https://twitter.com/${speaker.data.twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bio-link"
+                >
+                  𝕏 @{speaker.data.twitter}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    })}
   </div>
 </BaseLayout>
 

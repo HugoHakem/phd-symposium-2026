@@ -3,6 +3,7 @@ interface Session {
   time: string;
   title: string;
   type: string;
+  keynote?: boolean;
   speaker?: string;
   speakerSlug?: string;
   abstract?: string;
@@ -83,28 +84,26 @@ const isMainEvent = (type: string) => ['talk', 'panel', 'ceremony'].includes(typ
             <span class:list={['session-badge', badgeClasses[session.type] || 'badge-break']}>
               {session.type}
             </span>
+            {session.keynote && (
+              <span class="session-badge badge-keynote">Keynote</span>
+            )}
           </div>
 
           <h3
             class:list={[
-              'font-display font-700 leading-tight mb-1',
+              'font-display font-700 leading-tight mb-2',
               isMainEvent(session.type) ? 'text-lg lg:text-xl text-ink' : 'text-base text-muted',
             ]}
           >
-            {session.title}
+            {session.speakerSlug ? (
+              <a href={`${base}speakers#${session.speakerSlug}`} class="hover:underline">
+                {session.title}
+                {session.speaker && ` – ${session.speaker}`}
+              </a>
+            ) : (
+              session.title
+            )}
           </h3>
-
-          {session.speaker && (
-            <p class="font-body text-base font-600 mb-2" style="color: var(--color-green-500);">
-              {session.speakerSlug ? (
-                <a href={`${base}speakers#${session.speakerSlug}`} class="hover:underline">
-                  {session.speaker}
-                </a>
-              ) : (
-                <span class="text-muted font-400">{session.speaker}</span>
-              )}
-            </p>
-          )}
 
           {session.location && (
             <p class="font-mono text-[0.6rem] tracking-[0.12em] text-muted/70 uppercase mt-2">

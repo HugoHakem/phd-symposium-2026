@@ -14,8 +14,8 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
 ---
 
 <BaseLayout
-  title="Program — 28th EMBL PhD Symposium 2026"
-  description="Full program for the 28th EMBL PhD Symposium: invited talks, workshops, and social events over three days."
+  title="Programme — 28th EMBL PhD Symposium 2026"
+  description="Full programme for the 28th EMBL PhD Symposium: invited talks, workshops, and social events over three days."
 >
   <!-- Page Hero -->
   <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
@@ -31,7 +31,7 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
         <div class="h-px w-10 bg-green-500"></div>
         <span class="label-tag text-green-400">3-Day Symposium</span>
       </div>
-      <h1 class="font-display font-800 text-white text-5xl lg:text-7xl mb-4">Program</h1>
+      <h1 class="font-display font-800 text-white text-5xl lg:text-7xl mb-4">Programme</h1>
       <p class="font-body text-white/60 text-lg max-w-2xl">
         Three focused days at the intersection of automation, AI, and high-throughput biology — from
         robotic workflows and large-scale screening to scalable data analysis and translational applications.
@@ -58,11 +58,13 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
         <span class="font-mono text-xs tracking-[0.15em] text-ink uppercase font-600">Session types:</span>
         {[
-          ['talk',     'Invited Talk'   ],
           ['workshop', 'Workshop'       ],
-          ['panel',    'Panel'          ],
           ['poster',   'Poster Session' ],
+          ['keynote',  'Keynote Talk'   ],
           ['social',   'Social Event'   ],
+          ['talk',     'Invited Talk'   ],
+          ['panel',    'Panel'          ],
+          ['ceremony', 'Ceremony'       ],
         ].map(([type, label]) => (
           <div class="flex items-center gap-1.5">
             <span class:list={['session-badge', `badge-${type}`]}>{type}</span>
@@ -166,7 +168,6 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
               <div class="flex flex-wrap gap-3">
                 <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=3532786b714233776141585163793455734f654f74696e367936556f57664e4d516e744135536d7372546b3d" target="_blank" rel="noopener noreferrer" class="font-display font-700 text-sm px-6 py-3 bg-red-600 text-white hover:bg-red-700 transition-colors">Standard</a>
                 <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=716d4d6a4e676f6932323267614d42736b796b6c6f536b454d503669763449717575504642757a6b48726f3d" target="_blank" rel="noopener noreferrer" class="font-display font-700 text-sm px-6 py-3 border border-white/30 text-white hover:bg-white/10 transition-colors">EMBL-affiliated</a>
-                <a href="https://embl.ungerboeck.com/PROD/emc00/register.aspx?aat=584f4d716a4d5653696434656561765949726b595441705566367148366e577869306157764a48542b71413d" target="_blank" rel="noopener noreferrer" class="font-display font-700 text-sm px-6 py-3 border border-white/30 text-white hover:bg-white/10 transition-colors">Speaker / Organiser</a>
               </div>
             </div>
             <div>
@@ -182,3 +183,5 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
     </div>
   </div>
 </BaseLayout>
+
+
