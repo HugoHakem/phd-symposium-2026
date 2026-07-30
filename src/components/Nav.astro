@@ -4,7 +4,7 @@ const base = import.meta.env.BASE_URL;
 // paths relative to base (no leading slash)
 const navLinks = [
   { path: '',          label: 'Home'     },
-  { path: 'program',   label: 'Program'  },
+  { path: 'program',   label: 'Programme'  },
   { path: 'speakers',  label: 'Speakers' },
   { path: 'about',     label: 'About'    },
 ];
@@ -24,19 +24,31 @@ function isActive(path: string): boolean {
 
   <div class="relative max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
     <!-- Logo -->
-    <a href={base} class="flex items-center gap-3 group">
-      <div class="relative w-9 h-9 shrink-0">
-        <img
-          src={`${base}logo.svg`}
-          alt="EMBL PhD Symposium logo"
-          class="w-full h-full object-contain"
-        />
-      </div>
-      <div class="leading-none">
-        <p class="font-display font-800 text-white text-sm tracking-tight">EMBL PhD</p>
-        <p class="font-mono text-white/60 text-[0.6rem] tracking-[0.15em] uppercase">Symposium 2026</p>
-      </div>
-    </a>
+    <div class="flex items-center gap-4">
+      <a
+        href="https://www.embl.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:block shrink-0"
+        aria-label="EMBL"
+      >
+        <img src={`${base}embl-logo.svg`} alt="EMBL" class="h-9 w-auto opacity-90 hover:opacity-100 transition-opacity" />
+      </a>
+      <span class="hidden sm:block w-px h-8 bg-white/20" aria-hidden="true"></span>
+      <a href={base} class="flex items-center gap-3 group">
+        <div class="relative w-9 h-9 shrink-0">
+          <img
+            src={`${base}logo.svg`}
+            alt="EMBL PhD Symposium logo"
+            class="w-full h-full object-contain"
+          />
+        </div>
+        <div class="leading-none">
+          <p class="font-display font-800 text-white text-sm tracking-tight">EMBL PhD</p>
+          <p class="font-mono text-white/60 text-[0.6rem] tracking-[0.15em] uppercase">Symposium 2026</p>
+        </div>
+      </a>
+    </div>
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-1">

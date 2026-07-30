@@ -19,8 +19,8 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
 ---
 
 <BaseLayout
-  title="28th EMBL PhD Symposium 2026 — Shifting Gears: Automation, AI, and High-Throughput Methodologies"
-  description="The 28th EMBL PhD Symposium: Shifting Gears: Automation, AI, and High-Throughput Methodologies. December 2–4, 2026 at EMBL Heidelberg."
+  title="28th EMBL PhD Symposium 2026 — Shifting gears: automation, AI, and high-throughput methodologies"
+  description="The 28th EMBL PhD Symposium: Shifting gears: automation, AI, and high-throughput methodologies. December 2–4, 2026 at EMBL Heidelberg."
 >
   <HeroSection />
 
@@ -53,7 +53,7 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
           <!-- Key stats -->
           <div class="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-warm">
             {[
-              { value: '11', label: 'Invited Speakers' },
+              { value: '12', label: 'Invited Speakers' },
               { value: '3', label: 'Focused Days'     },
               { value: '100+', label: 'Participants'  },
             ].map(({ value, label }) => (
@@ -137,6 +137,7 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
                   day={speaker.data.day}
                   sessionType={speaker.data.sessionType}
                   image={speaker.data.image}
+                  keynote={speaker.data.keynote}
                 />
               </div>
             ))}
@@ -156,7 +157,7 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
             <div class="h-px w-10 bg-red-600"></div>
             <span class="label-tag text-red-600">Important Dates</span>
           </div>
-          <h2 class="font-display font-800 text-ink text-4xl mb-10">Mark Your<br />Calendar</h2>
+          <h2 class="font-display font-800 text-ink text-4xl mb-10">Mark your<br />calendar</h2>
           <div class="space-y-0">
             {[
 { date: 'August 10, 2026',    label: 'Early-Bird Registration Deadline'  },

@@ -7,7 +7,7 @@ const footerLinks = [
     heading: 'Symposium',
     links: [
       { href: base,                      label: 'Home'    },
-      { href: `${base}program`,          label: 'Program' },
+      { href: `${base}program`,          label: 'Programme' },
       { href: `${base}speakers`,         label: 'Speakers'},
       { href: `${base}about`,            label: 'About'   },
     ],
@@ -53,10 +53,14 @@ const footerLinks = [
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
       <!-- Brand + Description -->
-      <div class="grid grid-cols-2 lg:grid-cols-5 gap-8">
+      <div class="grid grid-cols-2 lg:grid-cols-6 gap-8">
         <!-- Brand column -->
-        <div class="col-span-2 lg:col-span-1">
-          <div class="flex items-center gap-3 mb-4">
+        <div class="col-span-2 lg:col-span-2">
+          <div class="flex items-center gap-3 mb-4 flex-wrap">
+            <a href="https://www.embl.org" target="_blank" rel="noopener noreferrer" class="shrink-0" aria-label="EMBL">
+              <img src={`${base}embl-logo.svg`} alt="EMBL" class="h-8 w-auto opacity-90 hover:opacity-100 transition-opacity" />
+            </a>
+            <span class="w-px h-8 bg-white/20" aria-hidden="true"></span>
             <img src={`${base}logo.svg`} alt="EMBL PhD Symposium logo" class="w-8 h-8" />
             <div>
               <p class="font-display font-800 text-white text-sm">EMBL PhD</p>
@@ -64,7 +68,7 @@ const footerLinks = [
             </div>
           </div>
           <p class="font-display font-700 text-green-400 text-2xl leading-tight mb-3">
-            Shifting Gears:<br />Automation, AI, and<br />High-Throughput Methodologies
+            Shifting gears:<br />automation, AI, and<br />high-throughput methodologies
           </p>
           <p class="font-mono text-white/50 text-xs leading-relaxed">
             December 2–4, 2026<br />
