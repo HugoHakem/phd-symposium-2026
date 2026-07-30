@@ -4,7 +4,7 @@ role: "Senior Executive Scientist"
 institution: "Boehringer Ingelheim"
 country: "Germany"
 topic: "Cancer drug discovery, precision oncology, translational research"
-day: 3
+day: 2
 sessionType: "talk"
 image: "speakers/norbert-kraut.png"
 ---

@@ -4,7 +4,7 @@ role: "Personal Chair in Engineering Biology"
 institution: "University of Edinburgh"
 country: "UK"
 topic: "AI-driven automation in synthetic and engineering biology, accelerating therapy development for rare diseases"
-day: 2
+day: 3
 sessionType: "talk"
 image: "speakers/giovanni-stracquadanio.png"
 website: "https://www.stracquadaniolab.org"

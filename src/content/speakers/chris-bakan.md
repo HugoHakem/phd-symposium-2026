@@ -1,10 +1,10 @@
 ---
-name: "Invited Speaker — Day 1"
+name: "Chris Bakan"
 role: "TBA"
 institution: "TBA"
 country: "TBA"
 topic: "TBA"
-day: 1
+day: 2
 sessionType: "talk"
 ---
 

@@ -6,6 +6,7 @@ country: "USA"
 topic: "Multiplexed high-throughput chemical screening, cancer dependency mapping, PRISM platform"
 day: 1
 sessionType: "talk"
+keynote: true
 image: "speakers/jennifer-roth.jpg"
 website: "https://www.theprismlab.org"
 ---

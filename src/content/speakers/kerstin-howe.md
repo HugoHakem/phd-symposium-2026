@@ -4,7 +4,7 @@ role: "Head of Production Genomics, Tree of Life Programme"
 institution: "Wellcome Sanger Institute"
 country: "UK"
 topic: "Genome assembly, genome annotation, and reference genome curation"
-day: 3
+day: 1
 sessionType: "talk"
 website: "https://www.sanger.ac.uk/person/howe-kerstin/"
 image: "speakers/kerstin-howe.png"
