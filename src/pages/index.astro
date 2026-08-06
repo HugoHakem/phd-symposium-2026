@@ -160,8 +160,8 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
           <h2 class="font-display font-800 text-ink text-4xl mb-10">Mark your<br />calendar</h2>
           <div class="space-y-0">
             {[
-{ date: 'August 10, 2026',    label: 'Early-Bird Registration Deadline'  },
-              { date: 'August 26, 2026',    label: 'Abstract Submission Deadline'       },
+              { date: 'August 10, 2026',    label: 'Early-Bird Registration Deadline'   },
+              { date: 'September 9, 2026',  label: 'Abstract Submission Deadline'       },
               { date: 'September 16, 2026', label: 'Abstract Selection Notification'    },
               { date: 'October 21, 2026',   label: 'On-Site Registration Deadline'      },
               { date: 'November 25, 2026',  label: 'Virtual Registration Deadline'      },
@@ -178,7 +178,6 @@ const scheduleByDay = [...schedule].sort((a: Schedule, b: Schedule) => a.data.da
                   </p>
                   <p class="font-mono text-xs text-muted">{date}</p>
                 </div>
-                {highlight && <span class="session-badge badge-highlight text-[0.6rem]">Featured</span>}
               </div>
             ))}
           </div>
