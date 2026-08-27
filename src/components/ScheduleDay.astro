@@ -4,6 +4,7 @@ interface Session {
   title: string;
   type: string;
   keynote?: boolean;
+  embo?: boolean;
   speaker?: string;
   speakerSlug?: string;
   abstract?: string;
@@ -80,12 +81,15 @@ const isMainEvent = (type: string) => ['talk', 'panel', 'ceremony'].includes(typ
 
         <!-- Content column -->
         <div class="session-content">
-          <div class="flex flex-wrap items-start gap-2 mb-2">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
             <span class:list={['session-badge', badgeClasses[session.type] || 'badge-break']}>
               {session.type}
             </span>
             {session.keynote && (
-              <span class="session-badge badge-keynote">Keynote</span>
+              <span class="session-badge badge-keynote">{session.embo ? 'EMBO Keynote Lecture' : 'Keynote'}</span>
+            )}
+            {session.embo && (
+              <img src={`${base}sponsors/embo-logo.svg`} alt="EMBO" class="embo-badge-logo" />
             )}
           </div>
 
@@ -164,6 +168,13 @@ const isMainEvent = (type: string) => ['talk', 'panel', 'ceremony'].includes(typ
     padding-top: 0.25rem;
     text-align: right;
     flex-shrink: 0;
+  }
+
+  .embo-badge-logo {
+    height: 2.1rem;
+    width: auto;
+    flex-shrink: 0;
+    display: block;
   }
 
   @media (max-width: 640px) {

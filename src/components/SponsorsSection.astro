@@ -65,6 +65,16 @@ const cppGrouped = Object.fromEntries(
               class="sponsor-card sponsor-main"
               title={sponsor.data.name}
             >
+              {sponsor.data.logo && (
+                <div class="sponsor-main-logo-slot">
+                  <img
+                    src={`${base}${sponsor.data.logo}`}
+                    alt={sponsor.data.name}
+                    class:list={['sponsor-main-logo', sponsor.id === 'embo' && 'sponsor-main-logo--embo']}
+                    loading="lazy"
+                  />
+                </div>
+              )}
               <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
               <p class="sponsor-desc font-body text-sm text-muted">{sponsor.data.description}</p>
             </a>
@@ -179,9 +189,22 @@ const cppGrouped = Object.fromEntries(
     background: var(--color-border);
     border: 1px solid var(--color-border);
   }
-  .grid-sponsor { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-  .grid-grant   { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-  .grid-cpp     { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .grid-sponsor { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-grant   { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-cpp {
+    /* Flexbox, not grid: a partial last row (e.g. one leftover logo) then
+       just centers itself with blank space either side, instead of CSS
+       Grid reserving empty cells that show the container's own background
+       as dark "missing tile" gaps. */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #ffffff;
+  }
+  .grid-cpp .sponsor-cpp {
+    flex: 1 1 200px;
+    max-width: 240px;
+  }
 
   .sponsor-card {
     background: var(--color-cream);
@@ -203,6 +226,40 @@ const cppGrouped = Object.fromEntries(
   }
   .sponsor-cpp:hover {
     background: #f8f8f8;
+  }
+
+  .sponsor-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .sponsor-main .sponsor-desc {
+    max-width: 28rem;
+  }
+
+  .sponsor-main-logo-slot {
+    height: 7rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .sponsor-main-logo {
+    height: 3.25rem;
+    width: auto;
+    max-width: 70%;
+    object-fit: contain;
+    display: block;
+  }
+  .sponsor-main-logo--embo {
+    /* EMBO's mark is more compact/square than EMBL's wide wordmark lockup,
+       so it needs extra height to read as visually comparable in size.
+       The fixed-height slot above keeps the name/description that follow
+       aligned across cards regardless of this override. */
+    height: 6.5rem;
   }
 
   .sponsor-main  .sponsor-name { font-size: 1.15rem; color: var(--color-ink); }

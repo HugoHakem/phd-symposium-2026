@@ -48,9 +48,10 @@ sessions:
     type: "lunch"
     location: "EMBL Canteen"
   - time: "13:30"
-    title: "Keynote Talk"
+    title: "The EMBO Keynote Lecture"
     type: "talk"
     keynote: true
+    embo: true
     speaker: "Paul Flicek"
     speakerSlug: "paul-flicek"
     location: "EMBL ATC Auditorium"

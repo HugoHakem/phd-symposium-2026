@@ -76,6 +76,7 @@ const bioMap = Object.fromEntries(rendered.map(r => [r.id, r.Content]));
           sessionType={speaker.data.sessionType}
           image={speaker.data.image}
           keynote={speaker.data.keynote}
+          embo={speaker.data.embo}
         />
       ))}
     </div>
@@ -94,7 +95,10 @@ const bioMap = Object.fromEntries(rendered.map(r => [r.id, r.Content]));
                     {speaker.data.sessionType}
                   </span>
                   {speaker.data.keynote && (
-                    <span class="session-badge badge-keynote">Keynote</span>
+                    <span class="session-badge badge-keynote">{speaker.data.embo ? 'EMBO Keynote Lecture' : 'Keynote'}</span>
+                  )}
+                  {speaker.data.embo && (
+                    <img src={`${base}sponsors/embo-logo.svg`} alt="EMBO" class="bio-embo-logo" />
                   )}
                   <span class="font-mono text-[0.6rem] text-muted uppercase tracking-widest">Day {speaker.data.day}</span>
                 </div>
@@ -153,6 +157,12 @@ const bioMap = Object.fromEntries(rendered.map(r => [r.id, r.Content]));
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
+  }
+  .bio-embo-logo {
+    height: 2.1rem;
+    width: auto;
+    flex-shrink: 0;
+    display: block;
   }
   .bio-header {
     padding: 2rem 2rem 1.5rem;
