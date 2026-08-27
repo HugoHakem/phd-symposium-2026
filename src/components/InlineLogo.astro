@@ -1,0 +1,37 @@
+---
+// Inlines an SVG sponsor logo so its individual shapes can be selectively
+// recoloured via CSS (see the `recolour-*` rules in SponsorsSection.astro).
+// The source file on disk is never modified — this only affects how the
+// browser renders a copy of its markup.
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  /** Path relative to static/, e.g. "sponsors/embl-corporate-partners/evident.svg" */
+  file: string;
+  class?: string;
+}
+
+const { file, class: className } = Astro.props;
+const filePath = path.join(process.cwd(), 'static', file);
+const svg = fs.readFileSync(filePath, 'utf-8');
+---
+<div class:list={['inline-logo', className]} set:html={svg} />
+
+<style is:global>
+  .inline-logo {
+    /* A definite height (rather than relying purely on max-* constraints)
+       is needed here — some of these source SVGs have no width/height
+       attribute of their own to fall back on, and pure max-width/max-height
+       sizing collapses to 0 in that case. */
+    display: block;
+    height: 3.5rem;
+    max-width: 100%;
+  }
+  .inline-logo svg {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    display: block;
+  }
+</style>

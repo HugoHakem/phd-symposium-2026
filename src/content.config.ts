@@ -52,6 +52,10 @@ const sponsors = defineCollection({
     website: z.string().optional(),
     description: z.string(),
     logo: z.string().optional(),
+    // 'invert' flips a dark-on-transparent logo to light-on-transparent via
+    // CSS filter (see SponsorsSection.astro) — for logos that are illegible
+    // against the site's dark cards but shouldn't be edited at the source.
+    logoTreatment: z.enum(['normal', 'invert']).optional(),
   }),
 });
 
