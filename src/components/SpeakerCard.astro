@@ -31,7 +31,11 @@ const initials = name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase
     <!-- Avatar area -->
     <div class="avatar-wrap">
       {keynote && (
-        <span class="keynote-badge session-badge badge-keynote">{embo ? 'EMBO Keynote Lecture' : 'Keynote'}</span>
+        <span class="keynote-badge session-badge badge-keynote">
+          {embo ? (
+            <><img src={`${base}sponsors/embo-logo-badge.svg`} alt="EMBO" class="embo-badge-logo" /> Keynote Lecture</>
+          ) : 'Keynote Lecture'}
+        </span>
       )}
       {image ? (
         <img src={`${base}${image}`} alt={name} class="avatar-img" loading="lazy" />
@@ -91,6 +95,13 @@ const initials = name.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase
     top: 0.6rem;
     left: 0.6rem;
     z-index: 1;
+  }
+  .embo-badge-logo {
+    height: 1.15rem;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin: -0.1rem 0.1em -0.1rem 0;
   }
   .avatar-img {
     width: 100%;

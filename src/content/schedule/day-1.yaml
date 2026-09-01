@@ -13,7 +13,7 @@ sessions:
     speaker: "Symposium Committee"
     location: "EMBL ATC Auditorium"
   - time: "09:30"
-    title: "Keynote Talk"
+    title: "Keynote Lecture"
     type: "talk"
     keynote: true
     speaker: "Jennifer Roth"
