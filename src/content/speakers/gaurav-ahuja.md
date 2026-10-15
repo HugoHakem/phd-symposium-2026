@@ -7,6 +7,7 @@ topic: "AI and systems biology, metabolomics, aging and cancer, cellular signall
 day: 2
 sessionType: "talk"
 image: "speakers/gaurav-ahuja.png"
+website: "https://www.ahuja-lab.in/"
 ---
 
 Dr. Gaurav Ahuja is an Associate Professor at IIIT-Delhi, where he leads the Chemical Biology Laboratory. He earned his PhD in Natural Sciences from the University of Cologne, followed by postdoctoral fellowships in Germany and Singapore. His research integrates artificial intelligence with systems biology to decode how endogenous metabolites regulate aging, cancer, and cellular signalling. His landmark contributions include AI platforms for predicting carcinogenic metabolites, discovering natural geroprotectors, mapping single-cell aging, and revealing endogenous sterols as allosteric GPCR modulators.

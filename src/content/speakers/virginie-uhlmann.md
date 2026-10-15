@@ -8,6 +8,7 @@ day: 2
 sessionType: "talk"
 keynote: true
 image: "speakers/virginie-uhlmann.png"
+website: "https://www.mls.uzh.ch/en/research/uhlmann.html"
 ---
 
 Virginie Uhlmann is Assistant Professor in Bioimaging and Data Analysis in the Department of Molecular Life Sciences at the University of Zurich (Switzerland). She obtained her MSc in Bioengineering, and PhD in Electrical Engineering from the Ecole Polytechnique fédérale de Lausanne (EPFL, Switzerland). She has also been a Research Group Leader at the European Bioinformatics Institute (EMBL-EBI, Cambridge, UK) since 2018.

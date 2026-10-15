@@ -7,6 +7,7 @@ topic: "Microbiome science, systems biology, host-microbe dynamics, organ-on-chi
 day: 1
 sessionType: "talk"
 image: "speakers/sarela-garcia-santamarina.png"
+website: "https://www.leibniz-hki.de/en/deep-microbiome-metabolomics.html"
 ---
 
 Sarela García-Santamarina is Professor and Head of the Department of Deep Microbiome Metabolomics at the Leibniz Institute for Natural Product Research and Infection Biology (Leibniz-HKI, Germany). She obtained her PhD in Biomedicine from the Universitat Pompeu Fabra (UPF, Spain). She previously led an independent research program at ITQB NOVA (Portugal), following postdoctoral research at Duke University (USA) and the European Molecular Biology Laboratory (EMBL, Germany).
