@@ -164,6 +164,7 @@ logo: "sponsors/org-logo.svg"    # optional, no leading slash
 | `tier` | Meaning |
 |--------|---------|
 | `sponsor` | Direct financial sponsor of the symposium |
+| `supporter` | Sponsors a specific item (company talk, poster prize…) — `description` is shown as a short caption under the logo |
 | `grant` | Grant-funding body |
 | `cpp` | EMBL Corporate Partnership Programme member — requires `subTier` |
 

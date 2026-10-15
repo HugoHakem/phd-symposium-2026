@@ -47,7 +47,7 @@ const sponsors = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/sponsors' }),
   schema: z.object({
     name: z.string(),
-    tier: z.enum(['sponsor', 'grant', 'cpp']),
+    tier: z.enum(['sponsor', 'supporter', 'grant', 'cpp']),
     subTier: z.enum(['founder_partner', 'corporate_partner', 'associate_partner']).optional(),
     website: z.string().optional(),
     description: z.string(),

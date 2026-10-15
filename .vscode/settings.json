@@ -3,4 +3,8 @@
         "MD060": false,
         "MD041": false
     },
+    "files.associations": {
+        "*.xml": "html",
+        "*.svg": "html",
+    }
 }
