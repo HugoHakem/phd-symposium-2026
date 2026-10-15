@@ -39,6 +39,7 @@ sessions:
     speaker: "Symposium Committee"
     location: "EMBL ATC Auditorium"
   - time: "12:45"
+    end: "13:30"
     title: "Closing Lunch & Farewell"
     type: "social"
     location: "ATC Foyer"

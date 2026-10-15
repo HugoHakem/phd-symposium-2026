@@ -95,7 +95,28 @@ sessions:
     title: "Coffee Break"
     type: break
     location: "ATC Foyer"
+
+  - time: "14:55"
+    title: "Company Talk – Example Corp"
+    type: talk
+    url: "https://example.com"   # optional external link (e.g. a sponsor's site)
+    location: "EMBL ATC Auditorium"
 ```
+
+`abstract` is shown under the session title in the programme's list view
+and in the `.ics` download. `url` turns the title into an external link; use it
+for sessions without a speaker page (talks by a named speaker link to their
+bio through `speakerSlug` instead).
+
+A session ends when the next one starts. Give it an explicit `end` time
+(e.g. `end: "16:30"`) when that's not true:
+
+- **before a gap** — e.g. a talk ending at 16:30 when the next item starts at
+  17:15; otherwise the talk stretches over the free time;
+- **on the last session of a day** — there is no next session, so without
+  `end` it shows as one hour long.
+
+Both the calendar view and the `.ics` download use it.
 
 `color` should reference one of the day accent variables defined in
 `src/styles/global.css` (`var(--color-day-1)`, `var(--color-day-2)`,

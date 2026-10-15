@@ -30,6 +30,9 @@ const schedule = defineCollection({
     sessions: z.array(
       z.object({
         time: z.string(),
+        // Optional end time (HH:MM). When omitted, a session ends when the next
+        // one starts — so it's only needed before a gap, or on a day's last session.
+        end: z.string().optional(),
         title: z.string(),
         type: z.enum(['talk', 'workshop', 'break', 'lunch', 'social', 'ceremony', 'panel', 'poster']),
         keynote: z.boolean().optional(),
@@ -37,6 +40,9 @@ const schedule = defineCollection({
         speaker: z.string().optional(),
         speakerSlug: z.string().optional(),
         abstract: z.string().optional(),
+        // External page for the session (e.g. a company's website). Speaker
+        // talks link to their bio via speakerSlug instead.
+        url: z.string().optional(),
         location: z.string().optional(),
       })
     ),

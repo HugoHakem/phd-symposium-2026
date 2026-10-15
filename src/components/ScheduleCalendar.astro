@@ -1,0 +1,294 @@
+---
+/**
+ * Week-style overview of the whole programme: one column per day on a shared
+ * time axis, each session a block sized by its duration and coloured like its
+ * session-type badge. Blocks link to the matching row of the list view
+ * (#day-N-session-I); program.astro intercepts the click to switch views.
+ */
+interface Session {
+  time: string;
+  end?: string;
+  title: string;
+  type: string;
+  keynote?: boolean;
+  embo?: boolean;
+  speaker?: string;
+  location?: string;
+}
+
+interface Day {
+  day: number;
+  date: string;
+  title: string;
+  color: string;
+  sessions: Session[];
+}
+
+interface Props {
+  days: Day[];
+}
+
+const { days } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const toMin = (t: string) => {
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + m;
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+const fmt = (min: number) => `${pad(Math.floor(min / 60))}:${pad(min % 60)}`;
+
+// A session ends at its own `end`, else when the next one starts, else after an hour
+const columns = days.map(d => ({
+  ...d,
+  events: d.sessions.map((s, i) => {
+    const start = toMin(s.time);
+    const next = d.sessions[i + 1];
+    const end = s.end ? toMin(s.end) : next ? toMin(next.time) : start + 60;
+    return { ...s, i, start, end };
+  }),
+}));
+
+// Axis spans whole hours around the earliest start and latest end
+const all = columns.flatMap(c => c.events);
+const axisStart = Math.floor(Math.min(...all.map(e => e.start)) / 60) * 60;
+const axisEnd = Math.ceil(Math.max(...all.map(e => e.end)) / 60) * 60;
+const hours = Array.from({ length: (axisEnd - axisStart) / 60 + 1 }, (_, i) => axisStart + i * 60);
+
+const weekday = (date: string) =>
+  new Date(date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+
+// Talks with a named speaker are labelled by the speaker (colour marks keynotes);
+// everything else by its title
+type Labelled = Pick<Session, 'title' | 'type' | 'speaker'>;
+const label = (e: Labelled) => (e.speaker && e.type === 'talk' ? e.speaker : e.title);
+---
+
+<div class="cal-scroll">
+  <div
+    class="cal"
+    style={`--cal-span: ${axisEnd - axisStart}; --cal-days: ${columns.length};`}
+  >
+    <!-- Header row -->
+    <div class="cal-corner"></div>
+    {columns.map(c => (
+      <div class="cal-dayhead" style={`border-top-color: ${c.color};`}>
+        <span class="font-mono text-[0.6rem] tracking-[0.15em] uppercase font-600" style={`color: ${c.color};`}>
+          Day {c.day} · {weekday(c.date)}
+        </span>
+        <span class="font-display font-700 text-ink text-sm leading-tight">{c.title}</span>
+      </div>
+    ))}
+
+    <!-- Time axis -->
+    <div class="cal-axis" aria-hidden="true">
+      {hours.map(h => (
+        <span class="cal-hour font-mono" style={`top: calc(var(--ppm) * ${h - axisStart});`}>{fmt(h)}</span>
+      ))}
+    </div>
+
+    <!-- Day columns -->
+    {columns.map(c => (
+      <div class="cal-col" aria-label={`Day ${c.day}: ${c.title}`}>
+        {c.events.map(e => {
+          const dur = e.end - e.start;
+          const size = dur < 30 ? 'xs' : dur < 45 ? 'sm' : 'lg';
+          const tip = `${fmt(e.start)}–${fmt(e.end)} · ${e.title}${e.speaker ? ` – ${e.speaker}` : ''}${e.location ? ` · ${e.location}` : ''}`;
+          return (
+            <a
+              href={`#day-${c.day}-session-${e.i}`}
+              class:list={['cal-event', e.keynote ? 'badge-keynote' : `badge-${e.type}`, `cal-${size}`]}
+              style={`top: calc(var(--ppm) * ${e.start - axisStart}); height: calc(var(--ppm) * ${dur} - 2px);`}
+              title={tip}
+              data-cal-day={c.day}
+            >
+              {size === 'xs' ? (
+                <span class="cal-line"><span class="cal-time">{fmt(e.start)}</span> {label(e)}{e.embo && <img src={`${base}sponsors/embo-logo-badge.svg`} alt="EMBO" class="cal-embo" />}{e.location && <span class="cal-loc"> · {e.location}</span>}</span>
+              ) : (
+                <>
+                  <span class="cal-meta"><span class="cal-time">{fmt(e.start)}–{fmt(e.end)}</span>{e.location && <span class="cal-loc"> · {e.location}</span>}</span>
+                  <span class="cal-title">{label(e)}{e.embo && <img src={`${base}sponsors/embo-logo-badge.svg`} alt="EMBO" class="cal-embo" />}</span>
+                </>
+              )}
+            </a>
+          );
+        })}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .cal-scroll {
+    /* Three columns need ~30rem; narrower screens scroll sideways inside here */
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    background: var(--color-cream);
+  }
+
+  .cal {
+    /* Pixels per minute — the one knob for the calendar's overall height */
+    --ppm: 1px;
+    display: grid;
+    grid-template-columns: 3.25rem repeat(var(--cal-days), minmax(9rem, 1fr));
+    grid-template-rows: auto calc(var(--ppm) * var(--cal-span));
+    min-width: 32rem;
+  }
+  @media (max-width: 640px) {
+    /* Narrower columns so the third day peeks in from the right — a cue that
+       the calendar scrolls sideways */
+    .cal {
+      grid-template-columns: 3rem repeat(var(--cal-days), 7.5rem);
+      min-width: 0;
+    }
+  }
+
+  .cal-corner {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-warm);
+  }
+  .cal-dayhead {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.75rem 0.75rem 0.65rem;
+    border-top: 3px solid;
+    border-left: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-warm);
+  }
+
+  .cal-axis {
+    position: relative;
+  }
+  .cal-hour {
+    position: absolute;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    font-size: 0.6rem;
+    color: var(--color-muted);
+  }
+  .cal-hour:first-child {
+    transform: none;
+  }
+  .cal-hour:last-child {
+    transform: translateY(-100%);
+  }
+
+  .cal-col {
+    position: relative;
+    border-left: 1px solid var(--color-border);
+    /* Faint hour lines, aligned with the axis labels (axis starts on the hour) */
+    background-image: repeating-linear-gradient(
+      to bottom,
+      var(--color-border) 0 1px,
+      transparent 1px calc(var(--ppm) * 60)
+    );
+  }
+
+  .cal-event {
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    /* 1px inset top and bottom (height is 2px short) so back-to-back sessions
+       read as separate blocks */
+    margin-top: 1px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+    overflow: hidden;
+    padding: 0.15rem 0.4rem;
+    border-left: 3px solid currentColor;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    line-height: 1.15;
+    text-transform: none;
+    letter-spacing: normal;
+    transition: filter 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cal-event:hover,
+  .cal-event:focus-visible {
+    filter: brightness(1.35);
+    box-shadow: 0 0 0 1px currentColor;
+    z-index: 2;
+  }
+  .cal-event:focus-visible {
+    outline: none;
+  }
+
+  /* Short sessions: one line, time + label. Sessions under ~15 min get a
+     minimum height so the line fits, overlapping the next block slightly. */
+  .cal-xs {
+    padding-block: 0;
+    justify-content: center;
+    min-height: 14px;
+    z-index: 1; /* above the following block it may overlap */
+  }
+  .cal-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cal-meta,
+  .cal-title {
+    flex-shrink: 0;
+  }
+  /* "10:25–11:00 · Room" on one line; a long room name is what gets cut off */
+  .cal-meta {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.8;
+  }
+
+  .cal-time {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+  }
+  .cal-xs .cal-time {
+    opacity: 0.8;
+  }
+  .cal-title {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  /* 30–45 min: two tight lines (meta + title) */
+  .cal-sm {
+    padding-block: 0.1rem;
+    gap: 0;
+    line-height: 1.1;
+  }
+  .cal-sm .cal-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cal-xs .cal-loc {
+    opacity: 0.7;
+  }
+  .cal-loc {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* EMBO-sponsored keynote: the EMBO logo after the speaker, so names stay aligned */
+  .cal-embo {
+    display: inline-block;
+    height: 0.7em;
+    width: auto;
+    vertical-align: 0.02em;
+    margin-left: 0.7em;
+  }
+
+  /* Breaks and meals are context, not content: keep them quiet */
+  .badge-break .cal-title,
+  .badge-lunch .cal-title {
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+</style>

@@ -1,6 +1,7 @@
 ---
 interface Session {
   time: string;
+  end?: string;
   title: string;
   type: string;
   keynote?: boolean;
@@ -8,6 +9,7 @@ interface Session {
   speaker?: string;
   speakerSlug?: string;
   abstract?: string;
+  url?: string;
   location?: string;
 }
 
@@ -80,8 +82,9 @@ const keynoteSpeakers = sessions.filter(s => s.keynote && s.speaker).map(s => s.
 
   <!-- Sessions -->
   <div class="sessions-list">
-    {sessions.map((session) => (
+    {sessions.map((session, i) => (
       <div
+        id={`day-${day}-session-${i}`}
         class:list={[
           'session-row',
           isMainEvent(session.type) ? 'session-main' : 'session-utility',
@@ -118,10 +121,21 @@ const keynoteSpeakers = sessions.filter(s => s.keynote && s.speaker).map(s => s.
                 {session.title}
                 {session.speaker && ` – ${session.speaker}`}
               </a>
+            ) : session.url ? (
+              <a href={session.url} target="_blank" rel="noopener noreferrer" class="hover:underline">
+                {session.title}
+                <svg class="inline-block w-3.5 h-3.5 ml-1.5 align-baseline opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="(opens in a new tab)">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
             ) : (
               session.title
             )}
           </h3>
+
+          {session.abstract && (
+            <p class="font-body text-sm text-muted leading-relaxed max-w-2xl">{session.abstract}</p>
+          )}
 
           {session.location && (
             <p class="font-mono text-[0.6rem] tracking-[0.12em] text-muted/70 uppercase mt-2">
@@ -224,6 +238,15 @@ const keynoteSpeakers = sessions.filter(s => s.keynote && s.speaker).map(s => s.
   }
   .session-row:hover {
     background: var(--color-warm);
+  }
+
+  /* Briefly highlight the row a calendar block jumped to */
+  .session-row.is-target {
+    animation: target-flash 2s ease-out;
+  }
+  @keyframes target-flash {
+    0%, 30% { background: var(--color-green-800); box-shadow: inset 3px 0 0 var(--color-green-500); }
+    100% { background: transparent; box-shadow: inset 3px 0 0 transparent; }
   }
 
   .session-main {

@@ -1,6 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
+// RFC 5545 TEXT values: backslash, semicolon and comma must be escaped,
+// newlines written as \n
+function escapeText(text: string): string {
+  return text.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+}
+
 function formatDT(date: string, time: string): string {
   return `${date.replace(/-/g, '')}T${time.replace(':', '')}00`;
 }
@@ -27,13 +33,17 @@ export const GET: APIRoute = async () => {
       const next = sessions[i + 1];
 
       const dtStart = formatDT(day.data.date, session.time);
-      const dtEnd = next
-        ? formatDT(day.data.date, next.time)
-        : addHour(day.data.date, session.time);
+      const dtEnd = session.end
+        ? formatDT(day.data.date, session.end)
+        : next
+          ? formatDT(day.data.date, next.time)
+          : addHour(day.data.date, session.time);
 
-      let description = '';
-      if (session.speaker) description += `Speaker: ${session.speaker}\\n`;
-      if (session.abstract) description += session.abstract.replace(/\n/g, '\\n');
+      const description = [
+        session.speaker && `Speaker: ${session.speaker}`,
+        session.abstract,
+        session.url,
+      ].filter(Boolean).join('\n');
 
       const lines = [
         'BEGIN:VEVENT',
@@ -41,10 +51,11 @@ export const GET: APIRoute = async () => {
         `DTEND;TZID=Europe/Berlin:${dtEnd}`,
         `DTSTAMP:${dtstamp}`,
         `UID:${day.data.date}-session-${i}@phd-symposium-2026`,
-        `SUMMARY:${session.title}`,
-        `LOCATION:${session.location ?? 'EMBL Heidelberg'}`,
+        `SUMMARY:${escapeText(session.title)}`,
+        `LOCATION:${escapeText(session.location ?? 'EMBL Heidelberg')}`,
       ];
-      if (description) lines.push(`DESCRIPTION:${description}`);
+      if (description) lines.push(`DESCRIPTION:${escapeText(description)}`);
+      if (session.url) lines.push(`URL:${session.url}`);
       lines.push('END:VEVENT');
       events.push(lines.join('\r\n'));
     }
