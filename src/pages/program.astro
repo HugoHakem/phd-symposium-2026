@@ -126,7 +126,7 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
 
   <!-- Schedule content -->
   <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-    <div class="space-y-12">
+    <div class="space-y-4">
       {sortedSchedule.map((day: ScheduleEntry, i: number) => (
         <div id={`day-${day.data.day}`}>
           <ScheduleDay
@@ -183,5 +183,30 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  // Days are folded <details>; open the one a link points at (the quick
+  // links above, or the home page's day cards → /program#day-N).
+  function openDay(hash: string, only = false) {
+    const day = hash ? document.getElementById(hash.slice(1))?.querySelector('details') : null;
+    if (!day) return;
+    if (only) document.querySelectorAll<HTMLDetailsElement>('details[data-date]').forEach(d => (d.open = false));
+    day.open = true;
+  }
+  // Arriving from a day link: show just that day
+  openDay(location.hash, true);
+  window.addEventListener('hashchange', () => openDay(location.hash));
+  // Re-clicking the link for the current hash fires no hashchange
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#day-"]').forEach(a =>
+    a.addEventListener('click', () => openDay(a.hash))
+  );
+
+  // During the symposium, show today's programme instead of Day 1
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Berlin' }); // YYYY-MM-DD
+  const todays = document.querySelector<HTMLDetailsElement>(`details[data-date="${today}"]`);
+  if (todays && !location.hash) {
+    document.querySelectorAll<HTMLDetailsElement>('details[data-date]').forEach(d => (d.open = d === todays));
+  }
+</script>
 
 
