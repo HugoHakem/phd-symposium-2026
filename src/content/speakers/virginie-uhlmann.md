@@ -6,6 +6,7 @@ country: "Switzerland"
 topic: "Quantitative bioimage analysis, machine learning, approximation theory, computational geometry"
 day: 2
 sessionType: "talk"
+keynote: true
 image: "speakers/virginie-uhlmann.png"
 ---
 

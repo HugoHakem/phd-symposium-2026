@@ -6,6 +6,7 @@ country: "UK"
 topic: "AI-driven automation in synthetic and engineering biology, accelerating therapy development for rare diseases"
 day: 3
 sessionType: "talk"
+keynote: true
 image: "speakers/giovanni-stracquadanio.png"
 website: "https://www.stracquadaniolab.org"
 ---
