@@ -225,23 +225,34 @@ const faqs = [
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {[
           {
-            icon: '✈️',
+            // Outline icons (Lucide: plane, train-front, bus), matching the site's line-icon style
+            icon: '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
             title: 'By Air',
             content: 'Frankfurt Airport (FRA, 82km) is the closest and most convenient airport. Stuttgart (STR, 120 km) is a secondary option. Direct airport shuttles and transfer taxis serve Heidelberg.',
           },
           {
-            icon: '🚆',
+            icon: '<path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/><path d="m9 15-1-1"/><path d="m15 15 1-1"/><path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z"/><path d="m8 19-2 3"/><path d="m16 19 2 3"/>',
             title: 'By Train',
             content: 'Heidelberg Hauptbahnhof has extensive European connections. EMBL collaborates with Deutsche Bahn for discounted tickets. Contact <a href="mailto:events@embl.de" class="text-green-700 underline-animate hover:text-green-500 transition-colors">events@embl.de</a> for details.',
           },
           {
-            icon: '🚌',
+            icon: '<path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/>',
             title: 'City Centre to EMBL',
             content: 'Bus 28 (direction Mombertplatz) stops directly at EMBL. Bus 39 (direction Königstuhl) stops at MPI Kernphysik which is 5-minute walk away. Taxi from the station costs ~20€. Note: Sunday and holiday services are limited.',
           },
         ].map(({ icon, title, content }) => (
           <div class="travel-card">
-            <div class="text-3xl mb-4">{icon}</div>
+            <svg
+              class="w-8 h-8 mb-4 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              set:html={icon}
+            />
             <h3 class="font-display font-700 text-ink text-xl mb-3">{title}</h3>
             <p class="font-body text-muted leading-relaxed" set:html={content} />
           </div>
