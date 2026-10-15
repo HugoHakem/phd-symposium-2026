@@ -88,45 +88,9 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
     </div>
   </div>
 
-  <!-- Add to Calendar -->
-  <div class="bg-warm border-b border-green-800">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-3 flex flex-wrap items-center gap-3">
-      <span class="label-tag text-muted">Add to calendar:</span>
-      <a
-        href={webcalUrl}
-        class="flex items-center gap-1.5 font-mono text-[0.65rem] px-3 py-1.5 border border-green-600 text-green-400 hover:bg-green-800 hover:text-green-100 hover:border-green-500 transition-colors"
-      >
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        Apple / Outlook
-      </a>
-      <a
-        href={googleUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-1.5 font-mono text-[0.65rem] px-3 py-1.5 border border-green-600 text-green-400 hover:bg-green-800 hover:text-green-100 hover:border-green-500 transition-colors"
-      >
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        Google Calendar
-      </a>
-      <a
-        href={calendarUrl}
-        download="phd-symposium-2026.ics"
-        class="flex items-center gap-1.5 font-mono text-[0.65rem] px-3 py-1.5 border border-green-600 text-green-400 hover:bg-green-800 hover:text-green-100 hover:border-green-500 transition-colors"
-      >
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-        Download .ics
-      </a>
-    </div>
-  </div>
-
   <!-- Schedule content -->
   <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+    <div class="schedule-toolbar">
     <!-- View switch: calendar overview (default) or the detailed list -->
     <div class="view-switch" role="tablist" aria-label="Programme view">
       <button type="button" role="tab" id="tab-calendar" aria-controls="view-calendar" aria-selected="true" data-view="calendar">
@@ -141,6 +105,40 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
         </svg>
         List
       </button>
+    </div>
+
+    <!-- Add to calendar: one button, options unfold on click -->
+    <details class="add-cal">
+      <summary>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Add to calendar
+        <svg class="add-cal-chevron w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </summary>
+      <div class="add-cal-menu">
+        <a href={webcalUrl}>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Apple / Outlook
+        </a>
+        <a href={googleUrl} target="_blank" rel="noopener noreferrer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Google Calendar
+        </a>
+        <a href={calendarUrl} download="phd-symposium-2026.ics">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download .ics
+        </a>
+      </div>
+    </details>
     </div>
 
     <div id="view-calendar" role="tabpanel" aria-labelledby="tab-calendar">
@@ -222,6 +220,21 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
     b.addEventListener('click', () => setView(b.dataset.view as View))
   );
 
+  // ── Add-to-calendar dropdown: close on outside click, Escape, or choosing ──
+  const addCal = document.querySelector<HTMLDetailsElement>('details.add-cal');
+  if (addCal) {
+    document.addEventListener('click', e => {
+      if (addCal.open && !addCal.contains(e.target as Node)) addCal.open = false;
+    });
+    addCal.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && addCal.open) {
+        addCal.open = false;
+        addCal.querySelector('summary')?.focus();
+      }
+    });
+    addCal.querySelectorAll('a').forEach(a => a.addEventListener('click', () => (addCal.open = false)));
+  }
+
   // ── Folding days ──────────────────────────────────────────────────────
   // Days are folded <details>; open the one a link points at (the quick
   // links above, or the home page's day cards → /program#day-N).
@@ -268,9 +281,17 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
 </script>
 
 <style>
+  .schedule-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
   .view-switch {
     display: inline-flex;
-    margin-bottom: 1.25rem;
     border: 1px solid var(--color-border);
   }
   .view-switch button {
@@ -299,6 +320,77 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
   .view-switch button:focus-visible {
     outline: 2px solid var(--color-green-500);
     outline-offset: 2px;
+  }
+
+  .add-cal {
+    position: relative;
+  }
+  .add-cal summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    list-style: none;
+    cursor: pointer;
+    border: 1px solid var(--color-green-600);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-green-400);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .add-cal summary::-webkit-details-marker {
+    display: none;
+  }
+  .add-cal summary:hover,
+  .add-cal[open] summary {
+    background: var(--color-green-800);
+    color: var(--color-green-100);
+  }
+  .add-cal summary:focus-visible {
+    outline: 2px solid var(--color-green-500);
+    outline-offset: 2px;
+  }
+  .add-cal-chevron {
+    transition: transform 0.2s ease;
+  }
+  .add-cal[open] .add-cal-chevron {
+    transform: rotate(180deg);
+  }
+
+  .add-cal-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.35rem);
+    z-index: 20;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.35rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-warm);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.45);
+  }
+  .add-cal-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink);
+    transition: background 0.15s ease;
+  }
+  .add-cal-menu a:hover,
+  .add-cal-menu a:focus-visible {
+    background: var(--color-green-800);
+    outline: none;
+  }
+  .add-cal-menu svg {
+    color: var(--color-green-400);
+    flex-shrink: 0;
   }
 </style>
 
