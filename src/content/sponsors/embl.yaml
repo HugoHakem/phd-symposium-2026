@@ -1,5 +1,5 @@
 name: "European Molecular Biology Laboratory (EMBL)"
-tier: "sponsor"
+tier: "support"
+order: 3
 website: "https://www.embl.org"
-description: "EMBL is Europe's laboratory for the life sciences. It generously funds and hosts this symposium."
 logo: "sponsors/embl-logo-colour.svg"

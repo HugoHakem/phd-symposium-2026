@@ -92,13 +92,13 @@ schedule/
 
 ### `src/content/sponsors/`
 One `.yaml` file per sponsoring organisation (20 as of writing). Files are
-grouped visually on the site by their `tier` field (`sponsor`, `grant`, `cpp`),
+grouped visually on the site by their `tier` field (`sponsor`, `prize`, `support`, `grant`, `cpp`),
 and `cpp`-tier sponsors are further grouped by `subTier`
 (`founder_partner`, `corporate_partner`, `associate_partner`).
 
 ```
 sponsors/
-├── embl.yaml               # tier: sponsor
+├── embl.yaml               # tier: support
 ├── 10x-genomics.yaml       # tier: cpp, subTier: corporate_partner
 ├── boehringer-ingelheim.yaml
 ├── illumina.yaml

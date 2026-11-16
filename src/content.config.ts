@@ -53,10 +53,12 @@ const sponsors = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/sponsors' }),
   schema: z.object({
     name: z.string(),
-    tier: z.enum(['sponsor', 'supporter', 'grant', 'cpp']),
+    tier: z.enum(['sponsor', 'prize', 'support', 'grant', 'cpp']),
     subTier: z.enum(['founder_partner', 'corporate_partner', 'associate_partner']).optional(),
+    // Position within its tier (ascending); entries without one follow, by name.
+    order: z.number().optional(),
     website: z.string().optional(),
-    description: z.string(),
+    description: z.string().optional(),
     logo: z.string().optional(),
     // 'invert' flips a dark-on-transparent logo to light-on-transparent via
     // CSS filter (see SponsorsSection.astro) — for logos that are illegible

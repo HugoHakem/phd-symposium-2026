@@ -1,5 +1,5 @@
 name: "European Molecular Biology Organization (EMBO)"
-tier: "sponsor"
+tier: "support"
+order: 1
 website: "https://www.embo.org"
-description: "EMBO promotes excellence in life sciences research across Europe and beyond. It generously funds the EMBO Keynote Lecture at this symposium."
 logo: "sponsors/embo-logo.svg"

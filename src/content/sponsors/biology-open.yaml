@@ -1,5 +1,5 @@
 name: "Biology Open"
-tier: "supporter"
+tier: "prize"
+order: 1
 website: "https://journals.biologists.com/bio"
 logo: "sponsors/supporters/biology-open.svg"
-description: "Poster Prize"

@@ -173,19 +173,26 @@ it will render as plain text instead of a link, same as an unannounced speaker.
 
 ```yaml
 name: "Organisation Name"
-tier: "cpp"
+tier: "sponsor"
+order: 1                        # optional: position within its tier (ascending); unordered entries follow, by name
 subTier: "corporate_partner"    # required when tier is "cpp"; omit otherwise
 website: "https://www.example.com"
-description: "One or two sentences describing the organisation shown on the sponsors section."
+description: "Company Talk & Booth"   # optional short caption under the logo
 logo: "sponsors/org-logo.svg"    # optional, no leading slash
 ```
 
 ### Sponsor tiers
 
+Tiers appear on the site in this order: Sponsors, Prizes, Support, then the
+EMBL Corporate Partnership Programme. Within a tier, entries follow `order`.
+Sponsors, Prizes and Support are shown as logo cards; if a `description` is
+set, it appears as a short caption under the logo (none currently use one).
+
 | `tier` | Meaning |
 |--------|---------|
-| `sponsor` | Direct financial sponsor of the symposium |
-| `supporter` | Sponsors a specific item (company talk, poster prize…) — `description` is shown as a short caption under the logo |
+| `sponsor` | Company sponsor (Adelphi, CDD Vault, bpp…) |
+| `prize` | Funds a prize (the poster-prize journals) |
+| `support` | Institutional support (EMBO, EMBL Alumni Relations, EMBL) |
 | `grant` | Grant-funding body |
 | `cpp` | EMBL Corporate Partnership Programme member — requires `subTier` |
 

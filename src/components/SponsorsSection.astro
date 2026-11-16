@@ -5,16 +5,17 @@ import InlineLogo from './InlineLogo.astro';
 // these are inlined and selectively recoloured via CSS (see the
 // .recolour-* rules below) instead of using the plain <img> path, so only
 // the dark parts turn white and any other brand colour is kept.
-const SELECTIVE_RECOLOUR_IDS = new Set(['evident', 'sanofi', '10x-genomics', 'netapp', 'leica', 'thermofisher', 'illumina']);
+const SELECTIVE_RECOLOUR_IDS = new Set(['evident', 'sanofi', '10x-genomics', 'netapp', 'leica', 'thermofisher', 'illumina', 'adelphi-genetics-forum']);
 
 interface Sponsor {
   id: string;
   data: {
     name: string;
-    tier: 'sponsor' | 'supporter' | 'grant' | 'cpp';
+    tier: 'sponsor' | 'prize' | 'support' | 'grant' | 'cpp';
     subTier?: 'founder_partner' | 'corporate_partner' | 'associate_partner';
+    order?: number;
     website?: string;
-    description: string;
+    description?: string;
     logo?: string;
     logoTreatment?: 'normal' | 'invert';
   };
@@ -27,13 +28,18 @@ interface Props {
 const { sponsors } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
-const mainSponsors = sponsors.filter(s => s.data.tier === 'sponsor');
-// Grouped by what they support (the caption), so e.g. all poster-prize
-// journals sit side by side rather than in file-name order.
-const supporters   = sponsors
-  .filter(s => s.data.tier === 'supporter')
-  .sort((a, b) => a.data.description.localeCompare(b.data.description) || a.data.name.localeCompare(b.data.name));
-const grants       = sponsors.filter(s => s.data.tier === 'grant');
+// Explicit `order` first (ascending), then by name for entries without one.
+const byOrder = (a: Sponsor, b: Sponsor) =>
+  (a.data.order ?? Infinity) - (b.data.order ?? Infinity) || a.data.name.localeCompare(b.data.name);
+const inTier = (tier: Sponsor['data']['tier']) => sponsors.filter(s => s.data.tier === tier).sort(byOrder);
+
+// Logo-card tiers, in display order: logo with an optional short caption.
+const logoTiers = [
+  { label: 'Sponsors', items: inTier('sponsor') },
+  { label: 'Prizes',   items: inTier('prize')   },
+  { label: 'Support',  items: inTier('support') },
+].filter(t => t.items.length > 0);
+const grants       = inTier('grant');
 const cppSponsors  = sponsors.filter(s => s.data.tier === 'cpp');
 
 const cppSubTiers = [
@@ -63,49 +69,15 @@ const cppGrouped = Object.fromEntries(
       </p>
     </div>
 
-    <!-- Sponsors -->
-    {mainSponsors.length > 0 && (
+    <!-- Sponsors, Prizes, Support -->
+    {logoTiers.map(({ label, items }) => (
       <div class="sponsor-tier-group">
         <div class="tier-header">
-          <h3 class="font-mono text-xs tracking-[0.2em] uppercase font-700 text-green-400">Sponsors</h3>
-          <div class="tier-line"></div>
-        </div>
-        <div class="sponsors-grid grid-sponsor">
-          {mainSponsors.map((sponsor) => (
-            <a
-              href={sponsor.data.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="sponsor-card sponsor-main"
-              title={sponsor.data.name}
-            >
-              {sponsor.data.logo && (
-                <div class="sponsor-main-logo-slot">
-                  <img
-                    src={`${base}${sponsor.data.logo}`}
-                    alt={sponsor.data.name}
-                    class:list={['sponsor-main-logo', sponsor.id === 'embo' && 'sponsor-main-logo--embo']}
-                    loading="lazy"
-                  />
-                </div>
-              )}
-              <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
-              <p class="sponsor-desc font-body text-sm text-muted">{sponsor.data.description}</p>
-            </a>
-          ))}
-        </div>
-      </div>
-    )}
-
-    <!-- Supporters -->
-    {supporters.length > 0 && (
-      <div class="sponsor-tier-group">
-        <div class="tier-header">
-          <h3 class="font-mono text-xs tracking-[0.2em] uppercase font-700 text-green-400">Supporters</h3>
+          <h3 class="font-mono text-xs tracking-[0.2em] uppercase font-700 text-green-400">{label}</h3>
           <div class="tier-line"></div>
         </div>
         <div class="sponsors-grid grid-cpp">
-          {supporters.map((sponsor) => (
+          {items.map((sponsor) => (
             <a
               href={sponsor.data.website}
               target="_blank"
@@ -113,22 +85,25 @@ const cppGrouped = Object.fromEntries(
               class="sponsor-card sponsor-cpp sponsor-supporter"
               title={sponsor.data.name}
             >
-              {sponsor.data.logo ? (
+              {sponsor.data.logo && SELECTIVE_RECOLOUR_IDS.has(sponsor.id) ? (
+                <InlineLogo file={sponsor.data.logo} class={`recolour-${sponsor.id}`} />
+              ) : sponsor.data.logo ? (
                 <img
                   src={`${base}${sponsor.data.logo}`}
                   alt={sponsor.data.name}
                   class:list={['sponsor-logo', sponsor.data.logoTreatment === 'invert' && 'sponsor-logo--invert']}
+                 
                   loading="lazy"
                 />
               ) : (
                 <div class="sponsor-name font-display font-700">{sponsor.data.name}</div>
               )}
-              <p class="supporter-caption font-mono">{sponsor.data.description}</p>
+              {sponsor.data.description && <p class="supporter-caption font-mono">{sponsor.data.description}</p>}
             </a>
           ))}
         </div>
       </div>
-    )}
+    ))}
 
     <!-- Grants -->
     {grants.length > 0 && (
@@ -180,6 +155,7 @@ const cppGrouped = Object.fromEntries(
                       src={`${base}${sponsor.data.logo}`}
                       alt={sponsor.data.name}
                       class:list={['sponsor-logo', sponsor.data.logoTreatment === 'invert' && 'sponsor-logo--invert']}
+                 
                       loading="lazy"
                     />
                   ) : (
@@ -238,7 +214,6 @@ const cppGrouped = Object.fromEntries(
     background: var(--color-border);
     border: 1px solid var(--color-border);
   }
-  .grid-sponsor { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
   .grid-grant   { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
   .grid-cpp {
     /* Flexbox, not grid: a partial last row (e.g. one leftover logo) then
@@ -299,41 +274,9 @@ const cppGrouped = Object.fromEntries(
     color: var(--color-muted);
   }
 
-  .sponsor-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .sponsor-main .sponsor-desc {
-    max-width: 28rem;
-  }
 
-  .sponsor-main-logo-slot {
-    height: 7rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
 
-  .sponsor-main-logo {
-    height: 3.25rem;
-    width: auto;
-    max-width: 70%;
-    object-fit: contain;
-    display: block;
-  }
-  .sponsor-main-logo--embo {
-    /* EMBO's mark is more compact/square than EMBL's wide wordmark lockup,
-       so it needs extra height to read as visually comparable in size.
-       The fixed-height slot above keeps the name/description that follow
-       aligned across cards regardless of this override. */
-    height: 6.5rem;
-  }
 
-  .sponsor-main  .sponsor-name { font-size: 1.15rem; color: var(--color-ink); }
   .sponsor-grant .sponsor-name { font-size: 1rem;    color: var(--color-ink); }
   .sponsor-cpp   .sponsor-name { font-size: 0.9rem;  color: var(--color-muted); }
 
@@ -362,7 +305,7 @@ const cppGrouped = Object.fromEntries(
   }
 
   @media (max-width: 640px) {
-    .grid-sponsor, .grid-grant, .grid-cpp {
+    .grid-grant, .grid-cpp {
       grid-template-columns: 1fr;
     }
   }
@@ -409,6 +352,13 @@ const cppGrouped = Object.fromEntries(
 
   /* Leica — keep the red "Leica" script; only "MICROSYSTEMS" turns white */
   .recolour-leica [fill="#ec1c28"] { fill: #ec1c28; }
+
+  /* Adelphi Genetics Forum — not in the blanket white rule above. Its navy
+     wordmark (#204093, ~2:1 on our cards) is lifted to a tint taken from the
+     knot's own navy-to-white gradient, so it stays in the logo's colour
+     family and sits at the same brightness as the other blue logos (CDD
+     Vault, Merck). The gradient-filled knot keeps its brand colours. */
+  .recolour-adelphi-genetics-forum [fill="#204093"] { fill: #555da8; }
 
   /* Illumina — its grey wordmark is set via an inline style="fill:…"
      attribute, which (unlike a bare fill="…" presentation attribute) beats
