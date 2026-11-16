@@ -196,6 +196,16 @@ set, it appears as a short caption under the logo (none currently use one).
 | `grant` | Grant-funding body |
 | `cpp` | EMBL Corporate Partnership Programme member — requires `subTier` |
 
+### Logo files
+
+- Use an **SVG** (no embedded PNG/JPEG images) in `static/sponsors/`.
+- Crop its `viewBox` **tight to the visible artwork** — no blank margin. The
+  card provides the spacing, and the site sizes logos from the viewBox's
+  aspect ratio, so a padded file shows up too small.
+- `width`/`height` attributes aren't needed. Logos are sized automatically to a
+  similar visual area (`src/lib/logoSize.ts`; the limits are `TIER_LOGO` and
+  `CPP_LOGO` in `SponsorsSection.astro`).
+
 ### `subTier` (only when `tier: "cpp"`)
 
 | `subTier` | Meaning |

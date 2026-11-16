@@ -1,5 +1,6 @@
 ---
 import InlineLogo from './InlineLogo.astro';
+import { logoBoxStyle, type LogoBoxOptions } from '../lib/logoSize';
 
 // Sponsor ids whose logo is a dark colourway not designed for a dark card —
 // these are inlined and selectively recoloured via CSS (see the
@@ -27,6 +28,11 @@ interface Props {
 
 const { sponsors } = Astro.props;
 const base = import.meta.env.BASE_URL;
+
+// Equal-area logo boxes (see src/lib/logoSize.ts), in rem. Limits keep a box
+// inside its card: tier cards are ~280px wide, CPP cards ~220px.
+const TIER_LOGO: LogoBoxOptions = { area: 32, maxWidth: 13,   maxHeight: 4.5 };
+const CPP_LOGO:  LogoBoxOptions = { area: 20, maxWidth: 9.5,  maxHeight: 3.75 };
 
 // Explicit `order` first (ascending), then by name for entries without one.
 const byOrder = (a: Sponsor, b: Sponsor) =>
@@ -86,13 +92,13 @@ const cppGrouped = Object.fromEntries(
               title={sponsor.data.name}
             >
               {sponsor.data.logo && SELECTIVE_RECOLOUR_IDS.has(sponsor.id) ? (
-                <InlineLogo file={sponsor.data.logo} class={`recolour-${sponsor.id}`} />
+                <InlineLogo file={sponsor.data.logo} class={`recolour-${sponsor.id}`} style={logoBoxStyle(sponsor.data.logo, TIER_LOGO)} />
               ) : sponsor.data.logo ? (
                 <img
                   src={`${base}${sponsor.data.logo}`}
                   alt={sponsor.data.name}
                   class:list={['sponsor-logo', sponsor.data.logoTreatment === 'invert' && 'sponsor-logo--invert']}
-                 
+                  style={logoBoxStyle(sponsor.data.logo, TIER_LOGO)}
                   loading="lazy"
                 />
               ) : (
@@ -149,13 +155,13 @@ const cppGrouped = Object.fromEntries(
                   title={sponsor.data.name}
                 >
                   {sponsor.data.logo && SELECTIVE_RECOLOUR_IDS.has(sponsor.id) ? (
-                    <InlineLogo file={sponsor.data.logo} class={`recolour-${sponsor.id}`} />
+                    <InlineLogo file={sponsor.data.logo} class={`recolour-${sponsor.id}`} style={logoBoxStyle(sponsor.data.logo, CPP_LOGO)} />
                   ) : sponsor.data.logo ? (
                     <img
                       src={`${base}${sponsor.data.logo}`}
                       alt={sponsor.data.name}
                       class:list={['sponsor-logo', sponsor.data.logoTreatment === 'invert' && 'sponsor-logo--invert']}
-                 
+                  style={logoBoxStyle(sponsor.data.logo, CPP_LOGO)}
                       loading="lazy"
                     />
                   ) : (
@@ -264,9 +270,6 @@ const cppGrouped = Object.fromEntries(
     flex-direction: column;
     gap: 0.75rem;
   }
-  .sponsor-supporter .sponsor-logo {
-    max-width: 90%;
-  }
   .supporter-caption {
     font-size: 0.6rem;
     letter-spacing: 0.15em;
@@ -281,9 +284,9 @@ const cppGrouped = Object.fromEntries(
   .sponsor-cpp   .sponsor-name { font-size: 0.9rem;  color: var(--color-muted); }
 
   .sponsor-logo {
-    max-height: 3.5rem;
-    width: auto;
-    max-width: 80%;
+    /* width/height come from logoBoxStyle(); max-width guards narrow screens
+       and object-fit keeps the aspect if the box gets squeezed. */
+    max-width: 100%;
     object-fit: contain;
     display: block;
   }

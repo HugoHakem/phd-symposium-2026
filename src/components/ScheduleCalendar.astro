@@ -103,11 +103,11 @@ const label = (e: Labelled) => (e.speaker && e.type === 'talk' ? e.speaker : e.t
               data-cal-day={c.day}
             >
               {size === 'xs' ? (
-                <span class="cal-line"><span class="cal-time">{fmt(e.start)}</span> {label(e)}{e.embo && <img src={`${base}sponsors/embo-logo-badge.svg`} alt="EMBO" class="cal-embo" />}{e.location && <span class="cal-loc"> · {e.location}</span>}</span>
+                <span class="cal-line"><span class="cal-time">{fmt(e.start)}</span> {label(e)}{e.embo && <img src={`${base}sponsors/embo-logo.svg`} alt="EMBO" class="cal-embo" />}{e.location && <span class="cal-loc"> · {e.location}</span>}</span>
               ) : (
                 <>
                   <span class="cal-meta"><span class="cal-time">{fmt(e.start)}–{fmt(e.end)}</span>{e.location && <span class="cal-loc"> · {e.location}</span>}</span>
-                  <span class="cal-title">{label(e)}{e.embo && <img src={`${base}sponsors/embo-logo-badge.svg`} alt="EMBO" class="cal-embo" />}</span>
+                  <span class="cal-title">{label(e)}{e.embo && <img src={`${base}sponsors/embo-logo.svg`} alt="EMBO" class="cal-embo" />}</span>
                 </>
               )}
             </a>

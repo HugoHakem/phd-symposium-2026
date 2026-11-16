@@ -10,28 +10,28 @@ interface Props {
   /** Path relative to static/, e.g. "sponsors/embl-corporate-partners/evident.svg" */
   file: string;
   class?: string;
+  /** Box size, e.g. from logoBoxStyle() — the SVG fills it, keeping its aspect. */
+  style?: string;
 }
 
-const { file, class: className } = Astro.props;
+const { file, class: className, style } = Astro.props;
 const filePath = path.join(process.cwd(), 'static', file);
 const svg = fs.readFileSync(filePath, 'utf-8');
 ---
-<div class:list={['inline-logo', className]} set:html={svg} />
+<div class:list={['inline-logo', className]} style={style} set:html={svg} />
 
 <style is:global>
   .inline-logo {
-    /* A definite height (rather than relying purely on max-* constraints)
-       is needed here — some of these source SVGs have no width/height
-       attribute of their own to fall back on, and pure max-width/max-height
-       sizing collapses to 0 in that case. */
+    /* A definite box is needed — the source SVGs carry no width/height of
+       their own (only a viewBox), so pure max-* sizing would collapse to 0.
+       The caller normally sets width/height via `style`; this is a fallback. */
     display: block;
     height: 3.5rem;
     max-width: 100%;
   }
   .inline-logo svg {
     height: 100%;
-    width: auto;
-    max-width: 100%;
+    width: 100%;
     display: block;
   }
 </style>
