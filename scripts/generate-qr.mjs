@@ -33,7 +33,7 @@ const svgQR = raw.replace('</svg>', `
 </svg>`);
 
 // Monochrome white logo (magenta + cyan → white)
-const logoSvgMono = readFileSync(join(root, 'static', 'logo.svg'), 'utf8')
+const logoSvgMono = readFileSync(join(root, 'static', 'brand', 'logo.svg'), 'utf8')
   .replace(/rgb\(218,73,218\)/g, 'white')
   .replace(/rgb\(77,234,234\)/g, 'white');
 

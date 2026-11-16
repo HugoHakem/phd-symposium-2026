@@ -28,7 +28,7 @@ const bioMap = Object.fromEntries(rendered.map(r => [r.id, r.Content]));
   <!-- Page Hero -->
   <div class="relative bg-green-900 pt-32 pb-20 overflow-hidden">
     <img
-      src={`${base}gear2.svg`}
+      src={`${base}brand/gear2.svg`}
       alt=""
       aria-hidden="true"
       class="absolute -bottom-16 -right-20 w-100 gear-spin-reverse pointer-events-none select-none"
@@ -97,7 +97,7 @@ const bioMap = Object.fromEntries(rendered.map(r => [r.id, r.Content]));
                   {speaker.data.keynote && (
                     <span class="session-badge badge-keynote">
                       {speaker.data.embo ? (
-                        <><img src={`${base}sponsors/embo-logo.svg`} alt="EMBO" class="embo-badge-logo" /> Keynote Lecture</>
+                        <><img src={`${base}sponsors/support/embo.svg`} alt="EMBO" class="embo-badge-logo" /> Keynote Lecture</>
                       ) : 'Keynote Lecture'}
                     </span>
                   )}

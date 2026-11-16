@@ -35,13 +35,16 @@ Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
 - `base: '/phd-symposium-2026/'` in `astro.config.mjs` — note the **trailing slash**
 - `import.meta.env.BASE_URL` resolves to `/phd-symposium-2026/` at build time
 - All internal links and public asset `src` attributes use `${import.meta.env.BASE_URL}path`
-  (e.g. `href={'${import.meta.env.BASE_URL}program'}`, `src={'${import.meta.env.BASE_URL}gear1.svg'}`)
-- **Never** use bare absolute paths like `/program` or `/gear1.svg` — they break on GitHub Pages
+  (e.g. `href={'${import.meta.env.BASE_URL}program'}`, `src={'${import.meta.env.BASE_URL}brand/gear1.svg'}`)
+- **Never** use bare absolute paths like `/program` or `/brand/gear1.svg` — they break on GitHub Pages
 
 ### Public assets
 - `publicDir` is set to `static/` in `astro.config.mjs` (not the Astro default `public/`)
-- Gear SVGs live in `static/` for URL access and `src/assets/` as originals — **edit `static/` when changing served files**
-- Reference them as `${import.meta.env.BASE_URL}gear1.svg` etc.
+- Layout: `static/brand/` (symposium logo, gear SVGs, white EMBL logo for nav/footer),
+  `static/sponsors/<tier folder>/<sponsor-id>.svg`, `static/speakers/`, `static/qrcode/`;
+  `favicon.svg` and `og-image.png` stay at the root
+- Gear SVGs are served from `static/brand/`; `src/assets/` keeps originals — **edit `static/` when changing served files**
+- Reference them as `${import.meta.env.BASE_URL}brand/gear1.svg` etc.
 
 ### Tailwind colours
 Custom tokens are defined in `src/styles/global.css` under `@theme` and generate

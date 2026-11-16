@@ -97,8 +97,8 @@ CSS keyframe animation for rotating gear SVGs. Slow is 60 s/revolution clockwise
 reverse is 45 s/revolution counter-clockwise.
 
 ```html
-<img src="/gear1.svg" class="gear-spin-slow" />
-<img src="/gear2.svg" class="gear-spin-reverse" />
+<img src={`${import.meta.env.BASE_URL}brand/gear1.svg`} class="gear-spin-slow" />
+<img src={`${import.meta.env.BASE_URL}brand/gear2.svg`} class="gear-spin-reverse" />
 ```
 
 ### `.fade-up`
