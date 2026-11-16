@@ -1,12 +1,6 @@
 ---
-import InlineLogo from './InlineLogo.astro';
 import { logoBoxStyle, type LogoBoxOptions } from '../lib/logoSize';
 
-// Sponsor ids whose logo is a dark colourway not designed for a dark card —
-// these are inlined and selectively recoloured via CSS (see the
-// .recolour-* rules below) instead of using the plain <img> path, so only
-// the dark parts turn white and any other brand colour is kept.
-const SELECTIVE_RECOLOUR_IDS = new Set(['evident', 'sanofi', '10x-genomics', 'netapp', 'leica', 'thermofisher', 'illumina', 'adelphi-genetics-forum']);
 
 interface Sponsor {
   id: string;
@@ -18,7 +12,7 @@ interface Sponsor {
     website?: string;
     description?: string;
     logo?: string;
-    logoTreatment?: 'normal' | 'invert';
+    logoOriginal?: string;
   };
 }
 
@@ -91,13 +85,11 @@ const cppGrouped = Object.fromEntries(
               class="sponsor-card sponsor-cpp sponsor-supporter"
               title={sponsor.data.name}
             >
-              {sponsor.data.logo && SELECTIVE_RECOLOUR_IDS.has(sponsor.id) ? (
-                <InlineLogo file={sponsor.data.logo} class={`recolour-${sponsor.id}`} style={logoBoxStyle(sponsor.data.logo, TIER_LOGO)} />
-              ) : sponsor.data.logo ? (
+              {sponsor.data.logo ? (
                 <img
                   src={`${base}${sponsor.data.logo}`}
                   alt={sponsor.data.name}
-                  class:list={['sponsor-logo', sponsor.data.logoTreatment === 'invert' && 'sponsor-logo--invert']}
+                  class="sponsor-logo"
                   style={logoBoxStyle(sponsor.data.logo, TIER_LOGO)}
                   loading="lazy"
                 />
@@ -154,14 +146,12 @@ const cppGrouped = Object.fromEntries(
                   class="sponsor-card sponsor-cpp"
                   title={sponsor.data.name}
                 >
-                  {sponsor.data.logo && SELECTIVE_RECOLOUR_IDS.has(sponsor.id) ? (
-                    <InlineLogo file={sponsor.data.logo} class={`recolour-${sponsor.id}`} style={logoBoxStyle(sponsor.data.logo, CPP_LOGO)} />
-                  ) : sponsor.data.logo ? (
+                  {sponsor.data.logo ? (
                     <img
                       src={`${base}${sponsor.data.logo}`}
                       alt={sponsor.data.name}
-                      class:list={['sponsor-logo', sponsor.data.logoTreatment === 'invert' && 'sponsor-logo--invert']}
-                  style={logoBoxStyle(sponsor.data.logo, CPP_LOGO)}
+                      class="sponsor-logo"
+                      style={logoBoxStyle(sponsor.data.logo, CPP_LOGO)}
                       loading="lazy"
                     />
                   ) : (
@@ -290,14 +280,6 @@ const cppGrouped = Object.fromEntries(
     object-fit: contain;
     display: block;
   }
-  .sponsor-logo--invert {
-    /* Non-destructive fix for logos whose dark colourway is illegible on
-       our dark card background — flips them to a light silhouette via CSS
-       filter, without touching the source SVG. Used sparingly, only where
-       the logo would otherwise disappear (see logoTreatment in sponsor
-       front matter). */
-    filter: brightness(0) invert(1);
-  }
 
   .sponsor-desc {
     margin-top: 0.5rem;
@@ -314,59 +296,3 @@ const cppGrouped = Object.fromEntries(
   }
 </style>
 
-<style is:global>
-  /*
-   * Selective, post-hoc logo recolouring — for the sponsor ids listed in
-   * SELECTIVE_RECOLOUR_IDS above. The SVG is inlined (see InlineLogo.astro)
-   * so individual shapes can be targeted; the source files on disk are
-   * never edited. Each logo's dark colourway (illegible on our dark card)
-   * defaults to white, and a per-logo exception restores whichever brand
-   * colours should stay as-is. SVG presentation attributes (fill="…") have
-   * the lowest CSS priority, so the blanket rule below overrides them
-   * freely; an inline style="fill:…" (ThermoFisher's red wordmark) still
-   * wins over both, so no exception is needed there.
-   */
-  .recolour-evident :is(path, rect, polygon, circle, ellipse, polyline),
-  .recolour-sanofi :is(path, rect, polygon, circle, ellipse, polyline),
-  .recolour-10x-genomics :is(path, rect, polygon, circle, ellipse, polyline),
-  .recolour-netapp :is(path, rect, polygon, circle, ellipse, polyline),
-  .recolour-leica :is(path, rect, polygon, circle, ellipse, polyline),
-  .recolour-thermofisher :is(path, rect, polygon, circle, ellipse, polyline) {
-    fill: #ffffff;
-  }
-  /* Illumina isn't in the blanket rule above — every one of its shapes is
-     inline-styled (see the !important override below), so the blanket
-     rule would never apply to it anyway. */
-
-  /* Evident — keep its blue checkmark accent */
-  .recolour-evident [fill='#005CB9'] { fill: #005CB9; }
-
-  /* Sanofi — keep its purple accent dots */
-  .recolour-sanofi .st0 { fill: #7A00E6; }
-
-  /* 10x Genomics — keep the four accent colours in the "X" mark */
-  .recolour-10x-genomics [fill="#14b3e6"] { fill: #14b3e6; }
-  .recolour-10x-genomics [fill="#59c134"] { fill: #59c134; }
-  .recolour-10x-genomics [fill="#e6c00c"] { fill: #e6c00c; }
-  .recolour-10x-genomics [fill="#ed1559"] { fill: #ed1559; }
-
-  /* NetApp — keep its blue icon mark */
-  .recolour-netapp [fill="#0067C5"] { fill: #0067C5; }
-
-  /* Leica — keep the red "Leica" script; only "MICROSYSTEMS" turns white */
-  .recolour-leica [fill="#ec1c28"] { fill: #ec1c28; }
-
-  /* Adelphi Genetics Forum — not in the blanket white rule above. Its navy
-     wordmark (#204093, ~2:1 on our cards) is lifted to a tint taken from the
-     knot's own navy-to-white gradient, so it stays in the logo's colour
-     family and sits at the same brightness as the other blue logos (CDD
-     Vault, Merck). The gradient-filled knot keeps its brand colours. */
-  .recolour-adelphi-genetics-forum [fill="#204093"] { fill: #555da8; }
-
-  /* Illumina — its grey wordmark is set via an inline style="fill:…"
-     attribute, which (unlike a bare fill="…" presentation attribute) beats
-     any external stylesheet rule regardless of specificity, so it needs
-     !important here to turn white. The orange "i" dot is inline-styled the
-     same way, so it's already naturally protected — no exception needed. */
-  .recolour-illumina [style*="616161"] { fill: #ffffff !important; }
-</style>

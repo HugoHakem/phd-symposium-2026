@@ -41,7 +41,8 @@ Static site built with Astro 6 + Tailwind CSS v4. Deployed to GitHub Pages at
 ### Public assets
 - `publicDir` is set to `static/` in `astro.config.mjs` (not the Astro default `public/`)
 - Layout: `static/brand/` (symposium logo, gear SVGs, white EMBL logo for nav/footer),
-  `static/sponsors/<tier folder>/<sponsor-id>.svg`, `static/speakers/`, `static/qrcode/`;
+  `static/sponsors/<tier folder>/<sponsor-id>.svg` (the logos the site shows; originals of adapted ones in
+  `static/sponsors-original-unused/`, see `docs/logos.md`), `static/speakers/`, `static/qrcode/`;
   `favicon.svg` and `og-image.png` stay at the root
 - Gear SVGs are served from `static/brand/`; `src/assets/` keeps originals — **edit `static/` when changing served files**
 - Reference them as `${import.meta.env.BASE_URL}brand/gear1.svg` etc.

@@ -1,7 +1,9 @@
 <svg viewBox="-0.558 -0.837 419.895 181.174" xmlns="http://www.w3.org/2000/svg">
+<!-- Dark-background version of the original (static/sponsors-original-unused/support/embl.svg) (same artwork): black lettering white. -->
   <title>EMBL</title>
-  <!-- Source: EMBL Visual Framework, @visual-framework/embl-logo@1.2.0 (assets/logo.svg) -->
-  <path fill="#fff" d="M42.6 111.4H7.5V91.8h31.8v-7.4H7.5V66.7h34.3v-7.2H.3v59.1h42.3v-7.2zm68.1 7.2V59.5h-10.6s-2.4 6-2.6 6.7l-14.1 42.6h-.2L69 66.2c-.2-.7-2.6-6.7-2.6-6.7H55.7v59.1H63v-35c0-1.7-.2-8.7-.2-14.2h.2l16.2 49.2h8l16.2-49.2h.2c0 5.6-.2 49.2-.2 49.2h7.3zM132 66.1h14.9c9 0 12.7 3.2 12.7 8.7 0 7.3-5 9.4-12.7 9.4H132V66.1zm-7.3 52.5h25.2c13.2 0 19.5-7.8 19.5-17.3 0-10.2-6.1-13-10-14.6 6.6-3.1 7.1-8.5 7.1-12.4 0-8.2-4.9-14.8-16-14.8h-25.8v59.1zM132 91h16.1c6.6 0 14.2 1.7 14.2 10.1 0 6.6-4.5 10.9-12.9 10.9H132V91zm56.9-31.5h-7.8v59.1H220v-7.4h-31.1V59.5z"/>
+  <!-- Source: EMBL Visual Framework, @visual-framework/embl-logo@1.2.0 (assets/logo.svg), in its published
+       colours (black lettering). The website shows the lettering white via CSS (see docs/logos.md). -->
+  <path style="fill:#ffffff" fill="#000000" d="M42.6 111.4H7.5V91.8h31.8v-7.4H7.5V66.7h34.3v-7.2H.3v59.1h42.3v-7.2zm68.1 7.2V59.5h-10.6s-2.4 6-2.6 6.7l-14.1 42.6h-.2L69 66.2c-.2-.7-2.6-6.7-2.6-6.7H55.7v59.1H63v-35c0-1.7-.2-8.7-.2-14.2h.2l16.2 49.2h8l16.2-49.2h.2c0 5.6-.2 49.2-.2 49.2h7.3zM132 66.1h14.9c9 0 12.7 3.2 12.7 8.7 0 7.3-5 9.4-12.7 9.4H132V66.1zm-7.3 52.5h25.2c13.2 0 19.5-7.8 19.5-17.3 0-10.2-6.1-13-10-14.6 6.6-3.1 7.1-8.5 7.1-12.4 0-8.2-4.9-14.8-16-14.8h-25.8v59.1zM132 91h16.1c6.6 0 14.2 1.7 14.2 10.1 0 6.6-4.5 10.9-12.9 10.9H132V91zm56.9-31.5h-7.8v59.1H220v-7.4h-31.1V59.5z"/>
   <g fill="#009f4c">
   <circle cx="301.3" cy="28.1" r="7.5"/>
   <circle cx="301.3" cy="48.7" r="7.5"/>

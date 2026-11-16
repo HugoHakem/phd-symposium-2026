@@ -59,11 +59,12 @@ const sponsors = defineCollection({
     order: z.number().optional(),
     website: z.string().optional(),
     description: z.string().optional(),
+    // The logo the website shows (the site is dark), under static/sponsors/<tier>/.
     logo: z.string().optional(),
-    // 'invert' flips a dark-on-transparent logo to light-on-transparent via
-    // CSS filter (see SponsorsSection.astro) — for logos that are illegible
-    // against the site's dark cards but shouldn't be edited at the source.
-    logoTreatment: z.enum(['normal', 'invert']).optional(),
+    // The organisation's original logo, under static/sponsors-original-unused/, when
+    // `logo` is an adapted version (e.g. dark lettering turned white). Not used
+    // by the website; swap the two paths to show the original. See docs/logos.md.
+    logoOriginal: z.string().optional(),
   }),
 });
 

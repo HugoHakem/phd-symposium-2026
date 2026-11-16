@@ -2,5 +2,6 @@ name: "Vizgen"
 tier: "cpp"
 subTier: "corporate_partner"
 website: "https://vizgen.com"
+# Vizgen publishes no version for light backgrounds — only the dark-background one.
 logo: "sponsors/cpp/corporate-partners/vizgen.svg"
 description: "EMBL Corporate Partner"

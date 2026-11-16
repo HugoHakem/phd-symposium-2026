@@ -1,6 +1,6 @@
 <svg viewBox="-0.212 0.353 106.424 32.435" xmlns="http://www.w3.org/2000/svg">
   <title>GSK</title>
-  <!-- Letterforms: gsk.com/nuxtassets/icons/gsk-logo.svg. Gradient approximates GSK's primary (gradient) logo. -->
+  <!-- Letterforms: gsk.com/nuxtassets/icons/gsk-logo.svg. Gradient approximates GSK's primary (gradient) logo, with colours sampled from gsk.com's own gradient logo (gsk_logo_static.png). -->
   <defs>
     <clipPath id="gsk-letters">
       <path transform="translate(0 0.5725)" d="M37,12.4217568 C37,16.5111776 40.4249329,19.067127 45.0767166,19.067127 L60.7189107,19.067127 C61.8435137,19.067127 62.5591255,19.7827388 62.5591255,20.9073418 L62.5591255,23.565539 C62.5591255,24.690142 61.8435137,25.4057537 60.7189107,25.4057537 L38.6869659,25.4057537 L38.6869659,32 L60.8721595,32 C65.5240661,32 69,28.5239432 69,23.8721595 L69,20.9584657 C69,16.306682 65.5240661,12.8307481 60.8721595,12.8307481 L45.2812122,12.8307481 C44.1566092,12.8307481 43.4408745,12.1150134 43.4408745,10.9904104 L43.4408745,7.82109706 C43.4408745,7.05436139 43.9009897,6.59424626 44.6677253,6.59424626 L66.3419257,6.59424626 L66.3419257,0 L47.7860377,0 C45.2812122,0 43.2876257,1.99370936 43.2876257,4.49841198 L43.2876257,6.28750283 C43.2876257,6.44087454 43.1853779,6.59424626 42.9808823,6.59424626 C39.811446,6.69649406 37,8.48570781 37,12.4217568"/>
@@ -8,32 +8,32 @@
       <path transform="translate(0 0.5725)" d="M25.7124972,19.0670773 L25.7124972,24.1789958 C25.7124972,24.856513 25.1632839,25.4058513 24.4856464,25.4058513 L8.43458391,25.4058513 C7.41812763,25.4058513 6.59424626,24.5818439 6.59424626,23.5655066 L6.59424626,8.58774281 C6.59424626,7.48685413 7.48682538,6.59414869 8.58795562,6.59414869 L25.6613733,6.59414869 L25.6613733,0 L8.12784048,0 C3.63889134,0 0,3.63890532 0,8.1277488 L0,23.8722512 C0,28.5240528 3.47605679,32 8.12784048,32 L21.316333,32 C23.8211585,32 25.814745,29.9552818 25.814745,27.5015707 L25.814745,25.712473 C25.814745,25.5591007 25.9169928,25.4058513 26.1214884,25.4058513 C29.6996701,25.3036031 32,23.5655066 32,20.5495534 L32,12.8306745 L29.4983697,12.8306745 L20.219504,12.8306745 L18.9137553,12.8306745 L18.9137553,13.1208283 L18.9137553,14.8134539 C18.9137553,17.1831051 20.7998095,19.0691665 23.1694516,19.0691665 L25.7124972,19.0670773 Z"/>
     </clipPath>
     <linearGradient id="gsk-base" x1="0" y1="0" x2="0" y2="33" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#EF820A"/>
-      <stop offset="0.5" stop-color="#ED7A06"/>
-      <stop offset="0.78" stop-color="#E96C0B"/>
-      <stop offset="1" stop-color="#E2561A"/>
+      <stop offset="0" stop-color="#FF8800"/>
+      <stop offset="0.5" stop-color="#FF7B00"/>
+      <stop offset="0.78" stop-color="#F86F05"/>
+      <stop offset="1" stop-color="#F06009"/>
     </linearGradient>
     <radialGradient id="gsk-yellow-tr" cx="106" cy="0" r="40" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#F8B815"/>
       <stop offset="0.45" stop-color="#F49B0E" stop-opacity="0.7"/>
       <stop offset="1" stop-color="#F08909" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="gsk-yellow-l" cx="0" cy="9" r="14" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#F6A61D"/>
+    <radialGradient id="gsk-yellow-l" cx="0" cy="11" r="18" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F9A012"/>
       <stop offset="1" stop-color="#F08909" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="gsk-dark-tl" cx="18" cy="0" r="16" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#E9620C"/>
-      <stop offset="1" stop-color="#E9620C" stop-opacity="0"/>
+      <stop offset="0" stop-color="#F56A1C"/>
+      <stop offset="1" stop-color="#F56A1C" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="gsk-red-bl" cx="0" cy="36" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 36) scale(62 11) translate(0 -36)">
-      <stop offset="0" stop-color="#C23B28"/>
-      <stop offset="0.5" stop-color="#CC4726" stop-opacity="0.85"/>
-      <stop offset="1" stop-color="#E2561A" stop-opacity="0"/>
+      <stop offset="0" stop-color="#EE5008"/>
+      <stop offset="0.5" stop-color="#F15708" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#F15708" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="gsk-red-br" cx="106" cy="34" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(106 34) scale(26 13) translate(-106 -34)">
-      <stop offset="0" stop-color="#E24A12"/>
-      <stop offset="1" stop-color="#E24A12" stop-opacity="0"/>
+      <stop offset="0" stop-color="#FF5000"/>
+      <stop offset="1" stop-color="#FF5000" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <g clip-path="url(#gsk-letters)">

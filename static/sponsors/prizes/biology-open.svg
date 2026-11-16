@@ -1,7 +1,8 @@
 <svg viewBox="-1.242 -1.242 577.369 197.484" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Dark-background version of the original (static/sponsors-original-unused/prizes/biology-open.svg) (same artwork, colours only). See docs/logos.md. -->
   <!-- Biology Open banner rebuilt as vectors: the original's raster fan is a flat-colour polar grid, redrawn here as
      annular sectors with the sampled colours. Adapted for the site's dark cards: transparent background, fan dimmed
-     to 45% as a backdrop, wordmark in white. Source: TODO/biology-open.svg -->
+     to 50% as a backdrop, wordmark in white. -->
   <defs>
     <clipPath id="banner">
       <rect x="0" y="0.17" width="621.05" height="195" />

@@ -178,7 +178,8 @@ order: 1                        # optional: position within its tier (ascending)
 subTier: "corporate_partner"    # required when tier is "cpp"; omit otherwise
 website: "https://www.example.com"
 description: "Company Talk & Booth"   # optional short caption under the logo
-logo: "sponsors/sponsors/organisation-name.svg"    # optional, no leading slash
+logo: "sponsors/sponsors/organisation-name.svg"                    # optional: the logo the website shows, no leading slash
+logoOriginal: "sponsors-original-unused/sponsors/organisation-name.svg"  # optional: the original, when `logo` is adapted
 ```
 
 ### Sponsor tiers
@@ -199,10 +200,22 @@ set, it appears as a short caption under the logo (none currently use one).
 ### Logo files
 
 - Use an **SVG** (no embedded PNG/JPEG images), named after the sponsor's YAML
-  file (`<id>.svg`), in the folder for its tier: `static/sponsors/sponsors/`,
-  `prizes/`, `support/`, or `cpp/corporate-partners/` /
-  `cpp/associate-partners/` (`cpp/founder-partners/` if ever needed). When a
-  sponsor changes tier, move its logo too and update `logo:`.
+  file, in the folder for its tier: `static/sponsors/sponsors/`, `prizes/`,
+  `support/`, or `cpp/corporate-partners/` / `cpp/associate-partners/`
+  (`cpp/founder-partners/` if ever needed). When a sponsor changes tier, move
+  its logo files (and its original, if any) and update the paths.
+- The website is dark. If the organisation's original logo doesn't work on a
+  dark background, the website shows an adapted version:
+  - `static/sponsors/<tier>/<id>.svg` (`logo:`) is the version the website
+    shows. Prefer the organisation's own reversed logo if it has one. If you
+    adapt it yourself, change colours only, and add a comment at the top of
+    the file saying what changed.
+  - `static/sponsors-original-unused/<tier>/<id>.svg` (`logoOriginal:`) is the
+    organisation's original, unused by the website. Swap the two paths to show
+    the original instead.
+
+  If the original works on dark backgrounds, there is just one file (`logo:`).
+  Record every logo's source and changes in [`docs/logos.md`](logos.md).
 - Crop its `viewBox` **tight to the visible artwork** — no blank margin. The
   card provides the spacing, and the site sizes logos from the viewBox's
   aspect ratio, so a padded file shows up too small.
