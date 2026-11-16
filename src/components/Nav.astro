@@ -24,17 +24,17 @@ function isActive(path: string): boolean {
 
   <div class="relative max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
     <!-- Logo -->
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3 sm:gap-4">
       <a
         href="https://www.embl.org"
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden sm:block shrink-0"
+        class="block shrink-0"
         aria-label="EMBL"
       >
-        <img src={`${base}brand/embl-white.svg`} alt="EMBL" class="h-9 w-auto opacity-90 hover:opacity-100 transition-opacity" />
+        <img src={`${base}brand/embl-white.svg`} alt="EMBL" class="h-7 sm:h-9 w-auto opacity-90 hover:opacity-100 transition-opacity" />
       </a>
-      <span class="hidden sm:block w-px h-8 bg-white/20" aria-hidden="true"></span>
+      <span class="block shrink-0 w-px h-6 sm:h-8 bg-white/20" aria-hidden="true"></span>
       <a href={base} class="flex items-center gap-3 group">
         <div class="relative w-9 h-9 shrink-0">
           <img
@@ -45,7 +45,7 @@ function isActive(path: string): boolean {
         </div>
         <div class="leading-none">
           <p class="font-display font-800 text-white text-sm tracking-tight">EMBL PhD</p>
-          <p class="font-mono text-white/60 text-[0.6rem] tracking-[0.15em] uppercase">Symposium 2026</p>
+          <p class="font-mono text-white/60 text-[0.6rem] tracking-[0.1em] sm:tracking-[0.15em] uppercase whitespace-nowrap">Symposium 2026</p>
         </div>
       </a>
     </div>
