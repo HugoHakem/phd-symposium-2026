@@ -146,7 +146,7 @@ the rest of the theme.
 
 | `type` value | Badge colour | Use for |
 |--------------|-------------|---------|
-| `talk` | Aqua/teal | Invited talks (add `keynote: true` for keynote talks) |
+| `talk` | Aqua/teal | Featured, short and company talks (add `keynote: true` for keynote talks) |
 | `workshop` | Blue | Hands-on workshops |
 | `panel` | Orange | Panel discussions |
 | `poster` | Green | Poster sessions |
