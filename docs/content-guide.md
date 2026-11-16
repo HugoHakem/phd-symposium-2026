@@ -25,6 +25,7 @@ topic: "High-throughput single-cell profiling of immune cells"
 day: 2
 sessionType: "talk"
 keynote: true                         # optional — omit or set false for non-keynote speakers
+badges: ["embo-young-investigator"]   # optional — recognition badges, see below
 image: "speakers/john-smith.jpg"      # optional — omit for initials placeholder, no leading slash
 website: "https://smithlab.cam.ac.uk" # optional
 twitter: "johnsmithlab"               # optional, handle without @
@@ -52,6 +53,24 @@ You can use **bold**, _italic_, and paragraph breaks. Keep it to 2–3 paragraph
 `sessionType` and `keynote` are independent: `keynote` is a flag layered on
 top of a normal `sessionType`, not a session type of its own. Most keynote
 speakers still use `sessionType: "talk"`.
+
+### Recognition badges (`badges`)
+
+`badges` adds a small logo badge, e.g. **[EMBO] Young Investigator**, on the
+speaker's card, their bio panel and their talk in the programme (list and
+calendar). Set it only on the speaker. The programme finds the talk through
+the session's `speakerSlug`.
+
+| Badge id | Shows |
+|----------|-------|
+| `embo-young-investigator` | EMBO logo + "Young Investigator" |
+| `embl-alumni-speaker` | EMBL Alumni logo + "Alumni speaker" |
+
+In the calendar view, where logos are too small to read, the badge is shown as
+text instead ("EMBO Young Investigator", "EMBL Alumni speaker").
+
+To add a new kind of badge, add an entry to `src/lib/speakerBadges.ts` (logo,
+alt text, label, text-only wording).
 
 ### Adding a speaker photo
 

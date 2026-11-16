@@ -11,6 +11,13 @@ const googleUrl = `https://calendar.google.com/calendar/r?cid=${encodeURICompone
 
 const schedule = await getCollection('schedule');
 type ScheduleEntry = (typeof schedule)[number];
+
+// Recognition badges (e.g. EMBO Young Investigator) are set on the speaker;
+// sessions pick them up through their speakerSlug.
+const speakers = await getCollection('speakers');
+const speakerBadges = Object.fromEntries(
+  speakers.filter(s => s.data.badges?.length).map(s => [s.id, s.data.badges!]),
+);
 const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) => a.data.day - b.data.day);
 ---
 
@@ -142,7 +149,7 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
     </div>
 
     <div id="view-calendar" role="tabpanel" aria-labelledby="tab-calendar">
-      <ScheduleCalendar days={sortedSchedule.map((d: ScheduleEntry) => d.data)} />
+      <ScheduleCalendar days={sortedSchedule.map((d: ScheduleEntry) => d.data)} speakerBadges={speakerBadges} />
       <p class="font-body text-sm text-muted mt-3">Select a session to see it in the detailed list.</p>
     </div>
 
@@ -155,6 +162,7 @@ const sortedSchedule = [...schedule].sort((a: ScheduleEntry, b: ScheduleEntry) =
             title={day.data.title}
             color={day.data.color}
             sessions={day.data.sessions}
+            speakerBadges={speakerBadges}
             defaultOpen={i === 0}
           />
         </div>

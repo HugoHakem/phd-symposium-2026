@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'zod';
+import { SPEAKER_BADGE_IDS } from './lib/speakerBadges';
 
 const speakers = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/speakers' }),
@@ -14,6 +15,8 @@ const speakers = defineCollection({
     sessionType: z.enum(['talk', 'workshop-lead', 'panel']),
     keynote: z.boolean().optional(),
     embo: z.boolean().optional(),
+    // Recognition badges shown on the speaker and their talk (see src/lib/speakerBadges.ts)
+    badges: z.array(z.enum(SPEAKER_BADGE_IDS)).optional(),
     image: z.string().optional(),
     website: z.string().optional(),
     twitter: z.string().optional(),

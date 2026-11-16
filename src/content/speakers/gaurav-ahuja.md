@@ -6,6 +6,7 @@ country: "India"
 topic: "AI and systems biology, metabolomics, aging and cancer, cellular signalling"
 day: 2
 sessionType: "talk"
+badges: ["embo-young-investigator"]
 image: "speakers/gaurav-ahuja.png"
 website: "https://www.ahuja-lab.in/"
 ---

@@ -51,7 +51,6 @@ That changes size only.
 | EMBL | `support/embl.svg`: EMBL Visual Framework logo, identical to embl.org's live header | Black lettering → white (EMBL allows this colour version on dark backgrounds next to other coloured logos) |
 | EMBL Alumni | `support/embl-alumni.svg`: colours of the supplied TIFF (`#1b1919`, `#62a754`, `#ce2331`) | Lettering white; dots in the current EMBL palette `#009f4c` / `#da0f21`. Note: the logo on EMBL's own Alumni page uses yet other colours (`#91B84B` / `#BE1623`); worth confirming with the Alumni office. |
 | 10x Genomics | `cpp/…/10x-genomics.svg`: current logo (horizontal) from 10xgenomics.com, lettering in brand navy `#153057` | Official white-lettering version from the 10x website |
-| BD | `cpp/…/bd.svg`: official SVG from bd.com (orange `#FF6E00`, blue `#044ED7`) | Same artwork and colours. In BD's file the white disc under the orange is slightly larger than, and off-centre from, the orange circle, which shows as a thin white rim on dark backgrounds. The website version trims the white star to the orange circle. Identical to the original on white. |
 | Boehringer Ingelheim | `cpp/…/boehringer-ingelheim.svg`: 2023 logo in Dark Green `#08312A` (Wikimedia Commons; their site blocks downloads) | 2023 logo in Accent Green `#00E47C` |
 | Evident | `cpp/…/evident.svg`: official (black + blue `#005CB9` V) | Evident's own all-white logo |
 | Illumina | `cpp/…/illumina.svg`: official SVG (orange `#F9A31E`, grey `#666666`) | Grey wordmark white |
@@ -67,6 +66,7 @@ That changes size only.
 
 | Logo | Status |
 |---|---|
+| BD | Official SVG from bd.com (orange `#FF6E00`, blue `#044ED7`); white star trimmed to the orange circle so no thin white rim shows on dark backgrounds |
 | eppendorf | Official SVG (blue `#0035AD`) |
 | GSK | Letterforms from gsk.com's SVG; **orange gradient is an approximation** matched to gsk.com's own gradient logo image (no official vector of the gradient exists publicly) |
 | Nikon | Matches official |
