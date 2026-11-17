@@ -97,7 +97,7 @@ organisation's own vector artwork.
 | Adelphi Genetics Forum | Traced from `AGF LOGO_COLOUR WEB.png` (the only version on adelphigenetics.org; no official vector exists). Lettering colour exact; each ring piece filled with its original top-to-bottom gradient. |
 | EMBL Alumni | "EMBL" letterforms from EMBL's official vector logo; dots measured from `EMBL_Alumni_logo_final1.tif`; "ALUMNI" traced from it. |
 | GSK | Letterforms from GSK's own flat SVG; gradient approximated (see above). |
-| CDD Vault | The icon's 3D effects (shadow, rim, bevel) were embedded PNGs; rebuilt as vector gradients and masks. The rest is the original vector artwork. |
+| CDD Vault | The icon's 3D effects (shadow, rim, bevel) were embedded PNGs; rebuilt as vector gradients, with the shadow drawn as stacked semi-transparent layers rather than an SVG mask (masks show as a black square in some PDF viewers). The rest is the original vector artwork. |
 | Biology Open | The official banner's fan is a raster; redrawn as vector sectors with the sampled colours. |
 
 ## Symposium brand files (`static/brand/`)
