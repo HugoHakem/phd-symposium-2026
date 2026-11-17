@@ -73,7 +73,7 @@ That changes size only.
 | Roche | Official SVG from roche.com (blue `#0B41CD`) |
 | Thermo Fisher Scientific | Official current logo (white lettering in a red `#E71316` box) |
 | Merck (KGaA) | Correct Merck KGaA logo, recoloured from blue to cyan `#2DBECD`. Merck uses several brand colours for its wordmark on merckgroup.com (magenta `#EB3C96` in the header, purple `#503291` and cyan `#2DBECD` in the footer); no public rule says which is required |
-| Daiichi Sankyo | Matches visually (only PNGs found, so exact colours unchecked) |
+| Daiichi Sankyo | Matches visually (only PNGs found, so exact colours unchecked). The sphere's gradients are drawn as filled outlines instead of clipped rectangles (same look; `<use>` inside a clip path doesn't show in the PDF booklet). |
 | Promega | Matches official |
 | CDD Vault | Still CDD's current logo (3D icon, "Complexity Simplified"); see "Rebuilt as vector" |
 
